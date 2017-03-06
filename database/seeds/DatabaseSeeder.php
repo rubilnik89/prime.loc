@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,9 +14,38 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          $this->call(CountriesTableSeeder::class);
+         $this->call(UsersTableSeeder::class);
     }
 }
 
+class UsersTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('users')->delete();
+        User::create([
+            'name'=>'Roman',
+            'surname'=>'Zherebko',
+            'phone'=>'0996476763',
+            'country'=>'UA',
+            'is_admin'=>true,
+            'activated'=>true,
+            'password'=>'dddddd',
+            'email'=>'rubilnik89@mail.ru',
+        ]);
+        User::create([
+            'name'=>'Galina',
+            'surname'=>'Kulik',
+            'phone'=>'0557841252',
+            'country'=>'RU',
+            'is_admin'=>false,
+            'activated'=>true,
+            'password'=>'aaaaaa',
+            'email'=>'dgfgdfgrgr@fdef.rgf',
+        ]);
+
+    }
+}
 class CountriesTableSeeder extends Seeder
 {
     /**
