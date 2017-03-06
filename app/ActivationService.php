@@ -50,7 +50,7 @@ class ActivationService
 
         $user = User::find($activation->user_id);
 
-        $user->is_active = true;
+        $user->activated = true;
 
         $user->save();
 

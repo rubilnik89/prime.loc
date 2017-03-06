@@ -20,9 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('country');
             $table->string('phone');
             $table->boolean('is_admin')->default(false);
-            $table->boolean('is_active')->default(false);
+            $table->boolean('activated')->default(false);
             $table->string('email')->unique();
-            $table->string('password')->nullable();
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
