@@ -43,6 +43,66 @@ class UsersTableSeeder extends Seeder
             'password'=>'aaaaaa',
             'email'=>'dgfgdfgrgr@fdef.rgf',
         ]);
+        User::create([
+            'name'=>'Valina',
+            'surname'=>'Kulik',
+            'phone'=>'0557834252',
+            'country'=>'RU',
+            'is_admin'=>false,
+            'activated'=>true,
+            'password'=>'aaagaa',
+            'email'=>'dgftrdfgrgr@fdef.rgf',
+        ]);
+        User::create([
+            'name'=>'Valfna',
+            'surname'=>'Kulik',
+            'phone'=>'0577834252',
+            'country'=>'RU',
+            'is_admin'=>false,
+            'activated'=>true,
+            'password'=>'aaafaa',
+            'email'=>'dgftrdfgrkj@fdef.rgf',
+        ]);
+        User::create([
+            'name'=>'Varena',
+            'surname'=>'Kulik',
+            'phone'=>'0557694252',
+            'country'=>'RU',
+            'is_admin'=>false,
+            'activated'=>true,
+            'password'=>'aaasaa',
+            'email'=>'dgftrvcgrgr@fdef.rgf',
+        ]);
+        User::create([
+            'name'=>'Valona',
+            'surname'=>'Kulik',
+            'phone'=>'0557034252',
+            'country'=>'RU',
+            'is_admin'=>false,
+            'activated'=>true,
+            'password'=>'aaa54a',
+            'email'=>'dbnrdfgrgr@fdef.rgf',
+        ]);
+        User::create([
+            'name'=>'Valmoa',
+            'surname'=>'Kulik',
+            'phone'=>'0555034252',
+            'country'=>'RU',
+            'is_admin'=>false,
+            'activated'=>true,
+            'password'=>'aseaaa',
+            'email'=>'dgftrdfkklgr@fdef.rgf',
+        ]);
+        User::create([
+            'name'=>'Vcfina',
+            'surname'=>'Kulik',
+            'phone'=>'0557994252',
+            'country'=>'RU',
+            'is_admin'=>false,
+            'activated'=>true,
+            'password'=>'aaaffaa',
+            'email'=>'dgftrporgr@fdef.rgf',
+        ]);
 
     }
 }

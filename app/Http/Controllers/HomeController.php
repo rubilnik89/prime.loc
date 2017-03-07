@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $countries = Country::all();
+        $users = User::all();
+        return view('home')->with(['users'=>$users, 'countries'=>$countries]);
     }
 }
