@@ -2,7 +2,7 @@
 
 @section('content')
     @php
-        include('../app/countries.php');
+        include_once('../app/countries.php');
     @endphp
 <div class="container">
     <div class="row">
