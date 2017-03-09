@@ -19,6 +19,6 @@ class IsAdminMiddleware
         if(Auth::User()->is_admin == 1){
             return redirect('admin');
         }
-        return redirect('/');
+        return $next($request);
     }
 }

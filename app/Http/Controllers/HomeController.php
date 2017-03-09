@@ -25,8 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $countries = Country::all();
         $users = User::all();
-        return view('home')->with(['users'=>$users, 'countries'=>$countries]);
+        return view('home')->with(['users'=>$users]);
     }
 }

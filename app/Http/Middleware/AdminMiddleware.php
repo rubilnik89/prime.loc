@@ -19,6 +19,6 @@ class AdminMiddleware
         if(Auth::User()->is_admin == 1){
             return $response = $next($request);
         }
-        return redirect('/');
+        return redirect('/home');
     }
 }
