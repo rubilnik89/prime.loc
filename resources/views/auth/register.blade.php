@@ -34,18 +34,14 @@
                             </div>
                         </div>
 
-                        @php
-                            include('../app/countries.php')
-                        @endphp
-
                         <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
                             <label for="country" class="col-md-4 control-label">Country</label>
                             <div class="col-md-6">
                                 <select id="country" class="form-control" name="country" required autofocus>
                                     <option></option>
                                     @foreach($countries as $country)
-                                        <option value="{{ $country['country_id'] }}">
-                                            {{ $country['name'] }}
+                                        <option value="{{ $country->country_id }}">
+                                            {{ $country->name }}
                                         </option>
                                     @endforeach
                                 </select>

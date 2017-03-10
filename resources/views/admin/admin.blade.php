@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @php
-        include_once('../app/countries.php');
-    @endphp
 <div class="container">
     <div class="row">
         <div class="col-md-9">
@@ -51,8 +48,8 @@
                     <select id="country" class="form-control" name="country">
                         <option value="" disabled selected></option>
                         @foreach($countries as $country)
-                            <option value="{{ $country['country_id'] }}">
-                                {{ $country['name'] }}
+                            <option value="{{ $country->country_id }}">
+                                {{ $country->name }}
                             </option>
                         @endforeach
                     </select>

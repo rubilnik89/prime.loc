@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Input;
 
 class AdminController extends Controller
 {
     public function search(Request $request)
     {
-
         $data = $request->all();
         !empty($data['country']) ? $data['country'] = $data['country'] : $data['country'] = null;
         if($data['name']!=null||$data['surname']!=null||$data['email']!=null||$data['phone']!=null||$data['country']!=null){
@@ -19,7 +20,9 @@ class AdminController extends Controller
             ->searchEmail($data['email'])
             ->searchCountry($data['country'])
             ->get();
-        return view('admin/admin')->with(['users'=>$users]);
+        $countries = Country::all();
+        Input::flash();
+        return view('admin/admin')->with(['users'=>$users, 'countries'=>$countries]);
         }else{
             return redirect('admin');
         }
@@ -28,8 +31,9 @@ class AdminController extends Controller
 
     public function main()
     {
+        $countries = Country::all();
         $users = User::all();
-        return view('admin/admin')->with(['users'=>$users]);
+        return view('admin/admin')->with(['users'=>$users, 'countries'=>$countries]);
     }
 
     public function user($id)
