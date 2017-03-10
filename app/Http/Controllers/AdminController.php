@@ -7,24 +7,23 @@ use App\User;
 
 class AdminController extends Controller
 {
-
     public function search(Request $request)
     {
+
         $data = $request->all();
         !empty($data['country']) ? $data['country'] = $data['country'] : $data['country'] = null;
         if($data['name']!=null||$data['surname']!=null||$data['email']!=null||$data['phone']!=null||$data['country']!=null){
-            $where = [];
-            if (!empty($data['name'])) $where['name'] = $data['name'];
-            if (!empty($data['surname'])) $where['surname'] = $data['surname'];
-            if (!empty($data['email'])) $where['email'] = $data['email'];
-            if (!empty($data['phone'])) $where['phone'] = $data['phone'];
-            if (!empty($data['country'])) $where['country'] = $data['country'];
-
-            $users = User::where($where)->get();
-            return view('admin/admin')->with(['users'=>$users]);
+        $users = User::searchName($data['name'])
+            ->searchSurame($data['surname'])
+            ->searchPhone($data['phone'])
+            ->searchEmail($data['email'])
+            ->searchCountry($data['country'])
+            ->get();
+        return view('admin/admin')->with(['users'=>$users]);
         }else{
             return redirect('admin');
         }
+
     }
 
     public function main()

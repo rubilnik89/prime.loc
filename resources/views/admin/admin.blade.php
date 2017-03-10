@@ -37,13 +37,19 @@
             </table>
         </div>
         <div class="col-md-3">
-                {{ Form::open(array('url' => 'admin/search')) }}
-                    <input class="form-control" placeholder="Search by name" name="name">
-                    <input class="form-control" placeholder="Search by surname" name="surname">
-                    <input class="form-control" placeholder="Search by email" name="email">
-                    <input class="form-control" placeholder="Search by phone" name="phone">
-                    <select class="form-control" name="country">
-                        <option value="" disabled selected>Search by country</option>
+                {{--{{ Form::open(array('url' => 'admin/search')) }}--}}
+                {{ Form::open(array('action' => array('AdminController@search'))) }}
+                    <label for="name">Search by name</label>
+                    <input id="name" class="form-control" name="name" value="{{ old('name') }}">
+                    <label for="surname">Search by surname</label>
+                    <input id="surname" class="form-control" name="surname" value="{{ old('surname') }}">
+                    <label for="email">Search by email</label>
+                    <input id="email" class="form-control" name="email" value="{{ old('email') }}">
+                    <label for="phone">Search by phone</label>
+                    <input id="phone" class="form-control" name="phone" value="{{ old('phone') }}">
+                    <label for="country">Search by country</label>
+                    <select id="country" class="form-control" name="country">
+                        <option value="" disabled selected></option>
                         @foreach($countries as $country)
                             <option value="{{ $country['country_id'] }}">
                                 {{ $country['name'] }}
