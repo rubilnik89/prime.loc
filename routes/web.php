@@ -19,5 +19,5 @@ Route::get('user/activation/{token}', 'Auth\LoginController@activateUser')->name
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
     Route::get('/', 'AdminController@main');
     Route::get('user/{id}', 'AdminController@user');
-    Route::post('search', 'AdminController@search');
+    Route::get('search', 'AdminController@search');
 });

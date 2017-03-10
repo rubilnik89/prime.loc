@@ -19,7 +19,8 @@
                 </thead>
                 <tbody>
                     @foreach($users as $index => $user)
-                        <tr onclick="window.location.href='admin/user/{{ $user->id }}';">
+                        {{--<tr onclick="window.location.href='admin/user/{{ $user->id }}';">--}}
+                        <tr onclick="window.location.href='{{ url("admin/user/" . $user->id) }}';">
                             <td>{{ $index +1 }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->surname }}</td>
@@ -34,8 +35,7 @@
             </table>
         </div>
         <div class="col-md-3">
-                {{--{{ Form::open(array('url' => 'admin/search')) }}--}}
-                {{ Form::open(array('action' => array('AdminController@search'))) }}
+                {{ Form::open(array('action' => array('AdminController@search'), 'method' => 'get')) }}
                     <label for="name">Search by name</label>
                     <input id="name" class="form-control" name="name" value="{{ old('name') }}">
                     <label for="surname">Search by surname</label>
@@ -54,8 +54,10 @@
                         @endforeach
                     </select>
                     <button class="btn btn-primary" type="submit">OK</button>
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 {{ Form::close() }}
+        </div>
+        <div class="col-md-12">
+            {{ $users->links() }}
         </div>
     </div>
 </div>

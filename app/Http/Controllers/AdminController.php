@@ -13,16 +13,21 @@ class AdminController extends Controller
     {
         $data = $request->all();
         !empty($data['country']) ? $data['country'] = $data['country'] : $data['country'] = null;
+        !empty($data['name']) ? $data['name'] = $data['name'] : $data['name'] = null;
+        !empty($data['surname']) ? $data['surname'] = $data['surname'] : $data['surname'] = null;
+        !empty($data['phone']) ? $data['phone'] = $data['phone'] : $data['phone'] = null;
+        !empty($data['email']) ? $data['email'] = $data['email'] : $data['email'] = null;
         if($data['name']!=null||$data['surname']!=null||$data['email']!=null||$data['phone']!=null||$data['country']!=null){
         $users = User::searchName($data['name'])
             ->searchSurame($data['surname'])
             ->searchPhone($data['phone'])
             ->searchEmail($data['email'])
             ->searchCountry($data['country'])
-            ->get();
+            ->paginate(3);
         $countries = Country::all();
         Input::flash();
-        return view('admin/admin')->with(['users'=>$users, 'countries'=>$countries]);
+        $links = str_replace('/?', '?', $users->appends(Input::except('page'))->render());
+        return view('admin/admin', compact('users', 'links'))->with(['countries'=>$countries]);
         }else{
             return redirect('admin');
         }
@@ -32,7 +37,7 @@ class AdminController extends Controller
     public function main()
     {
         $countries = Country::all();
-        $users = User::all();
+        $users = User::paginate(5);
         return view('admin/admin')->with(['users'=>$users, 'countries'=>$countries]);
     }
 
