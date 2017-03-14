@@ -57,7 +57,9 @@ class AdminController extends Controller
 
     public function userInvestor($id)
     {
-
+//        $user = User::find($id);
+//        $personalAccount = User::find($id)->personalAccount;
+//        return view('admin/userPersonal')->with(['user'=>$user, 'personalAccount'=>$personalAccount]);
     }
 
 }
