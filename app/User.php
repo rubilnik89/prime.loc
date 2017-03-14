@@ -7,6 +7,21 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    public static $columns = [
+        "#"=>"",
+        "Name"=>"name",
+        "Surname"=>"surname",
+        "Email"=>"email",
+        "Phone"=>"phone",
+        "Country"=>"country",
+        "Created at"=>"created_at",
+        "Updated at"=>"updated_at",
+    ];
+
+
+
+
+
     use Notifiable;
 
     /**
@@ -31,7 +46,7 @@ class User extends Authenticatable
     {
         if ($name) $query->where('name', 'like', "%$name%");
     }
-    public function scopeSearchSurame($query, $surname)
+    public function scopeSearchSurname($query, $surname)
     {
         if ($surname) $query->where('surname', 'like', "%$surname%");
     }
@@ -51,6 +66,10 @@ class User extends Authenticatable
     public function personalAccount()
     {
         return $this->hasOne('App\PersonalAccount');
+    }
+    public function country()
+    {
+        return $this->hasOne('App\Country');
     }
 
 }

@@ -12,47 +12,70 @@ class AdminController extends Controller
     public function search(Request $request)
     {
         $data = $request->all();
+        $sortby = Input::get('sortby');
+        $order = Input::get('order');
         !empty($data['country']) ? $data['country'] = $data['country'] : $data['country'] = null;
         !empty($data['name']) ? $data['name'] = $data['name'] : $data['name'] = null;
         !empty($data['surname']) ? $data['surname'] = $data['surname'] : $data['surname'] = null;
         !empty($data['phone']) ? $data['phone'] = $data['phone'] : $data['phone'] = null;
         !empty($data['email']) ? $data['email'] = $data['email'] : $data['email'] = null;
-        if($data['name']!=null||$data['surname']!=null||$data['email']!=null||$data['phone']!=null||$data['country']!=null){
-        $users = User::searchName($data['name'])
-            ->searchSurame($data['surname'])
-            ->searchPhone($data['phone'])
-            ->searchEmail($data['email'])
-            ->searchCountry($data['country'])
-            ->paginate(3);
+        !empty($data['sortby']) ? $data['sortby'] = $data['sortby'] : $data['sortby'] = null;
+        if($data['name']!=null||$data['surname']!=null||$data['email']!=null||$data['phone']!=null||$data['country']!=null||$data['sortby']!=null){
+            if ($sortby && $order) {
+                $users = User::searchName($data['name'])
+                    ->searchSurname($data['surname'])
+                    ->searchPhone($data['phone'])
+                    ->searchEmail($data['email'])
+                    ->searchCountry($data['country'])
+                    ->orderBy($sortby, $order)
+                    ->paginate(3);
+            } else {
+                $users = User::searchName($data['name'])
+                    ->searchSurname($data['surname'])
+                    ->searchPhone($data['phone'])
+                    ->searchEmail($data['email'])
+                    ->searchCountry($data['country'])
+                    ->paginate(3);;
+            }
+
         $countries = Country::all();
+        $columns = User::$columns;
         Input::flash();
         $links = str_replace('/?', '?', $users->appends(Input::except('page'))->render());
-        return view('admin/admin', compact('users', 'links'))->with(['countries'=>$countries]);
+        return view('admin/adminSearch', compact('users', 'links', 'countries', 'columns', 'sortby', 'order', 'data'));
         }else{
-            return redirect('admin');
+            return redirect('/');
         }
 
     }
 
     public function main()
     {
+        $sortby = Input::get('sortby');
+        $order = Input::get('order');
+        if ($sortby && $order) {
+            $users = User::orderBy($sortby, $order)->paginate(5);
+        } else {
+            $users = User::paginate(5);
+        }
         $countries = Country::all();
-        $users = User::paginate(5);
-        return view('admin/admin')->with(['users'=>$users, 'countries'=>$countries]);
+        $columns = User::$columns;
+
+        return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order'));
     }
 
     public function user($id)
     {
         $user = User::find($id);
         $personalAccount = User::find($id)->personalAccount;
-        return view('admin/user')->with(['user'=>$user, 'personalAccount'=>$personalAccount]);
+        return view('admin/user', compact('user', 'personalAccount'));
     }
 
     public function userPersonal($id)
     {
         $user = User::find($id);
         $personalAccount = User::find($id)->personalAccount;
-        return view('admin/userPersonal')->with(['user'=>$user, 'personalAccount'=>$personalAccount]);
+        return view('admin/userPersonal', compact('user', 'personalAccount'));
     }
 
     public function userInvestor($id)

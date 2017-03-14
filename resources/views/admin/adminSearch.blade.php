@@ -16,14 +16,26 @@
                         <th>
                             @if ($sortby == $columns[$column] && $order == 'asc')
                                 {{link_to_action(
-                                  'AdminController@main',
-                                  $column, ['sortby' => $columns[$column],'order' => 'desc']
-                                )}}
+                                  'AdminController@search',
+                                  $column, ['sortby' => $columns[$column],
+                                  'order' => 'desc',
+                                  'name' => $data['name'],
+                                  'surname' => $data['surname'],
+                                  'phone' => $data['phone'],
+                                  'email' => $data['email'],
+                                  'country' => $data['country'],
+                                  ])}}
                             @else
                                 {{link_to_action(
-                                  'AdminController@main',
-                                  $column, ['sortby' => $columns[$column],'order' => 'asc']
-                                )}}
+                                  'AdminController@search',
+                                  $column, ['sortby' => $columns[$column],
+                                  'order' => 'asc',
+                                  'name' => $data['name'],
+                                  'surname' => $data['surname'],
+                                  'phone' => $data['phone'],
+                                  'email' => $data['email'],
+                                  'country' => $data['country'],
+                                  ])}}
                             @endif
                         </th>
                     @endforeach

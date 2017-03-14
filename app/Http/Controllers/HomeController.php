@@ -29,6 +29,6 @@ class HomeController extends Controller
         $user = Auth::user();
         $personalAccount = User::find($user->id)->personalAccount;
 
-        return view('home')->with(['user'=>$user, 'personalAccount'=>$personalAccount]);
+        return view('home', compact('users', 'personalAccount'));
     }
 }
