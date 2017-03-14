@@ -5,19 +5,16 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->middleware('isAdmin');
-
 Route::get('user/activation/{token}', 'Auth\LoginController@activateUser')->name('user.activate');
-//Route::post('searchName', 'UserController@searchName');
-//Route::post('searchSurame', 'UserController@searchSurame');
-//Route::post('searchPhone', 'UserController@searchPhone');
-//Route::post('searchCountry', 'UserController@searchCountry');
-//Route::post('searchEmail', 'UserController@searchEmail');
 
+Route::group(['prefix' => 'home', 'middleware' => 'isAdmin'], function(){
+    Route::get('/', 'HomeController@index')->name('home');
+});
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
-    Route::get('/', 'AdminController@main');
-    Route::get('user/{id}', 'AdminController@user');
+    Route::get('/', 'AdminController@main')->name('admin');
+    Route::get('user/{id}/personal', 'AdminController@userPersonal')->name('userPersonal');
+    Route::get('user/{id}/invest', 'AdminController@userInvestor')->name('userInvestor');
+    Route::get('user/{id}', 'AdminController@user')->name('user');
     Route::get('search', 'AdminController@search');
 });

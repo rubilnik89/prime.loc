@@ -44,6 +44,20 @@ class AdminController extends Controller
     public function user($id)
     {
         $user = User::find($id);
-        return view('admin/user')->with(['user'=>$user]);
+        $personalAccount = User::find($id)->personalAccount;
+        return view('admin/user')->with(['user'=>$user, 'personalAccount'=>$personalAccount]);
     }
+
+    public function userPersonal($id)
+    {
+        $user = User::find($id);
+        $personalAccount = User::find($id)->personalAccount;
+        return view('admin/userPersonal')->with(['user'=>$user, 'personalAccount'=>$personalAccount]);
+    }
+
+    public function userInvestor($id)
+    {
+
+    }
+
 }

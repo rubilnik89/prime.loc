@@ -27,7 +27,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
     public function scopeSearchName($query, $name)
     {
         if ($name) $query->where('name', 'like', "%$name%");
@@ -49,5 +48,9 @@ class User extends Authenticatable
         if ($country) $query->where('country', 'like', "%$country%");
     }
 
+    public function personalAccount()
+    {
+        return $this->hasOne('App\PersonalAccount');
+    }
 
 }

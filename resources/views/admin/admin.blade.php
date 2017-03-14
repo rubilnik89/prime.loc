@@ -3,7 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-2">
+            <a href="{{ route('admin') }}">Пользователи</a>
+        </div>
+        <div class="col-md-8">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -19,8 +22,7 @@
                 </thead>
                 <tbody>
                     @foreach($users as $index => $user)
-                        {{--<tr onclick="window.location.href='admin/user/{{ $user->id }}';">--}}
-                        <tr onclick="window.location.href='{{ url("admin/user/" . $user->id) }}';">
+                        <tr onclick="window.location.href='{{ route('user', ['id' => $user->id]) }}';">
                             <td>{{ $index +1 }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->surname }}</td>
@@ -34,7 +36,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
                 {{ Form::open(array('action' => array('AdminController@search'), 'method' => 'get')) }}
                     <label for="name">Search by name</label>
                     <input id="name" class="form-control" name="name" value="{{ old('name') }}">
@@ -55,6 +57,7 @@
                     </select>
                     <button class="btn btn-primary" type="submit">OK</button>
                 {{ Form::close() }}
+            <input class="btn btn-primary" type="button" onclick="location.href='{{ route('admin') }}';" value="Сбросить все фильтры" />
         </div>
         <div class="col-md-12">
             {{ $users->links() }}

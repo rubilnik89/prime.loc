@@ -1,8 +1,11 @@
 <?php
+
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCountriesTable extends Migration {
+class CreateAccountTypesTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -10,12 +13,12 @@ class CreateCountriesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('countries', function(Blueprint $table)
-        {
-            $table->string('country_id',2);
-            $table->string('name',60);
+        Schema::create('account_types', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -23,6 +26,6 @@ class CreateCountriesTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('countries');
+        Schema::dropIfExists('account_types');
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\PersonalAccount;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,6 +16,57 @@ class DatabaseSeeder extends Seeder
     {
          $this->call(CountriesTableSeeder::class);
          $this->call(UsersTableSeeder::class);
+         $this->call(AccountTypesTableSeeder::class);
+         $this->call(AccountsTableSeeder::class);
+    }
+}
+
+class AccountTypesTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('account_types')->delete();
+        DB::table('account_types')->insert(array('name' => 'Лицевой'));
+        DB::table('account_types')->insert(array('name' => 'Инвесторский'));
+    }
+}
+class AccountsTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('account_types')->delete();
+        PersonalAccount::create([
+            'number'=>'88888',
+            'user_id'=>1,
+        ]);
+        PersonalAccount::create([
+            'number'=>'88888',
+            'user_id'=>2,
+        ]);
+        PersonalAccount::create([
+            'number'=>'88888',
+            'user_id'=>3,
+        ]);
+        PersonalAccount::create([
+            'number'=>'88888',
+            'user_id'=>4,
+        ]);
+        PersonalAccount::create([
+            'number'=>'88888',
+            'user_id'=>5,
+        ]);
+        PersonalAccount::create([
+            'number'=>'88888',
+            'user_id'=>6,
+        ]);
+        PersonalAccount::create([
+            'number'=>'88888',
+            'user_id'=>7,
+        ]);
+        PersonalAccount::create([
+            'number'=>'88888',
+            'user_id'=>8,
+        ]);
     }
 }
 
@@ -30,7 +82,7 @@ class UsersTableSeeder extends Seeder
             'country'=>'UA',
             'is_admin'=>true,
             'activated'=>true,
-            'password'=>'dddddd',
+            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
             'email'=>'rubilnik89@mail.ru',
         ]);
         User::create([
@@ -40,7 +92,7 @@ class UsersTableSeeder extends Seeder
             'country'=>'RU',
             'is_admin'=>false,
             'activated'=>true,
-            'password'=>'aaaaaa',
+            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
             'email'=>'dgfgdfgrgr@fdef.rgf',
         ]);
         User::create([
@@ -50,7 +102,7 @@ class UsersTableSeeder extends Seeder
             'country'=>'RU',
             'is_admin'=>false,
             'activated'=>true,
-            'password'=>'aaagaa',
+            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
             'email'=>'dgftrdfgrgr@fdef.rgf',
         ]);
         User::create([
@@ -60,7 +112,7 @@ class UsersTableSeeder extends Seeder
             'country'=>'RU',
             'is_admin'=>false,
             'activated'=>true,
-            'password'=>'aaafaa',
+            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
             'email'=>'dgftrdfgrkj@fdef.rgf',
         ]);
         User::create([
@@ -70,7 +122,7 @@ class UsersTableSeeder extends Seeder
             'country'=>'RU',
             'is_admin'=>false,
             'activated'=>true,
-            'password'=>'aaasaa',
+            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
             'email'=>'dgftrvcgrgr@fdef.rgf',
         ]);
         User::create([
@@ -80,7 +132,7 @@ class UsersTableSeeder extends Seeder
             'country'=>'RU',
             'is_admin'=>false,
             'activated'=>true,
-            'password'=>'aaa54a',
+            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
             'email'=>'dbnrdfgrgr@fdef.rgf',
         ]);
         User::create([
@@ -90,7 +142,7 @@ class UsersTableSeeder extends Seeder
             'country'=>'RU',
             'is_admin'=>false,
             'activated'=>true,
-            'password'=>'aseaaa',
+            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
             'email'=>'dgftrdfkklgr@fdef.rgf',
         ]);
         User::create([
@@ -100,7 +152,7 @@ class UsersTableSeeder extends Seeder
             'country'=>'RU',
             'is_admin'=>false,
             'activated'=>true,
-            'password'=>'aaaffaa',
+            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
             'email'=>'dgftrporgr@fdef.rgf',
         ]);
 
