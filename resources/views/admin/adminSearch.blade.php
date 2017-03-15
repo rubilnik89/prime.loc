@@ -2,10 +2,11 @@
 
 @section('content')
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-1">
-            <a href="{{ route('admin') }}">Пользователи</a>
+            <a href="{{ route('users') }}">Пользователи</a>
+            <a href="{{ route('accounts') }}">Счета</a>
         </div>
         <div class="col-md-9">
 

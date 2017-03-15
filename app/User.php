@@ -63,10 +63,19 @@ class User extends Authenticatable
         if ($country) $query->where('country', 'like', "%$country%");
     }
 
+    public function accounts()
+    {
+        return $this->hasMany('App\Accounts');
+    }
     public function personalAccount()
     {
         return $this->hasOne('App\PersonalAccount');
     }
+    public function investorAccount()
+    {
+        return $this->hasOne('App\InvestorAccount');
+    }
+
     public function country()
     {
         return $this->hasOne('App\Country');

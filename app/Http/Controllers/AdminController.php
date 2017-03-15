@@ -74,15 +74,35 @@ class AdminController extends Controller
     public function userPersonal($id)
     {
         $user = User::find($id);
-        $personalAccount = User::find($id)->personalAccount;
+        $personalAccount = User::find($id)->accounts()->where('type_id', 1)->first();
         return view('admin/userPersonal', compact('user', 'personalAccount'));
     }
 
     public function userInvestor($id)
     {
-//        $user = User::find($id);
-//        $personalAccount = User::find($id)->personalAccount;
-//        return view('admin/userPersonal')->with(['user'=>$user, 'personalAccount'=>$personalAccount]);
+        $user = User::find($id);
+        $investorAccount = array();
+        if (empty($user->accounts[1])){
+            $investorAccount[0] = 'Не существует';
+            $investorAccount[1] = 'Не существует';
+            $investorAccount[2] = 'Не существует';
+        } else { $investorAccount[0] = $user->accounts[1]->number;
+                    $investorAccount[1] = $user->accounts[1]->created_at;
+                    $investorAccount[2] = $user->accounts[1]->updated_at; }
+        return view('admin/userInvestor', compact('user', 'investorAccount'));
+    }
+
+    public function accounts()
+    {
+        $users = User::with('accounts')->paginate(5);
+        $countries = Country::all();
+        $investor = array();
+        foreach ($users as $index => $user){
+            if (empty($user->accounts[1])){
+                $investor [$index] = '';
+            } else { $investor[$index] = $user->accounts[1]->number; }
+        }
+        return view('admin/accounts', compact('users', 'countries', 'investor'));
     }
 
 }

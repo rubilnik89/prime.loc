@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <ul class="nav nav-tabs">
             <li class="active"><a href="{{ route('home') }}">Home</a></li>
-            <li><a href="#">Menu 1</a></li>
-            <li><a href="#">Menu 2</a></li>
+            <li><a href="{{ route('personalAccount', ['id' => $user->id]) }}">Personal account</a></li>
+            <li><a href="{{ route('investorAccount', ['id' => $user->id]) }}">Investor account</a></li>
         </ul>
         <div class="col-md-12">
             <div class="col-md-6">
@@ -43,7 +43,13 @@
                 <h2>Лицевой счет</h2>
             </div>
             <div class="col-md-6">
-                <h2>{{ $personalAccount->number }}</h2>
+                <h2>{{ $user->accounts[0]->number }}</h2>
+            </div>
+            <div class="col-md-6">
+                <h2>Инвесторский счет</h2>
+            </div>
+            <div class="col-md-6">
+                <h2>{{ $investor }}</h2>
             </div>
             <div class="col-md-6">
                 <h2>Created at</h2>

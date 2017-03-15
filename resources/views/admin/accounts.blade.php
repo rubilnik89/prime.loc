@@ -13,29 +13,22 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    @foreach(array_keys($columns) as $column)
-                        <th>
-                            @if ($sortby == $columns[$column] && $order == 'asc')
-                                {{link_to_action(
-                                  'AdminController@main',
-                                  $column, ['sortby' => $columns[$column],'order' => 'desc']
-                                )}}
-                            @else
-                                {{link_to_action(
-                                  'AdminController@main',
-                                  $column, ['sortby' => $columns[$column],'order' => 'asc']
-                                )}}
-                            @endif
-                        </th>
-                    @endforeach
+                    <th>#</th>
+                    <th>Personal account</th>
+                    <th>Investor account</th>
+                    <th>Name</th>
+                    <th>Surame</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Created at</th>
                 </tr>
                 </thead>
                 <tbody>
                     @foreach($users as $index => $user)
                         <tr onclick="window.location.href='{{ route('user', ['id' => $user->id]) }}';">
                         <td>{{ $index +1 }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->surname }}</td>
+                        <td>{{ $user->accounts[0]->number }}</td>
+                        <td>{{ $investor[$index] }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->country }}</td>

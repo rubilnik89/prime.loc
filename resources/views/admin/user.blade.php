@@ -1,16 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-2">
-            <a href="{{ route('admin') }}">Пользователи</a>
+            <a href="{{ route('users') }}">Пользователи</a>
+            <br>
+            <a href="{{ route('accounts') }}">Счета</a>
         </div>
         <div class="col-md-10">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="{{ route('user', ['id' => $user->id]) }}">Home</a></li>
                 <li><a href="{{ route('userPersonal', ['id' => $user->id]) }}">Personal Account</a></li>
-                <li><a href="{{ route('userInvestor', ['id' => $user->id]) }}">Menu 2</a></li>
+                <li><a href="{{ route('userInvestor', ['id' => $user->id]) }}">Investor Account</a></li>
             </ul>
 
             <div class="col-md-10">
