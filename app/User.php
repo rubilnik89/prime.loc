@@ -17,10 +17,15 @@ class User extends Authenticatable
         "Created at"=>"created_at",
         "Updated at"=>"updated_at",
     ];
+    public static $accountColumns = [
+        "#"=>"",
+        "Personal account"=>"personal",
+        "Investor account"=>"investor",
+        "Name"=>"name",
+        "Phone"=>"phone",
+        "Email"=>"email",
 
-
-
-
+    ];
 
     use Notifiable;
 

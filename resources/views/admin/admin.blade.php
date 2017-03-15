@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-9">
 
-            <table class="table table-hover">
+            <table id="example" class="table table-hover table-striped">
                 <thead>
                 <tr>
                     @foreach(array_keys($columns) as $column)
@@ -26,7 +26,6 @@
                                   $column, ['sortby' => $columns[$column],'order' => 'asc']
                                 )}}
                             @endif
-                        </th>
                     @endforeach
                 </tr>
                 </thead>

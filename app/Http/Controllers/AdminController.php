@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Country;
+use App\PersonalAccount;
+use App\InvestorAccount;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Input;
@@ -64,6 +66,73 @@ class AdminController extends Controller
         return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order'));
     }
 
+
+    public function accounts()
+    {
+        $sortby = Input::get('sortby');
+        $order = Input::get('order');
+        $columns = User::$accountColumns;
+        if($sortby == 'personal'){
+            $accounts = PersonalAccount::where('type_id', 1)->orderBy('number', $order)->paginate(5);
+            $ids=array();
+            foreach ($accounts as $index=>$account){
+                $ids[$index] = $account->user_id;
+            }
+
+            $users = User::whereIn('id', $ids)->with('accounts')->orderBy('id', $order)->paginate(5);
+            $countries = Country::all();
+            $investor = array();
+            foreach ($users as $index => $user){
+                if (empty($user->accounts[1])){
+                    $investor [$index] = '';
+                } else { $investor[$index] = $user->accounts[1]->number; }
+            }
+            return view('admin/accounts', compact('users', 'countries', 'investor', 'columns', 'sortby', 'order'));
+        }else if ($sortby == 'investor') {
+            $accounts = InvestorAccount::where('type_id', 0)->orderBy('number', $order)->paginate(5);
+            $ids = array();
+            foreach ($accounts as $index => $account) {
+                $ids[$index] = $account->user_id;
+            }
+            $users = User::whereIn('id', $ids)->with('accounts')->orderBy('id', $order)->paginate(5);
+            $countries = Country::all();
+            $investor = array();
+            foreach ($users as $index => $user) {
+                if (empty($user->accounts[1])) {
+                    $investor [$index] = '';
+                } else {
+                    $investor[$index] = $user->accounts[1]->number;
+                }
+            }
+            return view('admin/accounts', compact('users', 'countries', 'investor', 'columns', 'sortby', 'order'));
+        }
+        if ($sortby && $order) {
+            $users = User::with('accounts')->orderBy($sortby, $order)->paginate(5);
+        } else {
+            $users = User::with('accounts')->paginate(5);
+        }
+        $countries = Country::all();
+        $investor = array();
+        foreach ($users as $index => $user){
+            if (empty($user->accounts[1])){
+                $investor [$index] = '';
+            } else { $investor[$index] = $user->accounts[1]->number; }
+        }
+        return view('admin/accounts', compact('users', 'countries', 'investor', 'columns', 'sortby', 'order'));
+    }
+//    public function accounts()
+//    {
+//        $users = User::with('accounts')->paginate(5);
+//        $countries = Country::all();
+//        $investor = array();
+//        foreach ($users as $index => $user){
+//            if (empty($user->accounts[1])){
+//                $investor [$index] = '';
+//            } else { $investor[$index] = $user->accounts[1]->number; }
+//        }
+//        return view('admin/accounts', compact('users', 'countries', 'investor'));
+//    }
+
     public function user($id)
     {
         $user = User::find($id);
@@ -92,17 +161,6 @@ class AdminController extends Controller
         return view('admin/userInvestor', compact('user', 'investorAccount'));
     }
 
-    public function accounts()
-    {
-        $users = User::with('accounts')->paginate(5);
-        $countries = Country::all();
-        $investor = array();
-        foreach ($users as $index => $user){
-            if (empty($user->accounts[1])){
-                $investor [$index] = '';
-            } else { $investor[$index] = $user->accounts[1]->number; }
-        }
-        return view('admin/accounts', compact('users', 'countries', 'investor'));
-    }
+
 
 }
