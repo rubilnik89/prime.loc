@@ -12,35 +12,49 @@
 
             <table class="table table-hover">
                 <thead>
-                <tr>
-                    @foreach(array_keys($columns) as $column)
-                        <th>
-                            @if ($sortby == $columns[$column] && $order == 'asc')
-                                {{link_to_action(
-                                  'AdminController@search',
-                                  $column, ['sortby' => $columns[$column],
-                                  'order' => 'desc',
-                                  'name' => $data['name'],
-                                  'surname' => $data['surname'],
-                                  'phone' => $data['phone'],
-                                  'email' => $data['email'],
-                                  'country' => $data['country'],
-                                  ])}}
-                            @else
-                                {{link_to_action(
-                                  'AdminController@search',
-                                  $column, ['sortby' => $columns[$column],
-                                  'order' => 'asc',
-                                  'name' => $data['name'],
-                                  'surname' => $data['surname'],
-                                  'phone' => $data['phone'],
-                                  'email' => $data['email'],
-                                  'country' => $data['country'],
-                                  ])}}
-                            @endif
-                        </th>
-                    @endforeach
-                </tr>
+                    <tr>
+                        <th>#</th>
+                        @foreach(array_keys($columns) as $column)
+                                @if ($sortby == $columns[$column] && $order == 'asc')
+                                    <th>
+                                    {{link_to_action(
+                                      'AdminController@search',
+                                      $column, ['sortby' => $columns[$column],
+                                      'order' => 'desc',
+                                      'name' => $data['name'],
+                                      'surname' => $data['surname'],
+                                      'phone' => $data['phone'],
+                                      'email' => $data['email'],
+                                      'country' => $data['country'],
+                                      ])}}<i class="fa fa-fw fa-sort-asc"></i>
+                                @elseif ($sortby == $columns[$column] && $order == 'desc')
+                                    <th>
+                                    {{link_to_action(
+                                      'AdminController@search',
+                                      $column, ['sortby' => $columns[$column],
+                                      'order' => 'asc',
+                                      'name' => $data['name'],
+                                      'surname' => $data['surname'],
+                                      'phone' => $data['phone'],
+                                      'email' => $data['email'],
+                                      'country' => $data['country'],
+                                      ])}}<i class="fa fa-fw fa-sort-desc"></i>
+                                @else
+                                    <th>
+                                        {{link_to_action(
+                                      'AdminController@search',
+                                      $column, ['sortby' => $columns[$column],
+                                      'order' => 'asc',
+                                      'name' => $data['name'],
+                                      'surname' => $data['surname'],
+                                      'phone' => $data['phone'],
+                                      'email' => $data['email'],
+                                      'country' => $data['country'],
+                                      ])}}<i class="fa fa-fw fa-sort"></i>
+                                @endif
+                                    </th>
+                        @endforeach
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach($users as $index => $user)
