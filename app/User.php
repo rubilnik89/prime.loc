@@ -17,8 +17,8 @@ class User extends Authenticatable
         "Updated at"=>"updated_at",
     ];
     public static $accountColumns = [
-        "Personal account"=>"personal",
-        "Investor account"=>"investor",
+        "Account"=>"account",
+        "Type"=>"type",
         "Name"=>"name",
         "Phone"=>"phone",
         "Email"=>"email",
@@ -69,14 +69,6 @@ class User extends Authenticatable
     public function accounts()
     {
         return $this->hasMany('App\Accounts');
-    }
-    public function personalAccount()
-    {
-        return $this->hasOne('App\PersonalAccount');
-    }
-    public function investorAccount()
-    {
-        return $this->hasOne('App\InvestorAccount');
     }
 
     public function country()

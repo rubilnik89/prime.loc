@@ -15,56 +15,45 @@
                 <li><a href="{{ route('userInvestor', ['id' => $user->id]) }}">Investor Account</a></li>
             </ul>
 
-            <div class="col-md-10">
-                <div class="col-md-6">
-                    <h2>Name</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>{{ $user->name }}</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>Surame</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>{{ $user->surname }}</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>Email</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>{{ $user->email }}</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>Phone</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>{{ $user->phone }}</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>Country</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>{{ $user->country }}</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>Лицевой счет</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>{{ $personalAccount->number }}</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>Created at</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>{{ $user->created_at }}</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>Updated at</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>{{ $user->updated_at }}</h2>
-                </div>
-            </div>
+            <table class="table">
+                <tr>
+                    <td><h2>Name</h2></td>
+                    <td><h2>{{ $user->name }}</h2></td>
+                </tr>
+                <tr>
+                    <td><h2>Surame</h2></td>
+                    <td><h2>{{ $user->surname }}</h2></td>
+                </tr>
+                <tr>
+                    <td><h2>Email</h2></td>
+                    <td><h2>{{ $user->email }}</h2></td>
+                </tr>
+                <tr>
+                    <td><h2>Phone</h2></td>
+                    <td><h2>{{ $user->phone }}</h2></td>
+                </tr>
+                <tr>
+                    <td><h2>Country</h2></td>
+                    <td><h2>{{ $user->country }}</h2></td>
+                </tr>
+                <tr>
+                    <td><h2>Счета</h2></td>
+                    @foreach( $user->accounts as $account)
+                        <td><h2>{{ $account->number }}</h2></td>
+                        <tr><td></td>
+                    @endforeach
+                        </tr>
+                </tr>
+                <tr>
+                    <td><h2>Created at</h2></td>
+                    <td><h2>{{ $user->created_at }}</h2></td>
+                </tr>
+                <tr>
+                    <td><h2>Updated at</h2></td>
+                    <td><h2>{{ $user->updated_at }}</h2></td>
+                </tr>
+            </table>
+
         </div>
     </div>
 </div>

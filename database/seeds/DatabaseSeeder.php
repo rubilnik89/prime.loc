@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\User;
-use App\PersonalAccount;
+use App\Accounts;
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,38 +34,61 @@ class AccountsTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('account_types')->delete();
-        PersonalAccount::create([
-            'number'=>'88888',
+        DB::table('accounts')->delete();
+        Accounts::create([
+            'number'=>'88880',
             'user_id'=>1,
+            'type_id'=>1,
         ]);
-        PersonalAccount::create([
-            'number'=>'88888',
+        Accounts::create([
+            'number'=>'88881',
             'user_id'=>2,
+            'type_id'=>1,
         ]);
-        PersonalAccount::create([
-            'number'=>'88888',
+        Accounts::create([
+            'number'=>'88882',
             'user_id'=>3,
+            'type_id'=>1,
         ]);
-        PersonalAccount::create([
-            'number'=>'88888',
+        Accounts::create([
+            'number'=>'88883',
             'user_id'=>4,
+            'type_id'=>1,
         ]);
-        PersonalAccount::create([
-            'number'=>'88888',
+        Accounts::create([
+            'number'=>'88884',
             'user_id'=>5,
+            'type_id'=>1,
         ]);
-        PersonalAccount::create([
-            'number'=>'88888',
+        Accounts::create([
+            'number'=>'88885',
             'user_id'=>6,
+            'type_id'=>1,
         ]);
-        PersonalAccount::create([
-            'number'=>'88888',
+        Accounts::create([
+            'number'=>'88886',
             'user_id'=>7,
+            'type_id'=>1,
         ]);
-        PersonalAccount::create([
-            'number'=>'88888',
+        Accounts::create([
+            'number'=>'88887',
             'user_id'=>8,
+            'type_id'=>1,
+        ]);
+        Accounts::create([
+            'number'=>'2489657',
+            'user_id'=>1,
+            'type_id'=>2,
+        ]);
+        Accounts::create([
+            'number'=>'2547856',
+            'user_id'=>1,
+            'type_id'=>2,
+        ]);
+        Accounts::create([
+            'number'=>'2569874',
+            'user_id'=>2,
+            'type_id'=>2,
         ]);
     }
 }

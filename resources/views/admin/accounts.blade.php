@@ -38,14 +38,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $index => $user)
-                        <tr onclick="window.location.href='{{ route('user', ['id' => $user->id]) }}';">
+                    @foreach($accounts as $index => $account)
+                        {{--<tr onclick="window.location.href='{{ route('user', ['id' => $user->id]) }}';">--}}
+                        <tr>
                         <td>{{ $index +1 }}</td>
-                        <td>{{ $user->accounts[0]->number }}</td>
-                        <td>{{ $investor[$index] }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->phone }}</td>
-                        <td>{{ $user->email }}</td>
+                        <td>{{ $account->number }}</td>
+                        <td>{{ $account->type_id }}</td>
+                        <td>{{ $account->user->name }}</td>
+                        <td>{{ $account->user->phone }}</td>
+                        <td>{{ $account->user->email }}</td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -73,6 +73,7 @@
             </table>
 
         </div>
+        {{--@yield('searchform')--}}
         <div class="col-md-2">
                 {{ Form::open(array('action' => array('AdminController@search'), 'method' => 'get')) }}
                     <label for="name">Search by name</label>

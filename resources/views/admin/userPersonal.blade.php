@@ -15,26 +15,20 @@
                 <li><a href="{{ route('userInvestor', ['id' => $user->id]) }}">Investor account</a></li>
             </ul>
 
-            <div class="col-md-10">
-                <div class="col-md-6">
-                    <h2>Number</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>{{ $personalAccount->number }}</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>Created at</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>{{ $personalAccount->created_at }}</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>Updated at</h2>
-                </div>
-                <div class="col-md-6">
-                    <h2>{{ $personalAccount->updated_at }}</h2>
-                </div>
-            </div>
+            <table class="table">
+                <tr>
+                    <td><h2>Number</h2></td>
+                    <td><h2>{{ $personalAccount->number }}</h2></td>
+                </tr>
+                <tr>
+                    <td><h2>Created at</h2></td>
+                    <td><h2>{{ $personalAccount->created_at }}</h2></td>
+                </tr>
+                <tr>
+                    <td><h2>Updated at</h2></td>
+                    <td><h2>{{ $personalAccount->updated_at }}</h2></td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
