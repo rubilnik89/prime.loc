@@ -10,24 +10,32 @@
         </div>
         <div class="col-md-9">
 
-            <table id="example" class="table table-hover table-striped">
+            <table class="table table-hover table-striped">
                 <thead>
-                <tr>
-                    @foreach(array_keys($columns) as $column)
-                        <th>
-                            @if ($sortby == $columns[$column] && $order == 'asc')
-                                {{link_to_action(
-                                  'AdminController@main',
-                                  $column, ['sortby' => $columns[$column],'order' => 'desc']
-                                )}}
-                            @else
-                                {{link_to_action(
-                                  'AdminController@main',
-                                  $column, ['sortby' => $columns[$column],'order' => 'asc']
-                                )}}
-                            @endif
-                    @endforeach
-                </tr>
+                    <tr>
+                        @foreach(array_keys($columns) as $column)
+                                @if ($sortby == $columns[$column] && $order == 'asc')
+                                    <th class="sorting_asc">
+                                    {{link_to_action(
+                                      'AdminController@main',
+                                      $column, ['sortby' => $columns[$column],'order' => 'desc']
+                                    )}}
+                                @elseif ($sortby == $columns[$column] && $order == 'desc')
+                                    <th class="sorting_desc">
+                                    {{link_to_action(
+                                      'AdminController@main',
+                                      $column, ['sortby' => $columns[$column],'order' => 'asc']
+                                    )}}
+                                @else
+                                    <th class="sorting">
+                                        {{link_to_action(
+                                      'AdminController@main',
+                                      $column , ['sortby' => $columns[$column],'order' => 'asc']
+                                    )}}
+                                @endif
+                                    </th>
+                        @endforeach
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach($users as $index => $user)

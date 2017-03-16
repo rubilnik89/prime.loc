@@ -27,12 +27,6 @@
                             )}}
                         @endif
                     @endforeach
-                    {{--<th>#</th>--}}
-                    {{--<th>Personal account</th>--}}
-                    {{--<th>Investor account</th>--}}
-                    {{--<th>Name</th>--}}
-                    {{--<th>Phone</th>--}}
-                    {{--<th>Email</th>--}}
                 </tr>
                 </thead>
                 <tbody>
@@ -48,6 +42,10 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="col-md-12">
+{{--            {{ $users->links() }}--}}
+            {{ $users->appends([])->links() }}
         </div>
     </div>
 </div>
