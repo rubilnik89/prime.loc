@@ -15,28 +15,45 @@
                     <tr>
                         <th>#</th>
                         @foreach(array_keys($columns) as $column)
-                                @if ($sortby == $columns[$column] && $order == 'asc')
-                                    <th>
+                            @if ($sortby == $columns[$column] && $order == 'asc')
+                                <th>
                                     {{link_to_action(
-                                      'AdminController@main',
-                                      $column, ['sortby' => $columns[$column],'order' => 'desc']
-                                    )}}
-                                        <i class="fa fa-fw fa-sort-asc"></i>
-                                @elseif ($sortby == $columns[$column] && $order == 'desc')
-                                    <th>
+                                      'AdminController@search',
+                                      $column, ['sortby' => $columns[$column],
+                                      'order' => 'desc',
+                                      'name' => $data['name'],
+                                      'surname' => $data['surname'],
+                                      'phone' => $data['phone'],
+                                      'email' => $data['email'],
+                                      'country' => $data['country'],
+                                      ])}}<i class="fa fa-fw fa-sort-asc"></i>
+                            @elseif ($sortby == $columns[$column] && $order == 'desc')
+                                <th>
                                     {{link_to_action(
-                                      'AdminController@main',
-                                      $column, ['sortby' => $columns[$column],'order' => 'asc']
-                                    )}} <i class="fa fa-fw fa-sort-desc"></i>
-                                @else
-                                    <th>
-                                        {{link_to_action(
-                                      'AdminController@main',
-                                      $column , ['sortby' => $columns[$column],'order' => 'asc']
-                                    )}} <i class="fa fa-fw fa-sort"></i>
-                                @endif
-                                        </th>
-                        @endforeach
+                                      'AdminController@search',
+                                      $column, ['sortby' => $columns[$column],
+                                      'order' => 'asc',
+                                      'name' => $data['name'],
+                                      'surname' => $data['surname'],
+                                      'phone' => $data['phone'],
+                                      'email' => $data['email'],
+                                      'country' => $data['country'],
+                                      ])}}<i class="fa fa-fw fa-sort-desc"></i>
+                            @else
+                                <th>
+                                    {{link_to_action(
+                                  'AdminController@search',
+                                  $column, ['sortby' => $columns[$column],
+                                  'order' => 'asc',
+                                  'name' => $data['name'],
+                                  'surname' => $data['surname'],
+                                  'phone' => $data['phone'],
+                                  'email' => $data['email'],
+                                  'country' => $data['country'],
+                                  ])}}<i class="fa fa-fw fa-sort"></i>
+                                    @endif
+                                </th>
+                            @endforeach
                     </tr>
                 </thead>
                 <tbody>

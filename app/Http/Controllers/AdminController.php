@@ -44,7 +44,7 @@ class AdminController extends Controller
         $columns = User::$columns;
         Input::flash();
         $links = str_replace('/?', '?', $users->appends(Input::except('page'))->render());
-        return view('admin/adminSearch', compact('users', 'links', 'countries', 'columns', 'sortby', 'order', 'data'));
+        return view('admin/admin', compact('users', 'links', 'countries', 'columns', 'sortby', 'order', 'data'));
         }else{
             return redirect('admin/users');
         }
@@ -53,6 +53,14 @@ class AdminController extends Controller
 
     public function main()
     {
+        !empty($data['country']) ? $data['country'] = $data['country'] : $data['country'] = null;
+        !empty($data['name']) ? $data['name'] = $data['name'] : $data['name'] = null;
+        !empty($data['surname']) ? $data['surname'] = $data['surname'] : $data['surname'] = null;
+        !empty($data['phone']) ? $data['phone'] = $data['phone'] : $data['phone'] = null;
+        !empty($data['email']) ? $data['email'] = $data['email'] : $data['email'] = null;
+        !empty($data['sortby']) ? $data['sortby'] = $data['sortby'] : $data['sortby'] = null;
+
+
         $sortby = Input::get('sortby');
         $order = Input::get('order');
         if ($sortby && $order) {
@@ -63,7 +71,7 @@ class AdminController extends Controller
         $countries = Country::all();
         $columns = User::$columns;
 
-        return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order'));
+        return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order', 'data'));
     }
 
 
@@ -98,7 +106,7 @@ class AdminController extends Controller
                 $investor [$index] = '';
             } else { $investor[$index] = $user->accounts[1]->number; }
         }
-        //dd($sortby);
+
         return view('admin/accounts', compact('users', 'countries', 'investor', 'columns', 'sortby', 'order'));
     }
 
