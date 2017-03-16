@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     public static $columns = [
-        "#"=>"",
         "Name"=>"name",
         "Surname"=>"surname",
         "Email"=>"email",
@@ -18,7 +17,6 @@ class User extends Authenticatable
         "Updated at"=>"updated_at",
     ];
     public static $accountColumns = [
-        "#"=>"",
         "Personal account"=>"personal",
         "Investor account"=>"investor",
         "Name"=>"name",

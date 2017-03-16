@@ -13,27 +13,29 @@
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
+                        <th>#</th>
                         @foreach(array_keys($columns) as $column)
                                 @if ($sortby == $columns[$column] && $order == 'asc')
-                                    <th class="sorting_asc">
+                                    <th>
                                     {{link_to_action(
                                       'AdminController@main',
                                       $column, ['sortby' => $columns[$column],'order' => 'desc']
                                     )}}
+                                        <i class="fa fa-fw fa-sort-asc"></i>
                                 @elseif ($sortby == $columns[$column] && $order == 'desc')
-                                    <th class="sorting_desc">
+                                    <th>
                                     {{link_to_action(
                                       'AdminController@main',
                                       $column, ['sortby' => $columns[$column],'order' => 'asc']
-                                    )}}
+                                    )}} <i class="fa fa-fw fa-sort-desc"></i>
                                 @else
-                                    <th class="sorting">
+                                    <th>
                                         {{link_to_action(
                                       'AdminController@main',
                                       $column , ['sortby' => $columns[$column],'order' => 'asc']
-                                    )}}
+                                    )}} <i class="fa fa-fw fa-sort"></i>
                                 @endif
-                                    </th>
+                                        </th>
                         @endforeach
                     </tr>
                 </thead>
@@ -77,7 +79,7 @@
                 {{ Form::close() }}
         </div>
         <div class="col-md-12">
-            {{ $users->links() }}
+            {{ $users->appends(['sortby'=>$sortby, 'order'=>$order])->links() }}
         </div>
     </div>
 </div>

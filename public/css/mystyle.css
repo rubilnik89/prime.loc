@@ -1,10 +1,4 @@
-th .sorting{
-    background-color: #2ab27b;
-    color: red;
+i {
+    float: right;
 }
-th .sorting_asc{
-    background-color: #3db9ec;
-}
-th .sorting_desc{
-    background-color: #8c8c8c;
-}
+

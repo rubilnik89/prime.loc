@@ -72,22 +72,21 @@ class AdminController extends Controller
         $sortby = Input::get('sortby');
         $order = Input::get('order');
         $columns = User::$accountColumns;
-        if($sortby == 'personal'){
-            $accounts = PersonalAccount::where('type_id', 1)->orderBy('number', $order)->paginate(5);
+        if($sortby == 'personal' && $order){
+            $accounts = PersonalAccount::where('type_id', 1)->orderBy('number', $order)->get();
             $ids=array();
             foreach ($accounts as $index=>$account){
                 $ids[$index] = $account->user_id;
             }
-
             $users = User::whereIn('id', $ids)->with('accounts')->orderBy('id', $order)->paginate(5);
-        }else if ($sortby == 'investor') {
-            $accounts = InvestorAccount::where('type_id', 0)->orderBy('number', $order)->paginate(5);
+        }else if ($sortby == 'investor' && $order) {
+            $accounts = InvestorAccount::where('type_id', 0)->orderBy('number', $order)->get();
             $ids = array();
             foreach ($accounts as $index => $account) {
                 $ids[$index] = $account->user_id;
             }
             $users = User::whereIn('id', $ids)->with('accounts')->orderBy('id', $order)->paginate(5);
-        } else if ($sortby && $order) {
+        } else if ($sortby != 'personal' && $sortby != 'investor' && $sortby && $order) {
             $users = User::with('accounts')->orderBy($sortby, $order)->paginate(5);
         } else {
             $users = User::with('accounts')->paginate(5);
@@ -99,6 +98,7 @@ class AdminController extends Controller
                 $investor [$index] = '';
             } else { $investor[$index] = $user->accounts[1]->number; }
         }
+        //dd($sortby);
         return view('admin/accounts', compact('users', 'countries', 'investor', 'columns', 'sortby', 'order'));
     }
 

@@ -82,7 +82,7 @@
                 {{ Form::close() }}
         </div>
         <div class="col-md-12">
-            {{ $users->links() }}
+            {{ $users->appends(['sortby'=>$sortby, 'order'=>$order])->links() }}
         </div>
     </div>
 </div>

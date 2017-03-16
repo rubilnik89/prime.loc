@@ -13,19 +13,27 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th>#</th>
                     @foreach(array_keys($columns) as $column)
-                        <th>
                         @if ($sortby == $columns[$column] && $order == 'asc')
-                            {{link_to_action(
-                              'AdminController@accounts',
-                              $column, ['sortby' => $columns[$column],'order' => 'desc']
-                            )}}
+                            <th>
+                                {{link_to_action(
+                                  'AdminController@accounts',
+                                  $column, ['sortby' => $columns[$column],'order' => 'desc']
+                                )}}<i class="fa fa-fw fa-sort-desc"></i>
+                        @elseif ($sortby == $columns[$column] && $order == 'desc')
+                            <th>{{link_to_action(
+                                  'AdminController@accounts',
+                                  $column, ['sortby' => $columns[$column],'order' => 'asc']
+                                )}}<i class="fa fa-fw fa-sort-asc"></i>
                         @else
-                            {{link_to_action(
+                            <th>
+                                {{link_to_action(
                               'AdminController@accounts',
-                              $column, ['sortby' => $columns[$column],'order' => 'asc']
-                            )}}
-                        @endif
+                              $column , ['sortby' => $columns[$column],'order' => 'asc']
+                                )}} <i class="fa fa-fw fa-sort"></i>
+                            @endif
+                        </th>
                     @endforeach
                 </tr>
                 </thead>
@@ -45,7 +53,7 @@
         </div>
         <div class="col-md-12">
 {{--            {{ $users->links() }}--}}
-            {{ $users->appends([])->links() }}
+            {{ $users->appends(['sortby'=>$sortby, 'order'=>$order])->links() }}
         </div>
     </div>
 </div>
