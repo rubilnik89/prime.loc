@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(CountriesTableSeeder::class);
-         $this->call(UsersTableSeeder::class);
-         $this->call(AccountTypesTableSeeder::class);
-         $this->call(AccountsTableSeeder::class);
+        $this->call(CountriesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(AccountTypesTableSeeder::class);
+        $this->call(AccountsTableSeeder::class);
     }
 }
 
@@ -30,65 +30,66 @@ class AccountTypesTableSeeder extends Seeder
         DB::table('account_types')->insert(array('name' => 'Инвесторский'));
     }
 }
+
 class AccountsTableSeeder extends Seeder
 {
     public function run()
     {
         DB::table('accounts')->delete();
         Accounts::create([
-            'number'=>'88880',
-            'user_id'=>1,
-            'type_id'=>1,
+            'number' => '88880',
+            'user_id' => 1,
+            'type_id' => 1,
         ]);
         Accounts::create([
-            'number'=>'88881',
-            'user_id'=>2,
-            'type_id'=>1,
+            'number' => '88881',
+            'user_id' => 2,
+            'type_id' => 1,
         ]);
         Accounts::create([
-            'number'=>'88882',
-            'user_id'=>3,
-            'type_id'=>1,
+            'number' => '88882',
+            'user_id' => 3,
+            'type_id' => 1,
         ]);
         Accounts::create([
-            'number'=>'88883',
-            'user_id'=>4,
-            'type_id'=>1,
+            'number' => '88883',
+            'user_id' => 4,
+            'type_id' => 1,
         ]);
         Accounts::create([
-            'number'=>'88884',
-            'user_id'=>5,
-            'type_id'=>1,
+            'number' => '88884',
+            'user_id' => 5,
+            'type_id' => 1,
         ]);
         Accounts::create([
-            'number'=>'88885',
-            'user_id'=>6,
-            'type_id'=>1,
+            'number' => '88885',
+            'user_id' => 6,
+            'type_id' => 1,
         ]);
         Accounts::create([
-            'number'=>'88886',
-            'user_id'=>7,
-            'type_id'=>1,
+            'number' => '88886',
+            'user_id' => 7,
+            'type_id' => 1,
         ]);
         Accounts::create([
-            'number'=>'88887',
-            'user_id'=>8,
-            'type_id'=>1,
+            'number' => '88887',
+            'user_id' => 8,
+            'type_id' => 1,
         ]);
         Accounts::create([
-            'number'=>'2489657',
-            'user_id'=>1,
-            'type_id'=>2,
+            'number' => '2489657',
+            'user_id' => 1,
+            'type_id' => 2,
         ]);
         Accounts::create([
-            'number'=>'2547856',
-            'user_id'=>1,
-            'type_id'=>2,
+            'number' => '2547856',
+            'user_id' => 1,
+            'type_id' => 2,
         ]);
         Accounts::create([
-            'number'=>'2569874',
-            'user_id'=>2,
-            'type_id'=>2,
+            'number' => '2569874',
+            'user_id' => 2,
+            'type_id' => 2,
         ]);
     }
 }
@@ -99,88 +100,89 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->delete();
         User::create([
-            'name'=>'Roman',
-            'surname'=>'Zherebko',
-            'phone'=>'0996476763',
-            'country'=>'Албания',
-            'is_admin'=>true,
-            'activated'=>true,
-            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
-            'email'=>'rubilnik89@mail.ru',
+            'name' => 'Roman',
+            'surname' => 'Zherebko',
+            'phone' => '0996476763',
+            'country' => 'Албания',
+            'is_admin' => true,
+            'activated' => true,
+            'password' => '$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
+            'email' => 'rubilnik89@mail.ru',
         ]);
         User::create([
-            'name'=>'Galina',
-            'surname'=>'Kulik',
-            'phone'=>'0557841252',
-            'country'=>'Албания',
-            'is_admin'=>false,
-            'activated'=>true,
-            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
-            'email'=>'dgfgdfgrgr@fdef.rgf',
+            'name' => 'Galina',
+            'surname' => 'Kulik',
+            'phone' => '0557841252',
+            'country' => 'Албания',
+            'is_admin' => false,
+            'activated' => true,
+            'password' => '$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
+            'email' => 'dgfgdfgrgr@fdef.rgf',
         ]);
         User::create([
-            'name'=>'Valina',
-            'surname'=>'Kulik',
-            'phone'=>'0557834252',
-            'country'=>'Албания',
-            'is_admin'=>false,
-            'activated'=>true,
-            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
-            'email'=>'dgftrdfgrgr@fdef.rgf',
+            'name' => 'Valina',
+            'surname' => 'Kulik',
+            'phone' => '0557834252',
+            'country' => 'Албания',
+            'is_admin' => false,
+            'activated' => true,
+            'password' => '$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
+            'email' => 'dgftrdfgrgr@fdef.rgf',
         ]);
         User::create([
-            'name'=>'Valfna',
-            'surname'=>'Kulik',
-            'phone'=>'0577834252',
-            'country'=>'Албания',
-            'is_admin'=>false,
-            'activated'=>true,
-            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
-            'email'=>'dgftrdfgrkj@fdef.rgf',
+            'name' => 'Valfna',
+            'surname' => 'Kulik',
+            'phone' => '0577834252',
+            'country' => 'Албания',
+            'is_admin' => false,
+            'activated' => true,
+            'password' => '$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
+            'email' => 'dgftrdfgrkj@fdef.rgf',
         ]);
         User::create([
-            'name'=>'Varena',
-            'surname'=>'Kulik',
-            'phone'=>'0557694252',
-            'country'=>'Албания',
-            'is_admin'=>false,
-            'activated'=>true,
-            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
-            'email'=>'dgftrvcgrgr@fdef.rgf',
+            'name' => 'Varena',
+            'surname' => 'Kulik',
+            'phone' => '0557694252',
+            'country' => 'Албания',
+            'is_admin' => false,
+            'activated' => true,
+            'password' => '$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
+            'email' => 'dgftrvcgrgr@fdef.rgf',
         ]);
         User::create([
-            'name'=>'Valona',
-            'surname'=>'Kulik',
-            'phone'=>'0557034252',
-            'country'=>'Албания',
-            'is_admin'=>false,
-            'activated'=>true,
-            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
-            'email'=>'dbnrdfgrgr@fdef.rgf',
+            'name' => 'Valona',
+            'surname' => 'Kulik',
+            'phone' => '0557034252',
+            'country' => 'Албания',
+            'is_admin' => false,
+            'activated' => true,
+            'password' => '$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
+            'email' => 'dbnrdfgrgr@fdef.rgf',
         ]);
         User::create([
-            'name'=>'Valmoa',
-            'surname'=>'Kulik',
-            'phone'=>'0555034252',
-            'country'=>'Албания',
-            'is_admin'=>false,
-            'activated'=>true,
-            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
-            'email'=>'dgftrdfkklgr@fdef.rgf',
+            'name' => 'Valmoa',
+            'surname' => 'Kulik',
+            'phone' => '0555034252',
+            'country' => 'Албания',
+            'is_admin' => false,
+            'activated' => true,
+            'password' => '$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
+            'email' => 'dgftrdfkklgr@fdef.rgf',
         ]);
         User::create([
-            'name'=>'Vcfina',
-            'surname'=>'Kulik',
-            'phone'=>'0557994252',
-            'country'=>'Албания',
-            'is_admin'=>false,
-            'activated'=>true,
-            'password'=>'$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
-            'email'=>'dgftrporgr@fdef.rgf',
+            'name' => 'Vcfina',
+            'surname' => 'Kulik',
+            'phone' => '0557994252',
+            'country' => 'Албания',
+            'is_admin' => false,
+            'activated' => true,
+            'password' => '$2y$10$jHTmBxMbx4NE6O7MukQkAO2GDLEUgO8cigNq6mf70JzsWv3Wa0iD.',
+            'email' => 'dgftrporgr@fdef.rgf',
         ]);
 
     }
 }
+
 class CountriesTableSeeder extends Seeder
 {
     /**

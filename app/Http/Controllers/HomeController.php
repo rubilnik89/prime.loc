@@ -27,9 +27,11 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if (empty($user->accounts[1])){
+        if (empty($user->accounts[1])) {
             $investor = 'Не существует';
-        } else { $investor = $user->accounts[1]->number; }
+        } else {
+            $investor = $user->accounts[1]->number;
+        }
 
         return view('home', compact('user', 'investor'));
     }
@@ -38,13 +40,15 @@ class HomeController extends Controller
     {
         $user = User::find($id);
         $investorAccount = array();
-        if (empty($user->accounts[1])){
+        if (empty($user->accounts[1])) {
             $investorAccount[0] = 'Не существует';
             $investorAccount[1] = 'Не существует';
             $investorAccount[2] = 'Не существует';
-        } else { $investorAccount[0] = $user->accounts[1]->number;
-                    $investorAccount[1] = $user->accounts[1]->created_at;
-                    $investorAccount[2] = $user->accounts[1]->updated_at; }
+        } else {
+            $investorAccount[0] = $user->accounts[1]->number;
+            $investorAccount[1] = $user->accounts[1]->created_at;
+            $investorAccount[2] = $user->accounts[1]->updated_at;
+        }
         return view('homeInvestor', compact('user', 'investorAccount'));
     }
 

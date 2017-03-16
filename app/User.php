@@ -16,14 +16,7 @@ class User extends Authenticatable
         "Created at"=>"created_at",
         "Updated at"=>"updated_at",
     ];
-    public static $accountColumns = [
-        "Account"=>"account",
-        "Type"=>"type",
-        "Name"=>"name",
-        "Phone"=>"phone",
-        "Email"=>"email",
 
-    ];
 
     use Notifiable;
 
