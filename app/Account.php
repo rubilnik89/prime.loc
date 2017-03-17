@@ -30,7 +30,13 @@ class Account extends Model
     }
     public function scopeSearchBalance($query, $from, $to)
     {
-        if ($from && $to) $query->whereBetween('balance', [$from, $to]);
+        if ($from) {
+            $query->where('balance', '>=', $from);
+        } else if ($to) {
+            $query->where('balance', '<=', $to);
+        } else if ($from && $to) {
+            $query->whereBetween('balance', [$from, $to]);
+        }
     }
 
 
