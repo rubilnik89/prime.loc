@@ -13,6 +13,7 @@ class AccountType extends Model
 
     public function account()
     {
-        return $this->belongsTo('App\Accounts', 'type_id');
+        return $this->hasOne('App\Account');
     }
+
 }

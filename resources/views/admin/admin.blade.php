@@ -18,7 +18,7 @@
                             @if ($sortby == $columns[$column] && $order == 'asc')
                                 <th>
                                     {{link_to_action(
-                                      'AdminController@search',
+                                      'AdminController@userSearch',
                                       $column, ['sortby' => $columns[$column],
                                       'order' => 'desc',
                                       'name' => $data['name'],
@@ -30,7 +30,7 @@
                             @elseif ($sortby == $columns[$column] && $order == 'desc')
                                 <th>
                                     {{link_to_action(
-                                      'AdminController@search',
+                                      'AdminController@userSearch',
                                       $column, ['sortby' => $columns[$column],
                                       'order' => 'asc',
                                       'name' => $data['name'],
@@ -42,7 +42,7 @@
                             @else
                                 <th>
                                     {{link_to_action(
-                                  'AdminController@search',
+                                  'AdminController@userSearch',
                                   $column, ['sortby' => $columns[$column],
                                   'order' => 'asc',
                                   'name' => $data['name'],
@@ -75,7 +75,7 @@
         </div>
         {{--@yield('searchform')--}}
         <div class="col-md-2">
-                {{ Form::open(array('action' => array('AdminController@search'), 'method' => 'get')) }}
+                {{ Form::open(array('action' => array('AdminController@userSearch'), 'method' => 'get')) }}
                     <label for="name">Search by name</label>
                     <input id="name" class="form-control" name="name" value="{{ old('name') }}">
                     <label for="surname">Search by surname</label>

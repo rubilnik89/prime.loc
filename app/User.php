@@ -61,7 +61,7 @@ class User extends Authenticatable
 
     public function accounts()
     {
-        return $this->hasMany('App\Accounts');
+        return $this->hasMany('App\Account');
     }
 
     public function country()
