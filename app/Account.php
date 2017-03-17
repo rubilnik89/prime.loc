@@ -13,6 +13,7 @@ class Account extends Model
     public static $accountColumns = [
         "Account"=>"number",
         "Type"=>"type_id",
+        "Balance"=>"balance",
         "Name"=>"name",
         "Phone"=>"phone",
         "Email"=>"email",
@@ -26,6 +27,10 @@ class Account extends Model
     public function scopeSearchType($query, $type)
     {
         if ($type) $query->where('type_id', 'like', "%$type%");
+    }
+    public function scopeSearchBalance($query, $from, $to)
+    {
+        if ($from && $to) $query->whereBetween('balance', [$from, $to]);
     }
 
 

@@ -17,20 +17,20 @@
             </ul>
 
             <table class="table">
-                @foreach($investorAccounts as $investorAccount)
+                <thead>
+                <tr>
+                    <th>Investor number</th>
+                    <th>Balance</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($investorAccounts as $index => $investorAccount)
                     <tr>
-                        <td><h2>Number</h2></td>
-                        <td><h2>{{ $investorAccount->number }}</h2></td>
-                    </tr>
-                    <tr>
-                        <td><h2>Created at</h2></td>
-                        <td><h2>{{ $investorAccount->created_at }}</h2></td>
-                    </tr>
-                    <tr>
-                        <td><h2>Updated at</h2></td>
-                        <td><h2>{{ $investorAccount->updated_at }}</h2></td>
+                        <td>{{ $investorAccount->number }}</td>
+                        <td>{{ $investorAccount->balance }}</td>
                     </tr>
                 @endforeach
+                </tbody>
             </table>
 
         </div>

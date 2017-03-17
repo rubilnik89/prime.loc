@@ -61,6 +61,7 @@
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $account->number }}</td>
                             <td>{{ $account->account_type->name }}</td>
+                            <td>{{ $account->balance }}</td>
                             <td>{{ $account->user->name }}</td>
                             <td>{{ $account->user->phone }}</td>
                             <td>{{ $account->user->email }}</td>
@@ -79,6 +80,15 @@
                     <option value="1">Лицевой</option>
                     <option value="2">Инвесторский</option>
                 </select>
+                <label for="from">Search by balance</label>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <input id="from" class="form-control" name="from" value="{{ old('from') }}" placeholder="from">
+                    </div>
+                    <div class="col-xs-6">
+                        <input id="to" class="form-control" name="to" value="{{ old('to') }}" placeholder="to">
+                    </div>
+                </div>
                 <label for="name">Search by name</label>
                 <input id="name" class="form-control" name="name" value="{{ old('name') }}">
                 <label for="email">Search by email</label>

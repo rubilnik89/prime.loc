@@ -13,8 +13,6 @@ class User extends Authenticatable
         "Email"=>"email",
         "Phone"=>"phone",
         "Country"=>"country",
-        "Created at"=>"created_at",
-        "Updated at"=>"updated_at",
     ];
 
 

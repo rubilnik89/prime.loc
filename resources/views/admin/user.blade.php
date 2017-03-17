@@ -44,14 +44,6 @@
                     @endforeach
                         </tr>
                 </tr>
-                <tr>
-                    <td><h2>Created at</h2></td>
-                    <td><h2>{{ $user->created_at }}</h2></td>
-                </tr>
-                <tr>
-                    <td><h2>Updated at</h2></td>
-                    <td><h2>{{ $user->updated_at }}</h2></td>
-                </tr>
             </table>
 
         </div>

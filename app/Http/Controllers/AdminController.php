@@ -20,6 +20,8 @@ class AdminController extends Controller
         !empty($data['sortby']) ? $data['sortby'] = $data['sortby'] : $data['sortby'] = null;
         !empty($data['type']) ? $data['type'] = $data['type'] : $data['type'] = null;
         !empty($data['account']) ? $data['account'] = $data['account'] : $data['account'] = null;
+        !empty($data['from']) ? $data['from'] = $data['from'] : $data['from'] = null;
+        !empty($data['to']) ? $data['to'] = $data['to'] : $data['to'] = null;
         return $data;
     }
 
@@ -166,7 +168,7 @@ class AdminController extends Controller
         $columns = Account::$accountColumns;
         $data = $this->isEmptyData($request->all());
 
-        if ($data['name'] != null || $data['email'] != null || $data['phone'] != null || $data['type'] != null || $data['account'] != null || $data['sortby'] != null) {
+        if ($data['name'] != null || $data['email'] != null || $data['phone'] != null || $data['type'] != null || $data['account'] != null || $data['sortby'] != null || $data['from'] != null || $data['to'] != null) {
 
             if ($data['name'] != null || $data['email'] != null || $data['phone'] != null) {
 
@@ -179,12 +181,14 @@ class AdminController extends Controller
             } else if ($sortby && $order) {
                 $accounts = Account::searchNumber($data['account'])
                     ->searchType($data['type'])
+                    ->searchBalance($data['from'], $data['to'])
                     ->with('user', 'account_type')
                     ->orderBy($sortby, $order)
                     ->paginate(3);
             } else {
                 $accounts = Account::searchNumber($data['account'])
                     ->searchType($data['type'])
+                    ->searchBalance($data['from'], $data['to'])
                     ->with('user', 'account_type')
                     ->paginate(3);
             }

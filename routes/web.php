@@ -9,8 +9,7 @@ Route::get('user/activation/{token}', 'Auth\LoginController@activateUser')->name
 
 Route::group(['prefix' => 'home', 'middleware' => 'isAdmin'], function(){
     Route::get('/', 'HomeController@index')->name('home');
-    Route::get('{id}/personal', 'HomeController@personalAccount')->name('personalAccount');
-    Route::get('{id}/investor', 'HomeController@investorAccount')->name('investorAccount');
+    Route::get('{id}/accounts', 'HomeController@accounts')->name('userAccounts');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
