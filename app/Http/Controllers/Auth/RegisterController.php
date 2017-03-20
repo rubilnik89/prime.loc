@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\PersonalAccount;
+use App\Account;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -81,9 +81,13 @@ class RegisterController extends Controller
                 'country' => $data['country'],
                 'password' => bcrypt($data['password']),
             ]);
-            $user->personalAccount()->save(new PersonalAccount([
+            Account::create([
                 'number' => (DB::table('accounts')->max('number') + 1),
-            ]));
+                'type_id' => 1,
+                'user_id' => $user->id,
+                'balance' => 0.0000,
+            ]);
+
             DB::commit();
             $success = true;
         } catch (\Exception $e) {

@@ -38,13 +38,8 @@ class HomeController extends Controller
     public function accounts($id)
     {
         $user = User::with('accounts')->find($id);
-        $accounts = [];
-        foreach ($user->accounts as $index => $account){
-            if ($account->type_id == "2"){
-                $accounts[$index] = $account;
-            }
-        }
-        return view('userAccounts', compact('user', 'accounts'));
+
+        return view('userAccounts', compact('user'));
     }
 
     public function moneyTransfer($id)
@@ -66,7 +61,7 @@ class HomeController extends Controller
                 $accountTo = Account::where('number', $data['to'])->first();
                 $balanceFrom = $accountFrom->balance - $data['sum'];
                 if ($balanceFrom < 0){
-                    return redirect()->route('moneyTransfer', $user->id);
+                    return redirect()->route('moneyTransfer', $user->id)->with('noMoney', 'На счету недостаточно средств для проведения этой транзакции');
                 }
                 $balanceTo = $accountTo->balance + $data['sum'];
 
@@ -88,9 +83,6 @@ class HomeController extends Controller
             }
             if ($success) {
                 return redirect()->route('moneyTransfer', $user->id)->with('success', 'Everything went great');
-            } else {
-                return redirect()->route('moneyTransfer', $user->id)->with('fail', 'Please, check your input');
-
             }
         }
         return redirect()->route('moneyTransfer', $user->id)->with('fail', 'Please, check your input');

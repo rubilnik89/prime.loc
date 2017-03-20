@@ -10,13 +10,12 @@
             </div>
 
             <div class="col-md-10">
-
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="row">
-                            @foreach($accounts as $account)
+                            @foreach($user->accounts as $account)
                                 <div class="col-md-3">
-                                    <h3>Investor number</h3>
+                                    <h3>Account</h3>
                                 </div>
                                 <div class="col-md-3">
                                     <h3>{{ $account->number }}</h3>
