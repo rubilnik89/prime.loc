@@ -40,7 +40,6 @@
                                 <select id="country" class="form-control" name="country" required autofocus>
                                     <option></option>
                                     @foreach($countries as $country)
-                                        {{--<option value="{{ $country->country_ }}">--}}
                                         <option>
                                             {{ $country->name }}
                                         </option>

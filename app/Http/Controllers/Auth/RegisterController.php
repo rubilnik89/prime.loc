@@ -93,7 +93,7 @@ class RegisterController extends Controller
         if ($success) {
             return $user;
         }
-            echo 'not register';
+            return redirect('register');
 
     }
 

@@ -19,7 +19,7 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                     <tr>
-                                        <th class="col-md-2">#</th>
+                                        <th class="col-md-1">#</th>
                                         @foreach(array_keys($columns) as $column)
                                             @if ($sortby == $columns[$column] && $order == 'asc')
                                                 <th class="col-md-2">
@@ -65,7 +65,7 @@
                                     <tbody>
                                     @foreach($users as $index => $user)
                                         <tr onclick="window.location.href='{{ route('user', ['id' => $user->id]) }}';">
-                                            <td class="col-md-2">{{ $index +1 }}</td>
+                                            <td class="col-md-1">{{ $index +1 }}</td>
                                             <td class="col-md-2">{{ $user->name }}</td>
                                             <td class="col-md-2">{{ $user->surname }}</td>
                                             <td class="col-md-2">{{ $user->email }}</td>

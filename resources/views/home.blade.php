@@ -6,12 +6,9 @@
             <div class="col-md-2">
                 <a class="list-group-item active" href="{{ route('home') }}">Домой</a>
                 <a class="list-group-item" href="{{ route('userAccounts', ['id' => $user->id]) }}">Мои счета</a>
+                <a class="list-group-item" href="{{ route('moneyTransfer', ['id' => $user->id]) }}">Перевод денег</a>
             </div>
             <div class="col-md-10">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="{{ route('userAccounts', ['id' => $user->id]) }}">Accounts</a></li>
-                </ul>
 
                 <div class="panel panel-default">
                     <div class="panel-body">

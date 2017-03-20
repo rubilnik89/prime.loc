@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
-    protected $fillable = ['number', 'user_id','type_id'];
+    protected $fillable = ['number', 'user_id','type_id', 'balance'];
 
     public static $accountColumns = [
         "Account"=>"number",
