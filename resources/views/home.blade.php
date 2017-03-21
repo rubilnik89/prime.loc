@@ -42,7 +42,7 @@
                                 <h2>Country</h2>
                             </div>
                             <div class="col-md-6">
-                                <h2>{{ $user->country }}</h2>
+                                <h2>{{ $user->Country->name }}</h2>
                             </div>
                             <div class="col-md-12">
                                 <a class="btn btn-primary"

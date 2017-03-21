@@ -44,7 +44,7 @@
                                 <h3>Country</h3>
                             </div>
                             <div class="col-md-6">
-                                <h3>{{ $user->country }}</h3>
+                                <h3>{{ $user->Country->name }}</h3>
                             </div>
                             <div class="col-md-6">
                                 <h3>Accounts</h3>

@@ -70,7 +70,7 @@
                                             <td class="col-md-2">{{ $user->surname }}</td>
                                             <td class="col-md-2">{{ $user->email }}</td>
                                             <td class="col-md-2">{{ $user->phone }}</td>
-                                            <td class="col-md-2">{{ $user->country }}</td>
+                                            <td class="col-md-2">{{ $user->Country->name }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -98,7 +98,7 @@
                         <select id="country" class="form-control" name="country">
                             <option value="" disabled selected></option>
                             @foreach($countries as $country)
-                                <option>
+                                <option value="{{ $country->country_id }}">
                                     {{ $country->name }}
                                 </option>
                             @endforeach

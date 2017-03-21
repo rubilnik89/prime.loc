@@ -70,8 +70,6 @@ class RegisterController extends Controller
         return view('auth.register')->with(['countries'=>$countries]);
     }
 
-
-
     /**
      * Create a new user instance after a valid registration.
      *

@@ -64,7 +64,7 @@ class User extends Authenticatable
 
     public function country()
     {
-        return $this->hasOne('App\Country');
+        return $this->hasOne('App\Country', 'country_id', 'country');
     }
 
     public function transactions()
