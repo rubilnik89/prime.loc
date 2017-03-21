@@ -37,7 +37,7 @@ class AdminController extends Controller
             $users = User::paginate(5);
         }
 
-        $countries = Country::all();
+        $countries = Country::orderBy('name', 'asc')->get();
         $columns = User::$columns;
 
         return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order', 'data'));
@@ -92,7 +92,7 @@ class AdminController extends Controller
         $sortby = Input::get('sortby');
         $order = Input::get('order');
         $data = $this->isEmptyData($request->all());
-        $countries = Country::all();
+        $countries = Country::orderBy('name', 'asc')->get();
         $columns = User::$columns;
 
         if ($data['name'] != null || $data['surname'] != null || $data['email'] != null || $data['phone'] != null || $data['country'] != null || $data['sortby'] != null) {

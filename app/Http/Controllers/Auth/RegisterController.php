@@ -66,7 +66,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $countries = Country::all();
+        $countries = Country::orderBy('name', 'asc')->get();
         return view('auth.register')->with(['countries' => $countries]);
     }
 
