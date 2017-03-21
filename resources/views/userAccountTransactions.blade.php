@@ -11,21 +11,27 @@
             </div>
 
             <div class="col-md-6">
-                @foreach($user->accounts as $account)
+                @foreach($transactions as $transaction)
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <h4>Account   {{ $account->number }}</h4>
+                                <div class="col-md-2">
+                                    <h4>From: {{ $transaction->account_id_from }}</h4>
                                 </div>
                                 <div class="col-md-2">
-                                    <input class="form-control" type="text" placeholder="{{ $account->balance }}" readonly>
+                                    <h4>To: {{ $transaction->account_id_to }}</h4>
                                 </div>
-                                <div class="col-md-1">
-                                    <a class="btn btn-default" href="#" role="button">Пополнить</a>
+                                <div class="col-md-2">
+                                    <h4>Amount: {{ $transaction->amount }}</h4>
                                 </div>
-                                <div class="col-md-5">
-                                    <a class="btn btn-default pull-right" href="{{ route('accountTransactions',['id' => $user->id, 'number' => $account->number]) }}" role="button">История</a>
+                                <div class="col-md-2">
+                                    <h4>Type: {{ $transaction->type }}</h4>
+                                </div>
+                                <div class="col-md-2">
+                                    <h4>{{ $transaction->status }}</h4>
+                                </div>
+                                <div class="col-md-2">
+                                    <h4>{{ $transaction->created_at }}</h4>
                                 </div>
                             </div>
                         </div>

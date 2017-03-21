@@ -12,6 +12,9 @@ Route::group(['prefix' => 'home', 'middleware' => 'isAdmin'], function(){
     Route::get('{id}/accounts', 'HomeController@accounts')->name('userAccounts');
     Route::get('{id}/moneyTransfer', 'HomeController@moneyTransfer')->name('moneyTransfer');
     Route::post('{id}/transfer', 'HomeController@transfer')->name('transfer');
+    Route::get('{id}/transactions', 'HomeController@transactions')->name('transactions');
+    Route::get('{id}/transactions/{number}', 'HomeController@accountTransactions')->name('accountTransactions');
+
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){

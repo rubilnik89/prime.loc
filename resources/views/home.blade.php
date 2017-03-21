@@ -4,11 +4,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2">
-                <a class="list-group-item active" href="{{ route('home') }}">Домой</a>
+                <a class="list-group-item active" href="{{ route('home') }}">Мой профиль</a>
                 <a class="list-group-item" href="{{ route('userAccounts', ['id' => $user->id]) }}">Мои счета</a>
                 <a class="list-group-item" href="{{ route('moneyTransfer', ['id' => $user->id]) }}">Перевод денег</a>
+                <a class="list-group-item" href="{{ route('transactions', ['id' => $user->id]) }}">История переводов</a>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-6">
 
                 <div class="panel panel-default">
                     <div class="panel-body">

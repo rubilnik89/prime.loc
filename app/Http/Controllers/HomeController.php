@@ -73,7 +73,9 @@ class HomeController extends Controller
                 Transaction::create(['user_id' => $user->id,
                 'account_id_from' => $accountFrom->number,
                 'account_id_to' => $accountTo->number,
-                'amount' => $data['sum']]);
+                'amount' => $data['sum'],
+                'type' => 'transfer',
+                'status' => true]);
 
                 DB::commit();
                 $success = true;
@@ -86,5 +88,29 @@ class HomeController extends Controller
             }
         }
         return redirect()->route('moneyTransfer', $user->id)->with('fail', 'Please, check your input');
+    }
+
+    public function accountTransactions($id, $number)
+    {
+        $user = User::find($id);
+        $transactions = $user->transactions()
+            ->where('account_id_from', $number)
+            ->orWhere('account_id_to', $number)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        foreach ($transactions as $transaction) {
+            $transaction->status == 1 ? $transaction->status = "Успешно" : $transaction->status = "Ошибка";
+        }
+
+        return view('userAccountTransactions', compact('user', 'transactions'));
+    }
+
+    public function transactions($id)
+    {
+        $user = User::with('transactions')->find($id);
+        foreach ($user->transactions as $transaction) {
+            $transaction->status == 1 ? $transaction->status = "Успешно" : $transaction->status = "Ошибка";
+        }
+        return view('userTransactions', compact('user'));
     }
 }

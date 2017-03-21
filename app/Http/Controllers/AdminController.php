@@ -25,7 +25,6 @@ class AdminController extends Controller
         return $data;
     }
 
-
     public function main(Request $request)
     {
         $data = $this->isEmptyData($request->all());
@@ -42,7 +41,6 @@ class AdminController extends Controller
 
         return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order', 'data'));
     }
-
 
     public function user($id)
     {
