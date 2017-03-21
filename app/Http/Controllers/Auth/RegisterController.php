@@ -49,7 +49,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -67,13 +67,13 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $countries = Country::all();
-        return view('auth.register')->with(['countries'=>$countries]);
+        return view('auth.register')->with(['countries' => $countries]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
@@ -104,7 +104,7 @@ class RegisterController extends Controller
         if ($success) {
             return $user;
         }
-            return redirect('register');
+        return redirect('register');
 
     }
 

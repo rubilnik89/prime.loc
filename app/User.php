@@ -8,11 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     public static $columns = [
-        "Name"=>"name",
-        "Surname"=>"surname",
-        "Email"=>"email",
-        "Phone"=>"phone",
-        "Country"=>"country",
+        "Name" => "name",
+        "Surname" => "surname",
+        "Email" => "email",
+        "Phone" => "phone",
+        "Country" => "country",
     ];
 
 
@@ -40,18 +40,22 @@ class User extends Authenticatable
     {
         if ($name) $query->where('name', 'like', "%$name%");
     }
+
     public function scopeSearchSurname($query, $surname)
     {
         if ($surname) $query->where('surname', 'like', "%$surname%");
     }
+
     public function scopeSearchPhone($query, $phone)
     {
         if ($phone) $query->where('phone', 'like', "%$phone%");
     }
+
     public function scopeSearchEmail($query, $email)
     {
         if ($email) $query->where('email', 'like', "%$email%");
     }
+
     public function scopeSearchCountry($query, $country)
     {
         if ($country) $query->where('country', 'like', "%$country%");

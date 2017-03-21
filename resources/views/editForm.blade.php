@@ -22,7 +22,8 @@
                         </div>
                         <div class="col-md-4">
                             <label for="surname">Фамилия: {{ $user->surname }}</label>
-                            <input id="surname" class="form-control" name="surname" placeholder="Введите другую фамилию">
+                            <input id="surname" class="form-control" name="surname"
+                                   placeholder="Введите другую фамилию">
                         </div>
                         <div class="col-md-4">
                             <label for="phone">Телефон: {{ $user->phone }}</label>

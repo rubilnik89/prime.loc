@@ -59,22 +59,22 @@ class HomeController extends Controller
                 $accountFrom = Account::where('id', $data['from'])->first();
                 $accountTo = Account::where('id', $data['to'])->first();
                 $balanceFrom = $accountFrom->balance - $data['sum'];
-                if ($balanceFrom < 0){
+                if ($balanceFrom < 0) {
                     return redirect()->route('moneyTransfer', $user->id)->with('noMoney', 'На счету недостаточно средств для проведения этой транзакции');
                 }
                 $balanceTo = $accountTo->balance + $data['sum'];
 
                 Account::where('number', $data['from'])
-                ->update(['balance' => $balanceFrom]);
+                    ->update(['balance' => $balanceFrom]);
 
                 Account::where('number', $data['to'])
                     ->update(['balance' => $balanceTo]);
                 Transaction::create(['user_id' => $user->id,
-                'account_id_from' => $accountFrom->number,
-                'account_id_to' => $accountTo->number,
-                'amount' => $data['sum'],
-                'type' => 'transfer',
-                'status' => true]);
+                    'account_id_from' => $accountFrom->number,
+                    'account_id_to' => $accountTo->number,
+                    'amount' => $data['sum'],
+                    'type' => 'transfer',
+                    'status' => true]);
 
                 DB::commit();
                 $success = true;

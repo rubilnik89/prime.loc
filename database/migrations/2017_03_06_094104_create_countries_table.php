@@ -2,7 +2,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCountriesTable extends Migration {
+class CreateCountriesTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -10,12 +11,12 @@ class CreateCountriesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('countries', function(Blueprint $table)
-        {
-            $table->string('country_id',2)->unique();
-            $table->string('name',60);
+        Schema::create('countries', function (Blueprint $table) {
+            $table->string('country_id', 2)->unique();
+            $table->string('name', 60);
         });
     }
+
     /**
      * Reverse the migrations.
      *

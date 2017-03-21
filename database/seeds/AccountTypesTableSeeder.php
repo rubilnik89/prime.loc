@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class AccountTypesTableSeeder extends  Seeder
+class AccountTypesTableSeeder extends Seeder
 {
     public function run()
     {

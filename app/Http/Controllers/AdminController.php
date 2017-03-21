@@ -52,14 +52,14 @@ class AdminController extends Controller
     public function userPersonal($id)
     {
         $user = User::find($id);
-        $personalAccount = User::find($id)->accounts()->where('type_id', 1)->first();
+        $personalAccount = $user->accounts()->where('type_id', 1)->first();
         return view('admin/userPersonal', compact('user', 'personalAccount'));
     }
 
     public function userInvestor($id)
     {
         $user = User::find($id);
-        $investorAccounts = User::find($id)->accounts()->where('type_id', 2)->get();
+        $investorAccounts = $user->accounts()->where('type_id', 2)->get();
         return view('admin/userInvestor', compact('user', 'investorAccounts'));
     }
 
