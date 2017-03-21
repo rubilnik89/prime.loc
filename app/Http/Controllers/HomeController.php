@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\Transaction;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -34,31 +33,31 @@ class HomeController extends Controller
         return view('home', compact('user'));
     }
 
-
-    public function accounts($id)
+    public function accounts()
     {
-        $user = User::with('accounts')->find($id);
+        $accounts = Auth::user()->accounts;
 
-        return view('userAccounts', compact('user'));
+        return view('userAccounts', compact('accounts'));
     }
 
-    public function moneyTransfer($id)
+    public function moneyTransfer()
     {
-        $user = User::with('accounts')->find($id);
+        $accounts = Auth::user()->accounts;
 
-        return view('moneyTransfer', compact('user'));
+        return view('moneyTransfer', compact('accounts'));
     }
 
-    public function transfer($id, Request $request)
+    public function transfer(Request $request)
     {
         $data = $request->all();
 
-        $user = User::find($id);
+        $user = Auth::user();
+
         if ($data['from'] && $data['to'] && $data['sum']) {
             DB::beginTransaction();
             try {
-                $accountFrom = Account::where('number', $data['from'])->first();
-                $accountTo = Account::where('number', $data['to'])->first();
+                $accountFrom = Account::where('id', $data['from'])->first();
+                $accountTo = Account::where('id', $data['to'])->first();
                 $balanceFrom = $accountFrom->balance - $data['sum'];
                 if ($balanceFrom < 0){
                     return redirect()->route('moneyTransfer', $user->id)->with('noMoney', 'На счету недостаточно средств для проведения этой транзакции');
@@ -92,7 +91,7 @@ class HomeController extends Controller
 
     public function accountTransactions($id, $number)
     {
-        $user = User::find($id);
+        $user = Auth::user();
         $transactions = $user->transactions()
             ->where('account_id_from', $number)
             ->orWhere('account_id_to', $number)
@@ -105,12 +104,35 @@ class HomeController extends Controller
         return view('userAccountTransactions', compact('user', 'transactions'));
     }
 
-    public function transactions($id)
+    public function transactions()
     {
-        $user = User::with('transactions')->find($id);
-        foreach ($user->transactions as $transaction) {
+        $user = Auth::user();
+        $transactions = $user->transactions()->orderBy('created_at', 'desc')->get();
+        foreach ($transactions as $transaction) {
             $transaction->status == 1 ? $transaction->status = "Успешно" : $transaction->status = "Ошибка";
         }
-        return view('userTransactions', compact('user'));
+        return view('userTransactions', compact('transactions', 'user'));
     }
+
+    public function editForm()
+    {
+        $user = Auth::user();
+
+        return view('editForm', compact('user'));
+    }
+
+    public function edit(Request $request)
+    {
+        $data = $request->all();
+        $user = Auth::user();
+        $user->update([
+            'name' => $data['name'] ? $data['name'] : $user->name,
+            'surname' => $data['surname'] ? $data['surname'] : $user->surname,
+            'phone' => $data['phone'] ? $data['phone'] : $user->phone,
+        ]);
+        return redirect()->route('home');
+
+    }
+
+
 }

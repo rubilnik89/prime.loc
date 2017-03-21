@@ -9,6 +9,8 @@ Route::get('user/activation/{token}', 'Auth\LoginController@activateUser')->name
 
 Route::group(['prefix' => 'home', 'middleware' => 'isAdmin'], function(){
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('{id}/editForm', 'HomeController@editForm')->name('editForm');
+    Route::post('{id}/edit', 'HomeController@edit')->name('edit');
     Route::get('{id}/accounts', 'HomeController@accounts')->name('userAccounts');
     Route::get('{id}/moneyTransfer', 'HomeController@moneyTransfer')->name('moneyTransfer');
     Route::post('{id}/transfer', 'HomeController@transfer')->name('transfer');

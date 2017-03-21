@@ -11,7 +11,7 @@
             </div>
 
             <div class="col-md-6">
-                @foreach($user->transactions as $transaction)
+                @foreach($transactions as $transaction)
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="row">

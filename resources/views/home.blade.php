@@ -15,6 +15,12 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-6">
+                                <h2>Email</h2>
+                            </div>
+                            <div class="col-md-6">
+                                <h2>{{ $user->email }}</h2>
+                            </div>
+                            <div class="col-md-6">
                                 <h2>Name</h2>
                             </div>
                             <div class="col-md-6">
@@ -27,12 +33,6 @@
                                 <h2>{{ $user->surname }}</h2>
                             </div>
                             <div class="col-md-6">
-                                <h2>Email</h2>
-                            </div>
-                            <div class="col-md-6">
-                                <h2>{{ $user->email }}</h2>
-                            </div>
-                            <div class="col-md-6">
                                 <h2>Phone</h2>
                             </div>
                             <div class="col-md-6">
@@ -43,6 +43,11 @@
                             </div>
                             <div class="col-md-6">
                                 <h2>{{ $user->country }}</h2>
+                            </div>
+                            <div class="col-md-12">
+                                <a class="btn btn-primary"
+                                   href="{{ route('editForm',['id' => $user->id]) }}"
+                                   role="button">Редактировать профиль</a>
                             </div>
                         </div>
                     </div>
