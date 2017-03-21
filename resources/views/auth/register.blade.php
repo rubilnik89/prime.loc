@@ -38,7 +38,7 @@
                             <label for="country" class="col-md-4 control-label">Country</label>
                             <div class="col-md-6">
                                 <select id="country" class="form-control" name="country" required autofocus>
-                                    <option value="0">Выберите страну в которой проживаете</option>
+                                    <option value="0" disabled selected>Выберите страну в которой проживаете</option>
                                     @foreach($countries as $country)
                                         <option value="{{ $country->country_id }}">
                                             {{ $country->name }}

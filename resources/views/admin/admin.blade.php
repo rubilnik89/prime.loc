@@ -96,7 +96,7 @@
                         <input id="phone" class="form-control" name="phone" value="{{ old('phone') }}">
                         <label for="country">Search by country</label>
                         <select id="country" class="form-control" name="country">
-                            <option value="" disabled selected></option>
+                            <option value="0" disabled selected>Выберите страну для поиска</option>
                             @foreach($countries as $country)
                                 <option value="{{ $country->country_id }}">
                                     {{ $country->name }}
