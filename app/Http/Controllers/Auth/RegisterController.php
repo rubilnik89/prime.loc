@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use App\ActivationService;
+use App\Country;
 
 class RegisterController extends Controller
 {
@@ -62,6 +63,14 @@ class RegisterController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
     }
+
+    public function showRegistrationForm()
+    {
+        $countries = Country::all();
+        return view('auth.register')->with(['countries'=>$countries]);
+    }
+
+
 
     /**
      * Create a new user instance after a valid registration.
