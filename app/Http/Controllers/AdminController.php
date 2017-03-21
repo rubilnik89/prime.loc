@@ -32,13 +32,13 @@ class AdminController extends Controller
         $sortby = Input::get('sortby');
         $order = Input::get('order');
         if ($sortby && $order) {
-            $users = User::with('country')->orderBy($sortby, $order)->paginate(5);
+            $users = User::orderBy($sortby, $order)->paginate(5);
         } else {
-            $users = User::with('country')->paginate(5);
+            $users = User::paginate(5);
         }
+
         $countries = Country::all();
         $columns = User::$columns;
-//        dd($users);
 
         return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order', 'data'));
     }
