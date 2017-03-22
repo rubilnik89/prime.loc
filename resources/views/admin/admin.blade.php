@@ -110,7 +110,7 @@
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-10">
-                {{ $users->appends(['sortby'=>$sortby, 'order'=>$order])->links() }}
+                {{ $users->appends(Request::input())->links() }}
             </div>
         </div>
     </div>

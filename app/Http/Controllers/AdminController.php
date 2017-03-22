@@ -38,9 +38,8 @@ class AdminController extends Controller
 
             $users = $this->usersWithSearch($data, $sortby, $order);
             Input::flash();
-            $links = str_replace('/?', '?', $users->appends(Input::except('page'))->render());
 
-            return view('admin/admin', compact('users', 'links', 'countries', 'columns', 'sortby', 'order', 'data'));
+            return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order', 'data'));
         } else if ($sortby && $order) {
             $users = User::orderBy($sortby, $order)->paginate(5);
         } else {
@@ -89,9 +88,8 @@ class AdminController extends Controller
 
             $accounts = $this->accountsWithSearch($data, $sortby, $order);
             Input::flash();
-            $links = str_replace('/?', '?', $accounts->appends(Input::except('page'))->render());
 
-            return view('admin/accounts', compact('links', 'countries', 'columns', 'sortby', 'order', 'data', 'accounts'));
+            return view('admin/accounts', compact('countries', 'columns', 'sortby', 'order', 'data', 'accounts'));
 
         } else $accounts = $this->accountsWithoutSearch($sortby, $order);
 

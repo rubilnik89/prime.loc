@@ -124,7 +124,7 @@
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-10">
-                {{ $accounts->appends(['sortby'=>$sortby, 'order'=>$order])->links() }}
+                {{ $accounts->appends(Request::input())->links() }}
             </div>
         </div>
     </div>
