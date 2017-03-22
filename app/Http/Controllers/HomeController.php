@@ -53,12 +53,14 @@ class HomeController extends Controller
         $data = $request->all();
 
         $user = Auth::user();
-
         if ($data['from'] && $data['to'] && $data['sum']) {
             DB::beginTransaction();
             try {
                 $accountFrom = Account::find($data['from']);
                 $accountTo = Account::find($data['to']);
+                if ($data['sum'] < 0){
+                    return redirect()->route('moneyTransfer', $user->id)->with('less0', 'Сумма должна быть больше нуля');
+                }
                 $balanceFrom = $accountFrom->balance - $data['sum'];
                 if ($balanceFrom < 0) {
                     return redirect()->route('moneyTransfer', $user->id)->with('noMoney', 'На счету недостаточно средств для проведения этой транзакции');
@@ -83,7 +85,7 @@ class HomeController extends Controller
             }
             if ($success) {
                 return redirect()->route('moneyTransfer', $user->id)->with('success', 'Everything went great');
-            } else return redirect()->route('moneyTransfer', $user->id)->with('noSuccess', 'Чтото пошло не так, повторите попытку через 5 минут');
+            } else return redirect()->route('moneyTransfer', $user->id)->with('noSuccess', 'Чтото пошло не так, повторите попытку еще раз');
         }
         return redirect()->route('moneyTransfer', $user->id)->with('fail', 'Please, check your input');
     }

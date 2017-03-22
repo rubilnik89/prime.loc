@@ -5,12 +5,9 @@
         <div class="row">
             <div class="col-md-2">
                 <a class="list-group-item" href="{{ route('home') }}">Мой профиль</a>
-                <a class="list-group-item active" href="{{ route('userAccounts', ['id' => $accounts[0]->user_id]) }}">Мои
-                    счета</a>
-                <a class="list-group-item" href="{{ route('moneyTransfer', ['id' => $accounts[0]->user_id]) }}">Перевод
-                    денег</a>
-                <a class="list-group-item" href="{{ route('transactions', ['id' => $accounts[0]->user_id]) }}">История
-                    переводов</a>
+                <a class="list-group-item active" href="{{ route('userAccounts', ['id' => $accounts[0]->user_id]) }}">Мои счета</a>
+                <a class="list-group-item" href="{{ route('moneyTransfer', ['id' => $accounts[0]->user_id]) }}">Перевод денег</a>
+                <a class="list-group-item" href="{{ route('transactions', ['id' => $accounts[0]->user_id]) }}">История переводов</a>
             </div>
 
             <div class="col-md-6">

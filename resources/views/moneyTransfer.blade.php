@@ -69,6 +69,11 @@
                         {{ Session::get('noSuccess') }}
                     </div>
                 @endif
+                @if(Session::has('less0'))
+                    <div class="alert alert-info">
+                        {{ Session::get('less0') }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>
