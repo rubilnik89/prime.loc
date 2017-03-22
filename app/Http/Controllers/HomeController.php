@@ -57,19 +57,17 @@ class HomeController extends Controller
         if ($data['from'] && $data['to'] && $data['sum']) {
             DB::beginTransaction();
             try {
-                $accountFrom = Account::where('id', $data['from'])->first();
-                $accountTo = Account::where('id', $data['to'])->first();
+                $accountFrom = Account::find($data['from']);
+                $accountTo = Account::find($data['to']);
                 $balanceFrom = $accountFrom->balance - $data['sum'];
                 if ($balanceFrom < 0) {
                     return redirect()->route('moneyTransfer', $user->id)->with('noMoney', 'На счету недостаточно средств для проведения этой транзакции');
                 }
-                $balanceTo = $accountTo->balance + $data['sum'];
-
                 Account::where('id', $data['from'])
-                    ->update(['balance' => $balanceFrom]);
-
+                    ->where('balance', '>', 0)
+                    ->update(['balance' => ((DB::select('SELECT balance from accounts WHERE id = ?', [$data['from']])[0]->balance) - $data['sum'])]);
                 Account::where('id', $data['to'])
-                    ->update(['balance' => $balanceTo]);
+                    ->update(['balance' => ((DB::select('SELECT balance from accounts WHERE id = ?', [$data['to']])[0]->balance) + $data['sum'])]);
                 Transaction::create(['user_id' => $user->id,
                     'account_id_from' => $accountFrom->number,
                     'account_id_to' => $accountTo->number,
@@ -122,9 +120,9 @@ class HomeController extends Controller
         $data = $request->all();
         $user = Auth::user();
         $user->update([
-            'name' => $data['name'] ? $data['name'] : $user->name,
-            'surname' => $data['surname'] ? $data['surname'] : $user->surname,
-            'phone' => $data['phone'] ? $data['phone'] : $user->phone,
+            'name' => $data['name'] ?: $user->name,
+            'surname' => $data['surname'] ?: $user->surname,
+            'phone' => $data['phone'] ?: $user->phone,
         ]);
         return redirect()->route('home');
 
