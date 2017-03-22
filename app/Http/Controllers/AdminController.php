@@ -71,22 +71,8 @@ class AdminController extends Controller
 
     public function user($id)
     {
-        $user = User::with('accounts', 'country')->find($id);
+        $user = User::find($id);
         return view('admin/user', compact('user'));
-    }
-
-    public function userPersonal($id)
-    {
-        $user = User::find($id);
-        $personalAccount = $user->accounts()->where('type_id', 1)->first();
-        return view('admin/userPersonal', compact('user', 'personalAccount'));
-    }
-
-    public function userInvestor($id)
-    {
-        $user = User::find($id);
-        $investorAccounts = $user->accounts()->where('type_id', 2)->get();
-        return view('admin/userInvestor', compact('user', 'investorAccounts'));
     }
 
     public function accounts(Request $request)
@@ -197,5 +183,25 @@ class AdminController extends Controller
             ->paginate(3);
         return $accounts;
     }
+
+    public function userAccounts($id)
+    {
+        $accounts = Account::where('user_id', $id)->get();
+        return view('admin/userAccounts', compact('accounts'));
+    }
+
+//    public function userPersonal($id)
+//    {
+//        $user = User::find($id);
+//        $personalAccount = $user->accounts()->where('type_id', 1)->first();
+//        return view('admin/userPersonal', compact('user', 'personalAccount'));
+//    }
+
+//    public function userInvestor($id)
+//    {
+//        $user = User::find($id);
+//        $investorAccounts = $user->accounts()->where('type_id', 2)->get();
+//        return view('admin/userInvestor', compact('user', 'investorAccounts'));
+//    }
 
 }
