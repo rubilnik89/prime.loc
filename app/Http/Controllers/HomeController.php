@@ -64,10 +64,10 @@ class HomeController extends Controller
                     return redirect()->route('moneyTransfer', $user->id)->with('noMoney', 'На счету недостаточно средств для проведения этой транзакции');
                 }
                 Account::where('id', $data['from'])
-                    ->where('balance', '>', 0)
-                    ->update(['balance' => ((DB::select('SELECT balance from accounts WHERE id = ?', [$data['from']])[0]->balance) - $data['sum'])]);
+                    ->where('balance', '>=', $data['sum'])
+                    ->update(['balance' => DB::raw('balance -'. $data['sum'])]);
                 Account::where('id', $data['to'])
-                    ->update(['balance' => ((DB::select('SELECT balance from accounts WHERE id = ?', [$data['to']])[0]->balance) + $data['sum'])]);
+                    ->update(['balance' => DB::raw('balance +'. $data['sum'])]);
                 Transaction::create(['user_id' => $user->id,
                     'account_id_from' => $accountFrom->number,
                     'account_id_to' => $accountTo->number,
