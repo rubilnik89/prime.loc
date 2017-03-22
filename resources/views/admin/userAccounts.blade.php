@@ -28,12 +28,9 @@
                                         <input class="form-control" type="text" placeholder="{{ $account->balance }}"
                                                readonly>
                                     </div>
-                                    <div class="col-md-1">
-                                        <a class="btn btn-default" href="#" role="button">Пополнить</a>
-                                    </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <a class="btn btn-default pull-right"
-                                           href="{{ route('accountTransactions',['id' => $account->user_id, 'number' => $account->number]) }}"
+                                           href="{{ route('userAccountTransactions',['id' => $account->user_id, 'number' => $account->number]) }}"
                                            role="button">История</a>
                                     </div>
                                 </div>

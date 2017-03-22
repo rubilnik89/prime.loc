@@ -22,6 +22,7 @@ Route::group(['prefix' => 'home', 'middleware' => 'isAdmin'], function(){
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
     Route::get('users', 'AdminController@main')->name('users');
     Route::get('user/{id}/accounts', 'AdminController@userAccounts')->name('userAccounts');
+    Route::get('user/{id}/transactions/{number}', 'AdminController@userAccountTransactions')->name('userAccountTransactions');
 //    Route::get('user/{id}/personal', 'AdminController@userPersonal')->name('userPersonal');
 //    Route::get('user/{id}/investor', 'AdminController@userInvestor')->name('userInvestor');
     Route::get('users/accounts', 'AdminController@accounts')->name('accounts');
