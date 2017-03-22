@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name' => 'superadmin',
             'surname' => 'superadmin',
-            'phone' => '0555034252',
+            'phone' => '0555034200',
             'country' => 'UA',
             'is_admin' => true,
             'activated' => true,
@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name' => 'Roman',
             'surname' => 'Zherebko',
-            'phone' => '0996476763',
+            'phone' => '0996476701',
             'country' => 'AL',
             'is_admin' => true,
             'activated' => true,
@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name' => 'Galina',
             'surname' => 'Kulik',
-            'phone' => '0557841252',
+            'phone' => '0557841202',
             'country' => 'AL',
             'is_admin' => false,
             'activated' => true,
@@ -42,7 +42,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name' => 'Valina',
             'surname' => 'Kulik',
-            'phone' => '0557834252',
+            'phone' => '0557834203',
             'country' => 'AL',
             'is_admin' => false,
             'activated' => true,
@@ -52,7 +52,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name' => 'Valfna',
             'surname' => 'Kulik',
-            'phone' => '0577834252',
+            'phone' => '0577834204',
             'country' => 'AL',
             'is_admin' => false,
             'activated' => true,
@@ -62,7 +62,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name' => 'Varena',
             'surname' => 'Kulik',
-            'phone' => '0557694252',
+            'phone' => '0557694205',
             'country' => 'AL',
             'is_admin' => false,
             'activated' => true,
@@ -72,7 +72,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name' => 'Valona',
             'surname' => 'Kulik',
-            'phone' => '0557034252',
+            'phone' => '0557034206',
             'country' => 'AL',
             'is_admin' => false,
             'activated' => true,
@@ -82,7 +82,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name' => 'Valmoa',
             'surname' => 'Kulik',
-            'phone' => '0555034252',
+            'phone' => '0555034207',
             'country' => 'AL',
             'is_admin' => false,
             'activated' => true,
@@ -92,7 +92,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name' => 'Vcfina',
             'surname' => 'Kulik',
-            'phone' => '0557994252',
+            'phone' => '0557994208',
             'country' => 'AL',
             'is_admin' => false,
             'activated' => true,

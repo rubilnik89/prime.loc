@@ -25,7 +25,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
     Route::get('user/{id}/investor', 'AdminController@userInvestor')->name('userInvestor');
     Route::get('users/accounts', 'AdminController@accounts')->name('accounts');
     Route::get('user/{id}', 'AdminController@user')->name('user');
-    Route::get('userSearch', 'AdminController@userSearch');
-    Route::get('accountSearch', 'AdminController@accountSearch');
 
 });

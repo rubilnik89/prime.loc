@@ -24,7 +24,7 @@
                                             @if ($sortby == $columns[$column] && $order == 'asc')
                                                 <th class="col-md-2">
                                                     {{link_to_action(
-                                                      'AdminController@userSearch',
+                                                      'AdminController@main',
                                                       $column, ['sortby' => $columns[$column],
                                                       'order' => 'desc',
                                                       'name' => $data['name'],
@@ -36,7 +36,7 @@
                                             @elseif ($sortby == $columns[$column] && $order == 'desc')
                                                 <th class="col-md-2">
                                                     {{link_to_action(
-                                                      'AdminController@userSearch',
+                                                      'AdminController@main',
                                                       $column, ['sortby' => $columns[$column],
                                                       'order' => 'asc',
                                                       'name' => $data['name'],
@@ -48,7 +48,7 @@
                                             @else
                                                 <th class="col-md-2">
                                                     {{link_to_action(
-                                                      'AdminController@userSearch',
+                                                      'AdminController@main',
                                                       $column, ['sortby' => $columns[$column],
                                                       'order' => 'asc',
                                                       'name' => $data['name'],
@@ -85,7 +85,7 @@
             <div class="col-md-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        {{ Form::open(array('action' => array('AdminController@userSearch'), 'method' => 'get')) }}
+                        {{ Form::open(array('action' => array('AdminController@main'), 'method' => 'get')) }}
                         <label for="name">Search by name</label>
                         <input id="name" class="form-control" name="name" value="{{ old('name') }}">
                         <label for="surname">Search by surname</label>

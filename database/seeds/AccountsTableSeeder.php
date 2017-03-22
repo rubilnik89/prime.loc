@@ -58,6 +58,12 @@ class AccountsTableSeeder extends Seeder
             'balance' => '0.0000',
         ]);
         Account::create([
+            'number' => '88888',
+            'user_id' => 9,
+            'type_id' => 1,
+            'balance' => '0.0000',
+        ]);
+        Account::create([
             'number' => '2489657',
             'balance' => '777780.46',
             'user_id' => 1,

@@ -25,7 +25,7 @@
                                             @if ($sortby == $columns[$column] && $order == 'asc')
                                                 <th class="col-md-2">
                                                     {{link_to_action(
-                                                      'AdminController@accountSearch',
+                                                      'AdminController@accounts',
                                                       $column, ['sortby' => $columns[$column],
                                                       'order' => 'desc',
                                                       'name' => $data['name'],
@@ -33,11 +33,13 @@
                                                       'email' => $data['email'],
                                                       'account' => $data['account'],
                                                       'type' => $data['type'],
+                                                      'from' => $data['from'],
+                                                      'to' => $data['to'],
                                                       ])}}<i class="fa fa-fw fa-sort-desc"></i>
                                             @elseif ($sortby == $columns[$column] && $order == 'desc')
                                                 <th class="col-md-2">
                                                     {{link_to_action(
-                                                       'AdminController@accountSearch',
+                                                       'AdminController@accounts',
                                                        $column, ['sortby' => $columns[$column],
                                                        'order' => 'asc',
                                                        'name' => $data['name'],
@@ -45,19 +47,23 @@
                                                        'email' => $data['email'],
                                                        'account' => $data['account'],
                                                        'type' => $data['type'],
+                                                       'from' => $data['from'],
+                                                       'to' => $data['to'],
                                                        ])}}<i class="fa fa-fw fa-sort-asc"></i>
                                             @else
                                                 <th class="col-md-2">
                                                     {{link_to_action(
-                                                        'AdminController@accountSearch',
+                                                        'AdminController@accounts',
                                                         $column , ['sortby' => $columns[$column],
                                                         'order' => 'asc',
                                                         'name' => $data['name'],
                                                         'phone' => $data['phone'],
                                                         'email' => $data['email'],
                                                         'account' => $data['account'],
-                                                        'type' => $data['type'],]
-                                                    )}} <i class="fa fa-fw fa-sort"></i>
+                                                        'type' => $data['type'],
+                                                        'from' => $data['from'],
+                                                        'to' => $data['to'],
+                                                        ])}} <i class="fa fa-fw fa-sort"></i>
                                                     @endif
                                                 </th>
                                                 @endforeach
@@ -85,7 +91,7 @@
             <div class="col-md-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        {{ Form::open(array('action' => array('AdminController@accountSearch'), 'method' => 'get')) }}
+                        {{ Form::open(array('action' => array('AdminController@accounts'), 'method' => 'get')) }}
                         <label for="account">Search by account number</label>
                         <input id="account" class="form-control" name="account" value="{{ old('account') }}">
                         <label for="type">Search by type</label>
