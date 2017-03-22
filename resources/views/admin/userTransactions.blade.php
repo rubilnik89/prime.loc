@@ -26,7 +26,7 @@
                                     <h4>Type: {{ $transaction->type }}</h4>
                                 </div>
                                 <div class="col-md-2">
-                                    <h4>{{ $transaction->status }}</h4>
+                                    <h4>{{ TRANSACTION_STATUSES[$transaction->status] }}</h4>
                                 </div>
                                 <div class="col-md-2">
                                     <h4>{{ $transaction->created_at }}</h4>

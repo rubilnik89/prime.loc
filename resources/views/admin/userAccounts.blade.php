@@ -12,7 +12,7 @@
                 <div class="col-md-7">
                     <ul class="nav nav-tabs">
                         <li><a href="{{ route('user', ['id' => $accounts[0]->user_id]) }}">Home</a></li>
-                        <li class="active"><a href="{{ route('userAccounts', ['id' => $accounts[0]->user_id]) }}">Accounts</a></li>
+                        <li class="active"><a href="{{ route('userAccountsAdmin', ['id' => $accounts[0]->user_id]) }}">Accounts</a></li>
                     </ul>
                 </div>
 

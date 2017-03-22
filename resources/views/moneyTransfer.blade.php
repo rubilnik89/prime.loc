@@ -64,6 +64,11 @@
                         {{ Session::get('noMoney') }}
                     </div>
                 @endif
+                @if(Session::has('noSuccess'))
+                    <div class="alert alert-info">
+                        {{ Session::get('noSuccess') }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>

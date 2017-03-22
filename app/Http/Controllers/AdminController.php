@@ -198,9 +198,6 @@ class AdminController extends Controller
             ->orWhere('account_id_to', $number)
             ->orderBy('created_at', 'desc')
             ->get();
-        foreach ($transactions as $transaction) {
-            $transaction->status == 1 ? $transaction->status = "Успешно" : $transaction->status = "Ошибка";
-        }
 
         return view('admin/userTransactions', compact('user', 'transactions'));
     }

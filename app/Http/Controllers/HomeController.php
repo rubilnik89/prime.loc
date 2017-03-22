@@ -7,6 +7,7 @@ use App\Account;
 use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -84,7 +85,7 @@ class HomeController extends Controller
             }
             if ($success) {
                 return redirect()->route('moneyTransfer', $user->id)->with('success', 'Everything went great');
-            }
+            } else return redirect()->route('moneyTransfer', $user->id)->with('noSuccess', 'Чтото пошло не так, повторите попытку через 5 минут');
         }
         return redirect()->route('moneyTransfer', $user->id)->with('fail', 'Please, check your input');
     }
@@ -97,9 +98,6 @@ class HomeController extends Controller
             ->orWhere('account_id_to', $number)
             ->orderBy('created_at', 'desc')
             ->get();
-        foreach ($transactions as $transaction) {
-            $transaction->status == 1 ? $transaction->status = "Успешно" : $transaction->status = "Ошибка";
-        }
 
         return view('userAccountTransactions', compact('user', 'transactions'));
     }
@@ -108,9 +106,7 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $transactions = $user->transactions()->orderBy('created_at', 'desc')->get();
-        foreach ($transactions as $transaction) {
-            $transaction->status == 1 ? $transaction->status = "Успешно" : $transaction->status = "Ошибка";
-        }
+
         return view('userTransactions', compact('transactions', 'user'));
     }
 
