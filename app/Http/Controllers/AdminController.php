@@ -97,19 +97,19 @@ class AdminController extends Controller
 
         if ($data['name'] != null || $data['surname'] != null || $data['email'] != null || $data['phone'] != null || $data['country'] != null || $data['sortby'] != null) {
             if ($sortby && $order) {
-                $users = User::searchName($data['name'])
-                    ->searchSurname($data['surname'])
-                    ->searchPhone($data['phone'])
-                    ->searchEmail($data['email'])
-                    ->searchCountry($data['country'])
+                $users = User::searchValue('name', $data['name'])
+                    ->searchValue('surname', $data['surname'])
+                    ->searchValue('phone', $data['phone'])
+                    ->searchValue('email', $data['email'])
+                    ->searchValue('country', $data['country'])
                     ->orderBy($sortby, $order)
                     ->paginate(3);
             } else {
-                $users = User::searchName($data['name'])
-                    ->searchSurname($data['surname'])
-                    ->searchPhone($data['phone'])
-                    ->searchEmail($data['email'])
-                    ->searchCountry($data['country'])
+                $users = User::searchValue('name', $data['name'])
+                    ->searchValue('surname', $data['surname'])
+                    ->searchValue('phone', $data['phone'])
+                    ->searchValue('email', $data['email'])
+                    ->searchValue('country', $data['country'])
                     ->paginate(3);
             }
 
@@ -124,9 +124,9 @@ class AdminController extends Controller
     public function searchAccountsByUsersFields(array $data, $sortby, $order)
     {
         if ($sortby && $order) {
-            $users = User::searchName($data['name'])
-                ->searchPhone($data['phone'])
-                ->searchEmail($data['email'])
+            $users = User::searchValue('name', $data['name'])
+                ->searchValue('phone', $data['phone'])
+                ->searchValue('email', $data['email'])
                 ->orderBy($sortby, $order)
                 ->get();
             $ids = [];
@@ -135,9 +135,9 @@ class AdminController extends Controller
             }
             $accounts = Account::whereIn('user_id', $ids)->with('user', 'account_type')->orderBy('user_id', $order)->paginate(3);
         } else {
-            $users = User::searchName($data['name'])
-                ->searchPhone($data['phone'])
-                ->searchEmail($data['email'])
+            $users = User::searchValue('name', $data['name'])
+                ->searchValue('phone', $data['phone'])
+                ->searchValue('email', $data['email'])
                 ->get();
             $ids = [];
             foreach ($users as $index => $user) {
@@ -178,15 +178,15 @@ class AdminController extends Controller
                 $accounts = $this->sortAccountsByUsersFields($sortby, $order);
 
             } else if ($sortby && $order) {
-                $accounts = Account::searchNumber($data['account'])
-                    ->searchType($data['type'])
+                $accounts = Account::searchValue('number', $data['account'])
+                    ->searchValue('type_id', $data['type'])
                     ->searchBalance($data['from'], $data['to'])
                     ->with('user', 'account_type')
                     ->orderBy($sortby, $order)
                     ->paginate(3);
             } else {
-                $accounts = Account::searchNumber($data['account'])
-                    ->searchType($data['type'])
+                $accounts = Account::searchValue('number', $data['account'])
+                    ->searchValue('type_id', $data['type'])
                     ->searchBalance($data['from'], $data['to'])
                     ->with('user', 'account_type')
                     ->paginate(3);

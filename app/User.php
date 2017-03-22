@@ -36,29 +36,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function scopeSearchName($query, $name)
+    public function scopeSearchValue($query, $field, $value)
     {
-        if ($name) $query->where('name', 'like', "%$name%");
-    }
-
-    public function scopeSearchSurname($query, $surname)
-    {
-        if ($surname) $query->where('surname', 'like', "%$surname%");
-    }
-
-    public function scopeSearchPhone($query, $phone)
-    {
-        if ($phone) $query->where('phone', 'like', "%$phone%");
-    }
-
-    public function scopeSearchEmail($query, $email)
-    {
-        if ($email) $query->where('email', 'like', "%$email%");
-    }
-
-    public function scopeSearchCountry($query, $country)
-    {
-        if ($country) $query->where('country', 'like', "%$country%");
+        if ($value) $query->where($field, 'like', "%$value%");
     }
 
     public function accounts()

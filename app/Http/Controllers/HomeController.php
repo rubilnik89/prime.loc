@@ -64,10 +64,10 @@ class HomeController extends Controller
                 }
                 $balanceTo = $accountTo->balance + $data['sum'];
 
-                Account::where('number', $data['from'])
+                Account::where('id', $data['from'])
                     ->update(['balance' => $balanceFrom]);
 
-                Account::where('number', $data['to'])
+                Account::where('id', $data['to'])
                     ->update(['balance' => $balanceTo]);
                 Transaction::create(['user_id' => $user->id,
                     'account_id_from' => $accountFrom->number,

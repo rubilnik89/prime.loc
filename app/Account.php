@@ -20,27 +20,21 @@ class Account extends Model
 
     ];
 
-    public function scopeSearchNumber($query, $number)
+    public function scopeSearchValue($query, $field, $value)
     {
-        if ($number) $query->where('number', 'like', "%$number%");
-    }
-
-    public function scopeSearchType($query, $type)
-    {
-        if ($type) $query->where('type_id', 'like', "%$type%");
+        if ($value) $query->where($field, 'like', "%$value%");
     }
 
     public function scopeSearchBalance($query, $from, $to)
     {
-        if ($from) {
+        if ($from && $to) {
+            $query->whereBetween('balance', [$from, $to]);
+        }else if ($from) {
             $query->where('balance', '>=', $from);
         } else if ($to) {
             $query->where('balance', '<=', $to);
-        } else if ($from && $to) {
-            $query->whereBetween('balance', [$from, $to]);
         }
     }
-
 
     public function user()
     {
