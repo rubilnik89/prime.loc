@@ -40,6 +40,10 @@ class User extends Authenticatable
     {
         if ($value) $query->where($field, 'like', "%$value%");
     }
+    public function scopeSearchCountry($query, $country)
+    {
+        if ($country && $country != '0') $query->where('country', 'like', "%$country%");
+    }
 
     public function accounts()
     {

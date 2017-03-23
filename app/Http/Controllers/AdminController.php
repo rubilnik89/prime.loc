@@ -10,60 +10,42 @@ use Illuminate\Support\Facades\Input;
 
 class AdminController extends Controller
 {
-    public function isEmptyData(array $data)
-    {
-        !empty($data['country']) ? $data['country'] = $data['country'] : $data['country'] = null;
-        !empty($data['name']) ? $data['name'] = $data['name'] : $data['name'] = null;
-        !empty($data['surname']) ? $data['surname'] = $data['surname'] : $data['surname'] = null;
-        !empty($data['phone']) ? $data['phone'] = $data['phone'] : $data['phone'] = null;
-        !empty($data['email']) ? $data['email'] = $data['email'] : $data['email'] = null;
-        !empty($data['sortby']) ? $data['sortby'] = $data['sortby'] : $data['sortby'] = null;
-        !empty($data['type']) ? $data['type'] = $data['type'] : $data['type'] = null;
-        !empty($data['account']) ? $data['account'] = $data['account'] : $data['account'] = null;
-        !empty($data['from']) ? $data['from'] = $data['from'] : $data['from'] = null;
-        !empty($data['to']) ? $data['to'] = $data['to'] : $data['to'] = null;
-        return $data;
-    }
-
-    public function main(Request $request)
+    public function main()
     {
         $sortby = Input::get('sortby');
         $order = Input::get('order');
-        $data = $this->isEmptyData($request->all());
         $countries = Country::orderBy('name', 'asc')->get();
         $columns = User::$columns;
+        if (!empty(Input::get('search'))) {
 
-        if ($data['name'] != null || $data['surname'] != null || $data['email'] != null ||
-            $data['phone'] != null || $data['country'] != null || $data['sortby'] != null) {
-
-            $users = $this->usersWithSearch($data, $sortby, $order);
+            $users = $this->usersWithSearch($sortby, $order);
             Input::flash();
 
-            return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order', 'data'));
+            return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order'));
         } else if ($sortby && $order) {
             $users = User::orderBy($sortby, $order)->paginate(5);
         } else {
             $users = User::paginate(5);
         }
-        return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order', 'data'));
+        return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order'));
     }
 
-    public function usersWithSearch(array $data, $sortby, $order)
+    public function usersWithSearch($sortby, $order)
     {
         if ($sortby && $order) {
-            return $users = User::searchValue('name', $data['name'])
-                ->searchValue('surname', $data['surname'])
-                ->searchValue('phone', $data['phone'])
-                ->searchValue('email', $data['email'])
-                ->searchValue('country', $data['country'])
+            return $users = User::searchValue('name', Input::get('name'))
+                ->searchValue('surname', Input::get('surname'))
+                ->searchValue('phone', Input::get('phone'))
+                ->searchValue('email', Input::get('email'))
+                ->searchCountry(Input::get('country'))
                 ->orderBy($sortby, $order)
                 ->paginate(5);
         } else {
-            return $users = User::searchValue('name', $data['name'])
-                ->searchValue('surname', $data['surname'])
-                ->searchValue('phone', $data['phone'])
-                ->searchValue('email', $data['email'])
-                ->searchValue('country', $data['country'])
+            return $users = User::searchValue('name', Input::get('name'))
+                ->searchValue('surname', Input::get('surname'))
+                ->searchValue('phone', Input::get('phone'))
+                ->searchValue('email', Input::get('email'))
+                ->searchCountry(Input::get('country'))
                 ->paginate(5);
         }
     }
@@ -74,26 +56,23 @@ class AdminController extends Controller
         return view('admin/user', compact('user'));
     }
 
-    public function accounts(Request $request)
+    public function accounts()
     {
-        $data = $this->isEmptyData($request->all());
         $sortby = Input::get('sortby');
         $order = Input::get('order');
         $columns = Account::$accountColumns;
         $countries = Country::orderBy('name', 'asc')->get();
 
-        if ($data['name'] != null || $data['email'] != null || $data['phone'] != null ||
-            $data['type'] != null || $data['account'] != null || $data['sortby'] != null ||
-            $data['from'] != null || $data['to'] != null) {
+        if (!empty(Input::get('search'))) {
 
-            $accounts = $this->accountsWithSearch($data, $sortby, $order);
+            $accounts = $this->accountsWithSearch($sortby, $order);
             Input::flash();
 
-            return view('admin/accounts', compact('countries', 'columns', 'sortby', 'order', 'data', 'accounts'));
+            return view('admin/accounts', compact('countries', 'columns', 'sortby', 'order', 'accounts'));
 
         } else $accounts = $this->accountsWithoutSearch($sortby, $order);
 
-        return view('admin/accounts', compact('countries', 'columns', 'sortby', 'order', 'accounts', 'data'));
+        return view('admin/accounts', compact('countries', 'columns', 'sortby', 'order', 'accounts'));
     }
 
     public function accountsWithoutSearch($sortby, $order)
@@ -112,38 +91,38 @@ class AdminController extends Controller
         }
     }
 
-    public function accountsWithSearch(array $data, $sortby, $order)
+    public function accountsWithSearch($sortby, $order)
     {
-        if ($data['name'] != null || $data['email'] != null || $data['phone'] != null) {
+        if (Input::get('name') != null || Input::get('email') != null || Input::get('phone') != null) {
 
-            return $accounts = $this->searchAccountsByUsersFields($data, $sortby, $order);
+            return $accounts = $this->searchAccountsByUsersFields($sortby, $order);
 
         } else if ($sortby == 'name' || $sortby == 'phone' || $sortby == 'email') {
 
-            return $accounts = $this->sortAccountsByUsersFieldsWithSearch($sortby, $order, $data);
+            return $accounts = $this->sortAccountsByUsersFieldsWithSearch($sortby, $order);
 
         } else if ($sortby && $order) {
-            return $accounts = Account::searchValue('number', $data['account'])
-                ->searchValue('type_id', $data['type'])
-                ->searchBalance($data['from'], $data['to'])
+            return $accounts = Account::searchValue('number', Input::get('account'))
+                ->searchValue('type_id', Input::get('type'))
+                ->searchBalance(Input::get('from'), Input::get('to'))
                 ->with('user', 'account_type')
                 ->orderBy($sortby, $order)
                 ->paginate(3);
         } else {
-            return $accounts = Account::searchValue('number', $data['account'])
-                ->searchValue('type_id', $data['type'])
-                ->searchBalance($data['from'], $data['to'])
+            return $accounts = Account::searchValue('number', Input::get('account'))
+                ->searchValue('type_id', Input::get('type'))
+                ->searchBalance(Input::get('from'), Input::get('to'))
                 ->with('user', 'account_type')
                 ->paginate(3);
         }
     }
 
-    public function searchAccountsByUsersFields(array $data, $sortby, $order)
+    public function searchAccountsByUsersFields($sortby, $order)
     {
         if ($sortby && $order) {
-            $users = User::searchValue('name', $data['name'])
-                ->searchValue('phone', $data['phone'])
-                ->searchValue('email', $data['email'])
+            $users = User::searchValue('name', Input::get('name'))
+                ->searchValue('phone', Input::get('phone'))
+                ->searchValue('email', Input::get('email'))
                 ->orderBy($sortby, $order)
                 ->get();
             $ids = [];
@@ -152,9 +131,9 @@ class AdminController extends Controller
             }
             $accounts = Account::whereIn('user_id', $ids)->with('user', 'account_type')->orderBy('user_id', $order)->paginate(3);
         } else {
-            $users = User::searchValue('name', $data['name'])
-                ->searchValue('phone', $data['phone'])
-                ->searchValue('email', $data['email'])
+            $users = User::searchValue('name', Input::get('name'))
+                ->searchValue('phone', Input::get('phone'))
+                ->searchValue('email', Input::get('email'))
                 ->get();
             $ids = [];
             foreach ($users as $index => $user) {
@@ -165,7 +144,7 @@ class AdminController extends Controller
         return $accounts;
     }
 
-    public function sortAccountsByUsersFieldsWithSearch($sortby, $order, array $data)
+    public function sortAccountsByUsersFieldsWithSearch($sortby, $order)
     {
         $users = User::orderBy($sortby, $order)->get();
         $ids = [];
@@ -173,9 +152,9 @@ class AdminController extends Controller
             $ids[$index] = $user->id;
         }
         $accounts = Account::whereIn('user_id', $ids)
-            ->searchValue('number', $data['account'])
-            ->searchValue('type_id', $data['type'])
-            ->searchBalance($data['from'], $data['to'])
+            ->searchValue('number', Input::get('account'))
+            ->searchValue('type_id', Input::get('type'))
+            ->searchBalance(Input::get('from'), Input::get('to'))
             ->with('user', 'account_type')
             ->orderBy('user_id', $order)
             ->paginate(3);
@@ -199,19 +178,5 @@ class AdminController extends Controller
 
         return view('admin/userTransactions', compact('user', 'transactions'));
     }
-
-//    public function userPersonal($id)
-//    {
-//        $user = User::find($id);
-//        $personalAccount = $user->accounts()->where('type_id', 1)->first();
-//        return view('admin/userPersonal', compact('user', 'personalAccount'));
-//    }
-
-//    public function userInvestor($id)
-//    {
-//        $user = User::find($id);
-//        $investorAccounts = $user->accounts()->where('type_id', 2)->get();
-//        return view('admin/userInvestor', compact('user', 'investorAccounts'));
-//    }
 
 }

@@ -28,13 +28,14 @@
                                                       'AdminController@accounts',
                                                       $column, ['sortby' => $columns[$column],
                                                       'order' => 'desc',
-                                                      'name' => $data['name'],
-                                                      'phone' => $data['phone'],
-                                                      'email' => $data['email'],
-                                                      'account' => $data['account'],
-                                                      'type' => $data['type'],
-                                                      'from' => $data['from'],
-                                                      'to' => $data['to'],
+                                                      'name' => Input::get('name'),
+                                                      'phone' => Input::get('phone'),
+                                                      'email' => Input::get('email'),
+                                                      'account' => Input::get('account'),
+                                                      'type' => Input::get('type'),
+                                                      'from' => Input::get('from'),
+                                                      'to' => Input::get('to'),
+                                                      'search' => Input::get('search'),
                                                       ])}}<i class="fa fa-fw fa-sort-desc"></i>
                                             @elseif ($sortby == $columns[$column] && $order == 'desc')
                                                 <th class="col-md-2">
@@ -42,13 +43,14 @@
                                                        'AdminController@accounts',
                                                        $column, ['sortby' => $columns[$column],
                                                        'order' => 'asc',
-                                                       'name' => $data['name'],
-                                                       'phone' => $data['phone'],
-                                                       'email' => $data['email'],
-                                                       'account' => $data['account'],
-                                                       'type' => $data['type'],
-                                                       'from' => $data['from'],
-                                                       'to' => $data['to'],
+                                                       'name' => Input::get('name'),
+                                                       'phone' => Input::get('phone'),
+                                                       'email' => Input::get('email'),
+                                                       'account' => Input::get('account'),
+                                                       'type' => Input::get('type'),
+                                                       'from' => Input::get('from'),
+                                                       'to' => Input::get('to'),
+                                                       'search' => Input::get('search'),
                                                        ])}}<i class="fa fa-fw fa-sort-asc"></i>
                                             @else
                                                 <th class="col-md-2">
@@ -56,13 +58,14 @@
                                                         'AdminController@accounts',
                                                         $column , ['sortby' => $columns[$column],
                                                         'order' => 'asc',
-                                                        'name' => $data['name'],
-                                                        'phone' => $data['phone'],
-                                                        'email' => $data['email'],
-                                                        'account' => $data['account'],
-                                                        'type' => $data['type'],
-                                                        'from' => $data['from'],
-                                                        'to' => $data['to'],
+                                                        'name' => Input::get('name'),
+                                                        'phone' => Input::get('phone'),
+                                                        'email' => Input::get('email'),
+                                                        'account' => Input::get('account'),
+                                                        'type' => Input::get('type'),
+                                                        'from' => Input::get('from'),
+                                                        'to' => Input::get('to'),
+                                                        'search' => Input::get('search'),
                                                         ])}} <i class="fa fa-fw fa-sort"></i>
                                                     @endif
                                                 </th>
@@ -92,6 +95,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         {{ Form::open(array('action' => array('AdminController@accounts'), 'method' => 'get')) }}
+                        <input name="search" type="hidden" value="1">
                         <label for="account">Search by account number</label>
                         <input id="account" class="form-control" name="account" value="{{ old('account') }}">
                         <label for="type">Search by type</label>

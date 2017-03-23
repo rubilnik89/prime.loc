@@ -27,36 +27,39 @@
                                                       'AdminController@main',
                                                       $column, ['sortby' => $columns[$column],
                                                       'order' => 'desc',
-                                                      'name' => $data['name'],
-                                                      'surname' => $data['surname'],
-                                                      'phone' => $data['phone'],
-                                                      'email' => $data['email'],
-                                                      'country' => $data['country'],
-                                                      ])}}<i class="fa fa-fw fa-sort-asc"></i>
+                                                      'name' => Input::get('name'),
+                                                      'surname' => Input::get('surname'),
+                                                      'phone' => Input::get('phone'),
+                                                      'email' => Input::get('email'),
+                                                      'country' => Input::get('country'),
+                                                      'search' => Input::get('search'),])}}
+                                                    <i class="fa fa-fw fa-sort-asc"></i>
                                             @elseif ($sortby == $columns[$column] && $order == 'desc')
                                                 <th class="col-md-2">
                                                     {{link_to_action(
                                                       'AdminController@main',
                                                       $column, ['sortby' => $columns[$column],
                                                       'order' => 'asc',
-                                                      'name' => $data['name'],
-                                                      'surname' => $data['surname'],
-                                                      'phone' => $data['phone'],
-                                                      'email' => $data['email'],
-                                                      'country' => $data['country'],
-                                                      ])}}<i class="fa fa-fw fa-sort-desc"></i>
+                                                      'name' => Input::get('name'),
+                                                      'surname' => Input::get('surname'),
+                                                      'phone' => Input::get('phone'),
+                                                      'email' => Input::get('email'),
+                                                      'search' => Input::get('search'),
+                                                      'country' => Input::get('country'),])}}
+                                                    <i class="fa fa-fw fa-sort-desc"></i>
                                             @else
                                                 <th class="col-md-2">
                                                     {{link_to_action(
                                                       'AdminController@main',
                                                       $column, ['sortby' => $columns[$column],
                                                       'order' => 'asc',
-                                                      'name' => $data['name'],
-                                                      'surname' => $data['surname'],
-                                                      'phone' => $data['phone'],
-                                                      'email' => $data['email'],
-                                                      'country' => $data['country'],
-                                                      ])}}<i class="fa fa-fw fa-sort"></i>
+                                                      'name' => Input::get('name'),
+                                                      'surname' => Input::get('surname'),
+                                                      'phone' => Input::get('phone'),
+                                                      'email' => Input::get('email'),
+                                                      'search' => Input::get('search'),
+                                                      'country' => Input::get('country'),])}}
+                                                    <i class="fa fa-fw fa-sort"></i>
                                                     @endif
                                                 </th>
                                                 @endforeach
@@ -86,6 +89,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         {{ Form::open(array('action' => array('AdminController@main'), 'method' => 'get')) }}
+                        <input name="search" type="hidden" value="1">
                         <label for="name">Search by name</label>
                         <input id="name" class="form-control" name="name" value="{{ old('name') }}">
                         <label for="surname">Search by surname</label>
@@ -96,7 +100,7 @@
                         <input id="phone" class="form-control" name="phone" value="{{ old('phone') }}">
                         <label for="country">Search by country</label>
                         <select id="country" class="form-control" name="country">
-                            <option value="0" disabled selected>Выберите страну для поиска</option>
+                            <option value="0" selected>Выберите страну для поиска</option>
                             @foreach($countries as $country)
                                 <option value="{{ $country->country_id }}">
                                     {{ $country->name }}
