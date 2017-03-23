@@ -36,7 +36,7 @@ class AdminController extends Controller
 
         $users = $query->paginate(PER_PAGE);
 
-        return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order', 'oldCountry'));
+        return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order'));
 
     }
 
@@ -80,6 +80,7 @@ class AdminController extends Controller
         }
 
         if($sortby){
+
             if($sortby == 'name' || $sortby == 'email' || $sortby == 'phone'){
                 $users = User::orderBy($sortby, $order)->get();
                 $ids = [];

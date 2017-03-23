@@ -97,31 +97,32 @@
                         {{ Form::open(array('action' => array('AdminController@accounts'), 'method' => 'get')) }}
                         <input name="search" type="hidden" value="1">
                         <label for="account">Search by account number</label>
-                        <input id="account" class="form-control" name="account" value="{{ old('account') }}">
+                        <input id="account" class="form-control" name="account" value="{{ Request::get('account') }}">
                         <label for="type">Search by type</label>
                         <select id="type" class="form-control" name="type">
                             <option value="" selected></option>
-                            <option value="1" {{ old('type') == 1 ? 'selected' : ''}}>Лицевой</option>
-                            <option value="2" {{ old('type') == 2 ? 'selected' : ''}}>Инвесторский</option>
+                            <option value="1" {{ Request::get('type') == 1 ? 'selected' : ''}}>Лицевой</option>
+                            <option value="2" {{ Request::get('type') == 2 ? 'selected' : ''}}>Инвесторский</option>
                         </select>
                         <label for="from">Search by balance</label>
                         <div class="row">
                             <div class="col-xs-6">
-                                <input id="from" class="form-control" name="from" value="{{ old('from') }}"
+                                <input id="from" class="form-control" name="from" value="{{ Request::get('from') }}"
                                        placeholder="from">
                             </div>
                             <div class="col-xs-6">
-                                <input id="to" class="form-control" name="to" value="{{ old('to') }}" placeholder="to">
+                                <input id="to" class="form-control" name="to" value="{{ Request::get('to') }}" placeholder="to">
                             </div>
                         </div>
                         <label for="name">Search by name</label>
-                        <input id="name" class="form-control" name="name" value="{{ old('name') }}">
+                        <input id="name" class="form-control" name="name" value="{{ Request::get('name') }}">
                         <label for="email">Search by email</label>
-                        <input id="email" class="form-control" name="email" value="{{ old('email') }}">
+                        <input id="email" class="form-control" name="email" value="{{ Request::get('email') }}">
                         <label for="phone">Search by phone</label>
-                        <input id="phone" class="form-control" name="phone" value="{{ old('phone') }}">
+                        <input id="phone" class="form-control" name="phone" value="{{ Request::get('phone') }}">
 
                         <button class="btn btn-primary" type="submit">OK</button>
+                        <a class="btn btn-primary" href="{{ route('accounts') }}" role="button">Сбросить</a>
                         {{ Form::close() }}
                     </div>
                 </div>

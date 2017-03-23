@@ -91,23 +91,24 @@
                         {{ Form::open(array('action' => array('AdminController@main'), 'method' => 'get')) }}
                         <input name="search" type="hidden" value="1">
                         <label for="name">Search by name</label>
-                        <input id="name" class="form-control" name="name" value="{{ old('name') }}">
+                        <input id="name" class="form-control" name="name" value="{{ Request::get('name') }}">
                         <label for="surname">Search by surname</label>
-                        <input id="surname" class="form-control" name="surname" value="{{ old('surname') }}">
+                        <input id="surname" class="form-control" name="surname" value="{{ Request::get('surname') }}">
                         <label for="email">Search by email</label>
-                        <input id="email" class="form-control" name="email" value="{{ old('email') }}">
+                        <input id="email" class="form-control" name="email" value="{{ Request::get('email') }}">
                         <label for="phone">Search by phone</label>
-                        <input id="phone" class="form-control" name="phone" value="{{ old('phone') }}">
+                        <input id="phone" class="form-control" name="phone" value="{{ Request::get('phone') }}">
                         <label for="country">Search by country</label>
                         <select id="country" class="form-control" name="country">
                             <option value="0" selected>Выберите страну для поиска</option>
                             @foreach($countries as $country)
-                                <option value="{{ $country->country_id }}" {{ $country->country_id == old('country') ? 'selected' : '' }}>
+                                <option value="{{ $country->country_id }}" {{ $country->country_id == Request::get('country') ? 'selected' : '' }}>
                                     {{ $country->name }}
                                 </option>
                             @endforeach
                         </select>
                         <button class="btn btn-primary" type="submit">OK</button>
+                        <a class="btn btn-primary" href="{{ route('users') }}" role="button">Сбросить</a>
                         {{ Form::close() }}
                     </div>
                 </div>
