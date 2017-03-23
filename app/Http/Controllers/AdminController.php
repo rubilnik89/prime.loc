@@ -69,7 +69,7 @@ class AdminController extends Controller
                     $ids[$index] = $user->id;
                 }
                 $query->whereIn('user_id', $ids);
-                $request->flash();;
+                $request->flash();
 
             } else {
                 $query->searchValue('number', $request->account)
