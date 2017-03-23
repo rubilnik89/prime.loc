@@ -21,9 +21,6 @@ class AdminController extends Controller
 
         $query = User::select();
 
-        $oldCountry = Country::where('country_id', $request->country)->first();
-        $oldCountry = $oldCountry ? $oldCountry->name : '';
-
         if ($request->search) {
             $query->searchValue('name', $request->name)
                 ->searchValue('surname', $request->surname)
@@ -63,9 +60,9 @@ class AdminController extends Controller
 
             if ($request->name != null || $request->email != null || $request->phone != null) {
 
-                $users = User::searchValue('name', Input::get('name'))
-                    ->searchValue('phone', Input::get('phone'))
-                    ->searchValue('email', Input::get('email'))
+                $users = User::searchValue('name', $request->name)
+                    ->searchValue('phone', $request->phone)
+                    ->searchValue('email', $request->email)
                     ->get();
                 $ids = [];
                 foreach ($users as $index => $user) {
@@ -75,9 +72,9 @@ class AdminController extends Controller
                 $request->flash();;
 
             } else {
-                $query->searchValue('number', Input::get('account'))
-                    ->searchValue('type_id', Input::get('type'))
-                    ->searchBalance(Input::get('from'), Input::get('to'));
+                $query->searchValue('number', $request->account)
+                    ->searchValue('type_id', $request->type)
+                    ->searchBalance(Input::get('from'), $request->to);
                 $request->flash();
             }
         }
