@@ -7,3 +7,13 @@
         TRANSACTION_STATUS_SUCCESS => 'Успешна',
         TRANSACTION_STATUS_FAIL  => 'Ошибка'
     ];
+
+    const PERSONAL_ACCOUNT = 1;
+    const INVESTOR_ACCOUNT = 2;
+
+    const USER_ACCOUNTS = [
+        PERSONAL_ACCOUNT => 'Лицевой',
+        INVESTOR_ACCOUNT  => 'Инвесторский'
+    ];
+
+    const PER_PAGE = 5;

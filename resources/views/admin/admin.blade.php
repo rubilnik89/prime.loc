@@ -102,7 +102,7 @@
                         <select id="country" class="form-control" name="country">
                             <option value="0" selected>Выберите страну для поиска</option>
                             @foreach($countries as $country)
-                                <option value="{{ $country->country_id }}">
+                                <option value="{{ $country->country_id }}" {{ $country->country_id == old('country') ? 'selected' : '' }}>
                                     {{ $country->name }}
                                 </option>
                             @endforeach

@@ -4,50 +4,43 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\Country;
-use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function main()
+    public function main(Request $request)
     {
-        $sortby = Input::get('sortby');
-        $order = Input::get('order');
+
+        $sortby = $request->sortby;
+        $order = $request->order;
+
         $countries = Country::orderBy('name', 'asc')->get();
         $columns = User::$columns;
-        if (!empty(Input::get('search'))) {
 
-            $users = $this->usersWithSearch($sortby, $order);
-            Input::flash();
+        $query = User::select();
 
-            return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order'));
-        } else if ($sortby && $order) {
-            $users = User::orderBy($sortby, $order)->paginate(5);
-        } else {
-            $users = User::paginate(5);
+        $oldCountry = Country::where('country_id', $request->country)->first();
+        $oldCountry = $oldCountry ? $oldCountry->name : '';
+
+        if ($request->search) {
+            $query->searchValue('name', $request->name)
+                ->searchValue('surname', $request->surname)
+                ->searchValue('phone', $request->phone)
+                ->searchValue('email', $request->email)
+                ->searchCountry($request->country);
+            $request->flash();
         }
-        return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order'));
-    }
 
-    public function usersWithSearch($sortby, $order)
-    {
-        if ($sortby && $order) {
-            return $users = User::searchValue('name', Input::get('name'))
-                ->searchValue('surname', Input::get('surname'))
-                ->searchValue('phone', Input::get('phone'))
-                ->searchValue('email', Input::get('email'))
-                ->searchCountry(Input::get('country'))
-                ->orderBy($sortby, $order)
-                ->paginate(5);
-        } else {
-            return $users = User::searchValue('name', Input::get('name'))
-                ->searchValue('surname', Input::get('surname'))
-                ->searchValue('phone', Input::get('phone'))
-                ->searchValue('email', Input::get('email'))
-                ->searchCountry(Input::get('country'))
-                ->paginate(5);
+        if ($sortby) {
+            $query->orderBy($sortby, $order);
         }
+
+        $users = $query->paginate(PER_PAGE);
+
+        return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order', 'oldCountry'));
+
     }
 
     public function user($id)
@@ -56,109 +49,56 @@ class AdminController extends Controller
         return view('admin/user', compact('user'));
     }
 
-    public function accounts()
+    public function accounts(Request $request)
     {
-        $sortby = Input::get('sortby');
-        $order = Input::get('order');
+        $sortby = $request->sortby;
+        $order = $request->order;
+
         $columns = Account::$accountColumns;
         $countries = Country::orderBy('name', 'asc')->get();
 
-        if (!empty(Input::get('search'))) {
+        $query = Account::select();
 
-            $accounts = $this->accountsWithSearch($sortby, $order);
-            Input::flash();
+        if ($request->search) {
 
-            return view('admin/accounts', compact('countries', 'columns', 'sortby', 'order', 'accounts'));
+            if ($request->name != null || $request->email != null || $request->phone != null) {
 
-        } else $accounts = $this->accountsWithoutSearch($sortby, $order);
+                $users = User::searchValue('name', Input::get('name'))
+                    ->searchValue('phone', Input::get('phone'))
+                    ->searchValue('email', Input::get('email'))
+                    ->get();
+                $ids = [];
+                foreach ($users as $index => $user) {
+                    $ids[$index] = $user->id;
+                }
+                $query->whereIn('user_id', $ids);
+                $request->flash();;
+
+            } else {
+                $query->searchValue('number', Input::get('account'))
+                    ->searchValue('type_id', Input::get('type'))
+                    ->searchBalance(Input::get('from'), Input::get('to'));
+                $request->flash();
+            }
+        }
+
+        if($sortby){
+            if($sortby == 'name' || $sortby == 'email' || $sortby == 'phone'){
+                $users = User::orderBy($sortby, $order)->get();
+                $ids = [];
+                foreach ($users as $index => $user) {
+                    $ids[$index] = $user->id;
+                }
+                $query->whereIn('user_id', $ids)
+                    ->orderBy('user_id', $order);
+            } else {
+                $query->orderBy($sortby, $order);
+            }
+        }
+
+        $accounts = $query->with('user', 'account_type')->paginate(PER_PAGE);
 
         return view('admin/accounts', compact('countries', 'columns', 'sortby', 'order', 'accounts'));
-    }
-
-    public function accountsWithoutSearch($sortby, $order)
-    {
-        if ($sortby == 'name' || $sortby == 'email' || $sortby == 'phone') {
-            $users = User::orderBy($sortby, $order)->get();
-            $ids = [];
-            foreach ($users as $index => $user) {
-                $ids[$index] = $user->id;
-            }
-            return $accounts = Account::whereIn('user_id', $ids)->with('user', 'account_type')->orderBy('user_id', $order)->paginate(5);
-        } else if ($sortby && $order) {
-            return $accounts = Account::with('user', 'account_type')->orderBy($sortby, $order)->paginate(5);
-        } else {
-            return $accounts = Account::with('user', 'account_type')->paginate(5);
-        }
-    }
-
-    public function accountsWithSearch($sortby, $order)
-    {
-        if (Input::get('name') != null || Input::get('email') != null || Input::get('phone') != null) {
-
-            return $accounts = $this->searchAccountsByUsersFields($sortby, $order);
-
-        } else if ($sortby == 'name' || $sortby == 'phone' || $sortby == 'email') {
-
-            return $accounts = $this->sortAccountsByUsersFieldsWithSearch($sortby, $order);
-
-        } else if ($sortby && $order) {
-            return $accounts = Account::searchValue('number', Input::get('account'))
-                ->searchValue('type_id', Input::get('type'))
-                ->searchBalance(Input::get('from'), Input::get('to'))
-                ->with('user', 'account_type')
-                ->orderBy($sortby, $order)
-                ->paginate(3);
-        } else {
-            return $accounts = Account::searchValue('number', Input::get('account'))
-                ->searchValue('type_id', Input::get('type'))
-                ->searchBalance(Input::get('from'), Input::get('to'))
-                ->with('user', 'account_type')
-                ->paginate(3);
-        }
-    }
-
-    public function searchAccountsByUsersFields($sortby, $order)
-    {
-        if ($sortby && $order) {
-            $users = User::searchValue('name', Input::get('name'))
-                ->searchValue('phone', Input::get('phone'))
-                ->searchValue('email', Input::get('email'))
-                ->orderBy($sortby, $order)
-                ->get();
-            $ids = [];
-            foreach ($users as $index => $user) {
-                $ids[$index] = $user->id;
-            }
-            $accounts = Account::whereIn('user_id', $ids)->with('user', 'account_type')->orderBy('user_id', $order)->paginate(3);
-        } else {
-            $users = User::searchValue('name', Input::get('name'))
-                ->searchValue('phone', Input::get('phone'))
-                ->searchValue('email', Input::get('email'))
-                ->get();
-            $ids = [];
-            foreach ($users as $index => $user) {
-                $ids[$index] = $user->id;
-            }
-            $accounts = Account::whereIn('user_id', $ids)->with('user', 'account_type')->orderBy('user_id', $order)->paginate(3);
-        }
-        return $accounts;
-    }
-
-    public function sortAccountsByUsersFieldsWithSearch($sortby, $order)
-    {
-        $users = User::orderBy($sortby, $order)->get();
-        $ids = [];
-        foreach ($users as $index => $user) {
-            $ids[$index] = $user->id;
-        }
-        $accounts = Account::whereIn('user_id', $ids)
-            ->searchValue('number', Input::get('account'))
-            ->searchValue('type_id', Input::get('type'))
-            ->searchBalance(Input::get('from'), Input::get('to'))
-            ->with('user', 'account_type')
-            ->orderBy('user_id', $order)
-            ->paginate(3);
-        return $accounts;
     }
 
     public function userAccounts($id)

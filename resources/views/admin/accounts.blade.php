@@ -100,9 +100,9 @@
                         <input id="account" class="form-control" name="account" value="{{ old('account') }}">
                         <label for="type">Search by type</label>
                         <select id="type" class="form-control" name="type">
-                            <option value="" disabled selected></option>
-                            <option value="1">Лицевой</option>
-                            <option value="2">Инвесторский</option>
+                            <option value="" selected></option>
+                            <option value="1" {{ old('type') == 1 ? 'selected' : ''}}>Лицевой</option>
+                            <option value="2" {{ old('type') == 2 ? 'selected' : ''}}>Инвесторский</option>
                         </select>
                         <label for="from">Search by balance</label>
                         <div class="row">
