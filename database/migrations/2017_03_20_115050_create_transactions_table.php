@@ -18,7 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('account_id_from');
             $table->integer('account_id_to');
             $table->integer('amount');
-            $table->string('type');
+            $table->integer('type');
             $table->integer('status');
             $table->timestamps();
 

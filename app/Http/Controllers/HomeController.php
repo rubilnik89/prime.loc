@@ -74,7 +74,7 @@ class HomeController extends Controller
                     'account_id_from' => $accountFrom->number,
                     'account_id_to' => $accountTo->number,
                     'amount' => $data['sum'],
-                    'type' => 'transfer',
+                    'type' => 1,
                     'status' => true]);
 
                 DB::commit();

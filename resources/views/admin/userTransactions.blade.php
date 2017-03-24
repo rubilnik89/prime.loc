@@ -24,7 +24,7 @@
                                     <h4>Amount: {{ $transaction->amount }}</h4>
                                 </div>
                                 <div class="col-md-2">
-                                    <h4>Type: {{ $transaction->type }}</h4>
+                                    <h4>{{ TRANSACTION_TYPES[$transaction->type] }}</h4>
                                 </div>
                                 <div class="col-md-2">
                                     <h4>{{ TRANSACTION_STATUSES[$transaction->status] }}</h4>

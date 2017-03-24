@@ -16,4 +16,9 @@
         INVESTOR_ACCOUNT  => 'Инвесторский'
     ];
 
+    const TRANSACTION_TYPE_TRANSFER = 1;
+const TRANSACTION_TYPES = [
+    TRANSACTION_TYPE_TRANSFER => 'Трансфер'
+];
+
     const PER_PAGE = 5;
