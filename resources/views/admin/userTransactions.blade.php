@@ -9,6 +9,7 @@
             </div>
 
             <div class="col-md-6">
+                <a class="btn btn-primary" href="{{ url()->previous() }}" role="button">Назад</a>
                 @foreach($transactions as $transaction)
                     <div class="panel panel-default">
                         <div class="panel-body">
