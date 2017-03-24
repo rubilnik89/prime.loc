@@ -23,38 +23,25 @@
                                     <tr>
                                         <th class="col-md-1">#</th>
                                         @foreach(array_keys($columns) as $column)
-                                            @if ($sortby == $columns[$column] && $order == 'asc')
+                                            @if ($sortby == $columns[$column] && $order)
                                                 <th class="col-md-2">
-                                                    {{link_to_action(
-                                                      'AdminController@accounts',
-                                                      $column, ['sortby' => $columns[$column],
-                                                      'order' => 'desc',
-                                                      'name' => Input::get('name'),
-                                                      'phone' => Input::get('phone'),
-                                                      'email' => Input::get('email'),
-                                                      'account' => Input::get('account'),
-                                                      'type' => Input::get('type'),
-                                                      'from' => Input::get('from'),
-                                                      'to' => Input::get('to'),
-                                                      'search' => Input::get('search'),
-                                                      ])}}<i class="fa fa-sort-desc pull-right"></i>
-                                            @elseif ($sortby == $columns[$column] && $order == 'desc')
-                                                <th class="col-md-2">
-                                                    {{link_to_action(
-                                                       'AdminController@accounts',
-                                                       $column, ['sortby' => $columns[$column],
-                                                       'order' => 'asc',
-                                                       'name' => Input::get('name'),
-                                                       'phone' => Input::get('phone'),
-                                                       'email' => Input::get('email'),
-                                                       'account' => Input::get('account'),
-                                                       'type' => Input::get('type'),
-                                                       'from' => Input::get('from'),
-                                                       'to' => Input::get('to'),
-                                                       'search' => Input::get('search'),
-                                                       ])}}<i class="fa fa-sort-asc pull-right"></i>
+                                                    <i class="fa fa-sort-{{ $order == 'asc' ? 'desc' : 'asc' }}"></i>
+                                                {{link_to_action(
+                                                  'AdminController@accounts',
+                                                  $column, ['sortby' => $columns[$column],
+                                                  'order' => $order == 'asc' ? 'desc' : 'asc',
+                                                  'name' => Input::get('name'),
+                                                  'phone' => Input::get('phone'),
+                                                  'email' => Input::get('email'),
+                                                  'account' => Input::get('account'),
+                                                  'type' => Input::get('type'),
+                                                  'from' => Input::get('from'),
+                                                  'to' => Input::get('to'),
+                                                  'search' => Input::get('search'),
+                                                  ])}}
                                             @else
                                                 <th class="col-md-2">
+                                                    <i class="fa fa-sort"></i>
                                                     {{link_to_action(
                                                         'AdminController@accounts',
                                                         $column , ['sortby' => $columns[$column],
@@ -67,7 +54,7 @@
                                                         'from' => Input::get('from'),
                                                         'to' => Input::get('to'),
                                                         'search' => Input::get('search'),
-                                                        ])}} <i class="fa fa-sort pull-right"></i>
+                                                        ])}}
                                                     @endif
                                                 </th>
                                                 @endforeach
@@ -112,7 +99,8 @@
                                        placeholder="from">
                             </div>
                             <div class="col-xs-6">
-                                <input id="to" class="form-control" name="to" value="{{ Request::get('to') }}" placeholder="to">
+                                <input id="to" class="form-control" name="to" value="{{ Request::get('to') }}"
+                                       placeholder="to">
                             </div>
                         </div>
                         <label for="name">Search by name</label>

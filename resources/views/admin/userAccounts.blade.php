@@ -22,14 +22,17 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <h4>Account {{ $account->number }}</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h4>{{ TARIFS[$account->tarif_id] }}</h4>
                                     </div>
                                     <div class="col-md-2">
                                         <input class="form-control" type="text" placeholder="{{ $account->balance }}"
                                                readonly>
                                     </div>
-                                    <div class="col-md-2 col-md-offset-4">
+                                    <div class="col-md-2 col-md-offset-2">
                                         <a class="btn btn-default pull-right"
                                            href="{{ route('userAccountTransactions',['id' => $account->user_id, 'number' => $account->number]) }}"
                                            role="button">История</a>

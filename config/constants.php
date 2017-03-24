@@ -17,8 +17,21 @@
     ];
 
     const TRANSACTION_TYPE_TRANSFER = 1;
-const TRANSACTION_TYPES = [
-    TRANSACTION_TYPE_TRANSFER => 'Трансфер'
+    const TRANSACTION_TYPES = [
+        TRANSACTION_TYPE_TRANSFER => 'Трансфер'
 ];
+
+    const TARIF_OPTIMAL = 1;
+    const TARIF_PROFITABLE = 2;
+    const TARIF_BEST = 3;
+    const TARIF_VIP = 4;
+
+    const TARIFS = [
+        TARIF_OPTIMAL => "Оптимальный",
+        TARIF_PROFITABLE => "Выгодный",
+        TARIF_BEST => "Лучший",
+        TARIF_VIP => "ВИП",
+    ];
+
 
     const PER_PAGE = 5;
