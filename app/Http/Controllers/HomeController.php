@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 
 use App\Account;
+use App\Tarif;
 use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -30,21 +32,18 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-
         return view('home', compact('user'));
     }
 
     public function accounts()
     {
         $accounts = Auth::user()->accounts;
-
         return view('userAccounts', compact('accounts'));
     }
 
     public function moneyTransfer()
     {
         $accounts = Auth::user()->accounts;
-
         return view('moneyTransfer', compact('accounts'));
     }
 
@@ -113,7 +112,6 @@ class HomeController extends Controller
     public function editForm()
     {
         $user = Auth::user();
-
         return view('editForm', compact('user'));
     }
 
@@ -126,9 +124,29 @@ class HomeController extends Controller
             'surname' => $data['surname'] ?: $user->surname,
             'phone' => $data['phone'] ?: $user->phone,
         ]);
-        return redirect()->route('home');
 
+        return redirect()->route('home');
     }
 
+    public function addAccount(Request $request)
+    {
+        $user = Auth::user();
 
+        if($request->addtarif) {
+
+            Account::create([
+                'number' => (DB::table('accounts')->max('number') + 1),
+                'user_id' => $user->id,
+                'type_id' => 2,
+                'balance' => 0,
+                'tarif_id' => $request->tarif,
+            ]);
+            Session::flash('addedAccount', 'Счет создан успешно!');
+            $accounts = $user->accounts;
+            return view('userAccounts', compact('accounts'));
+        }
+        $tarifs = Tarif::all();
+
+        return view('addAccount', compact('user', 'tarifs'));
+    }
 }

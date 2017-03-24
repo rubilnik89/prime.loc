@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
-    protected $fillable = ['number', 'user_id', 'type_id', 'balance'];
+    protected $fillable = ['number', 'user_id', 'type_id', 'balance', 'tarif_id'];
 
     public static $accountColumns = [
         "Account" => "number",
@@ -44,6 +44,11 @@ class Account extends Model
     public function account_type()
     {
         return $this->belongsTo('App\AccountType', 'type_id', 'id');
+    }
+
+    public function tarif()
+    {
+        return $this->belongsTo('App\Tarif', 'tarif_id', 'tarifs_id');
     }
 
 }

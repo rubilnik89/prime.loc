@@ -10,7 +10,18 @@
                 <a class="list-group-item" href="{{ route('transactions', ['id' => $accounts[0]->user_id]) }}">История переводов</a>
             </div>
 
+            <div class="col-md-10">
+                <a class="btn btn-default"
+                   href="{{ route('addAccount', ['id' => $accounts[0]->user_id]) }}"
+                   role="button"><i class="fa fa-plus"></i> Добавить новый счет</a>
+            </div>
+
             <div class="col-md-6">
+                @if(Session::has('addedAccount'))
+                    <div class="alert alert-info">
+                        {{ Session::get('addedAccount') }}
+                    </div>
+                @endif
                 @foreach($accounts as $account)
                     <div class="panel panel-default">
                         <div class="panel-body">
