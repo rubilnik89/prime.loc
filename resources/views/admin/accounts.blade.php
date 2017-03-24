@@ -8,6 +8,7 @@
                 <div class="list-group">
                     <a class="list-group-item" href="{{ route('users') }}">Пользователи</a>
                     <a class="list-group-item active" href="{{ route('accounts') }}">Счета</a>
+                    <a class="list-group-item" href="{{ route('tarifs') }}">Тарифы</a>
                 </div>
             </div>
             <div class="col-md-8">
@@ -36,7 +37,7 @@
                                                       'from' => Input::get('from'),
                                                       'to' => Input::get('to'),
                                                       'search' => Input::get('search'),
-                                                      ])}}<i class="fa fa-fw fa-sort-desc"></i>
+                                                      ])}}<i class="fa fa-sort-desc pull-right"></i>
                                             @elseif ($sortby == $columns[$column] && $order == 'desc')
                                                 <th class="col-md-2">
                                                     {{link_to_action(
@@ -51,7 +52,7 @@
                                                        'from' => Input::get('from'),
                                                        'to' => Input::get('to'),
                                                        'search' => Input::get('search'),
-                                                       ])}}<i class="fa fa-fw fa-sort-asc"></i>
+                                                       ])}}<i class="fa fa-sort-asc pull-right"></i>
                                             @else
                                                 <th class="col-md-2">
                                                     {{link_to_action(
@@ -66,7 +67,7 @@
                                                         'from' => Input::get('from'),
                                                         'to' => Input::get('to'),
                                                         'search' => Input::get('search'),
-                                                        ])}} <i class="fa fa-fw fa-sort"></i>
+                                                        ])}} <i class="fa fa-sort pull-right"></i>
                                                     @endif
                                                 </th>
                                                 @endforeach

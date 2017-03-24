@@ -7,6 +7,7 @@
             <div class="col-md-2">
                 <a class="list-group-item active" href="{{ route('users') }}">Пользователи</a>
                 <a class="list-group-item" href="{{ route('accounts') }}">Счета</a>
+                <a class="list-group-item" href="{{ route('tarifs') }}">Тарифы</a>
             </div>
             <div class="col-md-8">
 
@@ -33,7 +34,7 @@
                                                       'email' => Input::get('email'),
                                                       'country' => Input::get('country'),
                                                       'search' => Input::get('search'),])}}
-                                                    <i class="fa fa-fw fa-sort-asc"></i>
+                                                    <i class="fa fa-fw fa-sort-asc pull-right"></i>
                                             @elseif ($sortby == $columns[$column] && $order == 'desc')
                                                 <th class="col-md-2">
                                                     {{link_to_action(
@@ -46,7 +47,7 @@
                                                       'email' => Input::get('email'),
                                                       'search' => Input::get('search'),
                                                       'country' => Input::get('country'),])}}
-                                                    <i class="fa fa-fw fa-sort-desc"></i>
+                                                    <i class="fa fa-fw fa-sort-desc pull-right"></i>
                                             @else
                                                 <th class="col-md-2">
                                                     {{link_to_action(
@@ -59,7 +60,7 @@
                                                       'email' => Input::get('email'),
                                                       'search' => Input::get('search'),
                                                       'country' => Input::get('country'),])}}
-                                                    <i class="fa fa-fw fa-sort"></i>
+                                                    <i class="fa fa-fw fa-sort pull-right"></i>
                                                     @endif
                                                 </th>
                                                 @endforeach

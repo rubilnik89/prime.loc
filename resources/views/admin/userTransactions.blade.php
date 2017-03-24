@@ -6,6 +6,7 @@
             <div class="col-md-2">
                 <a class="list-group-item" href="{{ route('users') }}">Пользователи</a>
                 <a class="list-group-item active" href="{{ route('accounts') }}">Счета</a>
+                <a class="list-group-item" href="{{ route('tarifs') }}">Тарифы</a>
             </div>
 
             <div class="col-md-6">

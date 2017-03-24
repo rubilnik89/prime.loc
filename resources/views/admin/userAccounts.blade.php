@@ -6,6 +6,7 @@
             <div class="col-md-2">
                 <a class="list-group-item" href="{{ route('users') }}">Пользователи</a>
                 <a class="list-group-item active" href="{{ route('accounts') }}">Счета</a>
+                <a class="list-group-item" href="{{ route('tarifs') }}">Тарифы</a>
             </div>
 
             <div class="col-md-10">
@@ -28,7 +29,7 @@
                                         <input class="form-control" type="text" placeholder="{{ $account->balance }}"
                                                readonly>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-2 col-md-offset-4">
                                         <a class="btn btn-default pull-right"
                                            href="{{ route('userAccountTransactions',['id' => $account->user_id, 'number' => $account->number]) }}"
                                            role="button">История</a>

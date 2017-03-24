@@ -27,3 +27,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
     Route::get('user/{id}', 'AdminController@user')->name('user');
 
 });
+
+Route::get('tarifs', 'TarifController@all')->name('tarifs');
