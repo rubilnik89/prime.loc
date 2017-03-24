@@ -23,41 +23,23 @@
                                     <tr>
                                         <th class="col-md-1">#</th>
                                         @foreach(array_keys($columns) as $column)
-                                            @if ($sortby == $columns[$column] && $order)
-                                                <th class="col-md-2">
-                                                    <i class="fa fa-sort-{{ $order == 'asc' ? 'desc' : 'asc' }}"></i>
+                                            <th class="col-md-2">
+                                                <i class="fa fa-sort{{ ($sortby == $columns[$column]) ? getSort($order) : '' }}"></i>
                                                 {{link_to_action(
-                                                  'AdminController@accounts',
-                                                  $column, ['sortby' => $columns[$column],
-                                                  'order' => $order == 'asc' ? 'desc' : 'asc',
-                                                  'name' => Input::get('name'),
-                                                  'phone' => Input::get('phone'),
-                                                  'email' => Input::get('email'),
-                                                  'account' => Input::get('account'),
-                                                  'type' => Input::get('type'),
-                                                  'from' => Input::get('from'),
-                                                  'to' => Input::get('to'),
-                                                  'search' => Input::get('search'),
-                                                  ])}}
-                                            @else
-                                                <th class="col-md-2">
-                                                    <i class="fa fa-sort"></i>
-                                                    {{link_to_action(
-                                                        'AdminController@accounts',
-                                                        $column , ['sortby' => $columns[$column],
-                                                        'order' => 'asc',
-                                                        'name' => Input::get('name'),
-                                                        'phone' => Input::get('phone'),
-                                                        'email' => Input::get('email'),
-                                                        'account' => Input::get('account'),
-                                                        'type' => Input::get('type'),
-                                                        'from' => Input::get('from'),
-                                                        'to' => Input::get('to'),
-                                                        'search' => Input::get('search'),
+                                                    'AdminController@accounts',
+                                                     $column , ['sortby' => $columns[$column],
+                                                     'order' => getOrder($order),
+                                                     'name' => Input::get('name'),
+                                                     'phone' => Input::get('phone'),
+                                                     'email' => Input::get('email'),
+                                                     'account' => Input::get('account'),
+                                                     'type' => Input::get('type'),
+                                                     'from' => Input::get('from'),
+                                                     'to' => Input::get('to'),
+                                                     'search' => Input::get('search'),
                                                         ])}}
-                                                    @endif
-                                                </th>
-                                                @endforeach
+                                            </th>
+                                        @endforeach
                                     </tr>
                                     </thead>
                                     <tbody>

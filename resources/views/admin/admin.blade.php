@@ -22,35 +22,20 @@
                                     <tr>
                                         <th class="col-md-1">#</th>
                                         @foreach(array_keys($columns) as $column)
-                                            @if ($sortby == $columns[$column] && $order)
-                                                <th class="col-md-2">
-                                                    <i class="fa fa-fw fa-sort-{{ $order == 'asc' ? 'desc' : 'asc' }}"></i>
-                                                    {{link_to_action(
-                                                      'AdminController@main',
-                                                      $column, ['sortby' => $columns[$column],
-                                                      'order' => $order == 'asc' ? 'desc' : 'asc',
-                                                      'name' => Input::get('name'),
-                                                      'surname' => Input::get('surname'),
-                                                      'phone' => Input::get('phone'),
-                                                      'email' => Input::get('email'),
-                                                      'country' => Input::get('country'),
-                                                      'search' => Input::get('search'),])}}
-                                            @else
-                                                <th class="col-md-2">
-                                                    <i class="fa fa-fw fa-sort"></i>
-                                                    {{link_to_action(
-                                                      'AdminController@main',
-                                                      $column, ['sortby' => $columns[$column],
-                                                      'order' => 'asc',
-                                                      'name' => Input::get('name'),
-                                                      'surname' => Input::get('surname'),
-                                                      'phone' => Input::get('phone'),
-                                                      'email' => Input::get('email'),
-                                                      'search' => Input::get('search'),
-                                                      'country' => Input::get('country'),])}}
-                                                    @endif
-                                                </th>
-                                                @endforeach
+                                            <th class="col-md-2">
+                                                <i class="fa fa-fw fa-sort{{ ($sortby == $columns[$column]) ? getSort($order) : '' }}"></i>
+                                                {{link_to_action(
+                                                'AdminController@main',
+                                                $column, ['sortby' => $columns[$column],
+                                                'order' => getOrder($order),
+                                                'name' => Input::get('name'),
+                                                'surname' => Input::get('surname'),
+                                                'phone' => Input::get('phone'),
+                                                'email' => Input::get('email'),
+                                                'search' => Input::get('search'),
+                                                'country' => Input::get('country'),])}}
+                                            </th>
+                                        @endforeach
                                     </tr>
                                     </thead>
                                     <tbody>
