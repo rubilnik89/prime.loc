@@ -31,7 +31,7 @@ class Account extends Model
             $query->whereBetween('balance', [$from, $to]);
         }else if ($from) {
             $query->where('balance', '>=', $from);
-        } else if ($to) {
+        }else if ($to) {
             $query->where('balance', '<=', $to);
         }
     }

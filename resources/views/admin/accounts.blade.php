@@ -27,17 +27,7 @@
                                                 <i class="fa fa-sort{{ ($sortby == $columns[$column]) ? getSort($order) : '' }}"></i>
                                                 {{link_to_action(
                                                     'AdminController@accounts',
-                                                     $column , ['sortby' => $columns[$column],
-                                                     'order' => getOrder($order),
-                                                     'name' => Input::get('name'),
-                                                     'phone' => Input::get('phone'),
-                                                     'email' => Input::get('email'),
-                                                     'account' => Input::get('account'),
-                                                     'type' => Input::get('type'),
-                                                     'from' => Input::get('from'),
-                                                     'to' => Input::get('to'),
-                                                     'search' => Input::get('search'),
-                                                        ])}}
+                                                     $column, array_merge($request->all(), array('sortby' => $columns[$column], 'order' => getOrder($order))))}}
                                             </th>
                                         @endforeach
                                     </tr>

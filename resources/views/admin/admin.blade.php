@@ -10,13 +10,11 @@
                 <a class="list-group-item" href="{{ route('tarifs') }}">Тарифы</a>
             </div>
             <div class="col-md-8">
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">Users</div>
                             <div class="panel-body">
-
                                 <table class="table table-hover table-striped">
                                     <thead>
                                     <tr>
@@ -26,14 +24,7 @@
                                                 <i class="fa fa-fw fa-sort{{ ($sortby == $columns[$column]) ? getSort($order) : '' }}"></i>
                                                 {{link_to_action(
                                                 'AdminController@main',
-                                                $column, ['sortby' => $columns[$column],
-                                                'order' => getOrder($order),
-                                                'name' => Input::get('name'),
-                                                'surname' => Input::get('surname'),
-                                                'phone' => Input::get('phone'),
-                                                'email' => Input::get('email'),
-                                                'search' => Input::get('search'),
-                                                'country' => Input::get('country'),])}}
+                                                $column, array_merge($request->all(), array('sortby' => $columns[$column], 'order' => getOrder($order))))}}
                                             </th>
                                         @endforeach
                                     </tr>
@@ -41,7 +32,7 @@
                                     <tbody>
                                     @foreach($users as $index => $user)
                                         <tr onclick="window.location.href='{{ route('user', ['id' => $user->id]) }}';">
-                                            <td class="col-md-1">{{ $index +1 }}</td>
+                                            <td class="col-md-1">{{ $index + 1 }}</td>
                                             <td class="col-md-2">{{ $user->name }}</td>
                                             <td class="col-md-2">{{ $user->surname }}</td>
                                             <td class="col-md-2">{{ $user->email }}</td>
@@ -55,9 +46,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            {{--@yield('searchform')--}}
+
             <div class="col-md-2">
                 <div class="panel panel-default">
                     <div class="panel-body">

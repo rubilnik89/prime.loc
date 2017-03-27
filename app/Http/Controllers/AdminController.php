@@ -5,18 +5,16 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\Country;
 use App\User;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     public function main(Request $request)
     {
-
         $sortby = $request->sortby;
         $order = $request->order;
 
-        $countries = Country::orderBy('name', 'asc')->get();
+        $countries = Country::orderBy('name')->get();
         $columns = User::$columns;
 
         $query = User::select();
@@ -36,8 +34,7 @@ class AdminController extends Controller
 
         $users = $query->paginate(PER_PAGE);
 
-        return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order'));
-
+        return view('admin/admin', compact('users', 'countries', 'columns', 'sortby', 'order', 'request'));
     }
 
     public function user($id)
@@ -50,9 +47,7 @@ class AdminController extends Controller
     {
         $sortby = $request->sortby;
         $order = $request->order;
-
         $columns = Account::$accountColumns;
-        $countries = Country::orderBy('name', 'asc')->get();
 
         $query = Account::select();
 
@@ -74,7 +69,7 @@ class AdminController extends Controller
             } else {
                 $query->searchValue('number', $request->account)
                     ->searchValue('type_id', $request->type)
-                    ->searchBalance(Input::get('from'), $request->to);
+                    ->searchBalance($request->from, $request->to);
                 $request->flash();
             }
         }
@@ -96,7 +91,7 @@ class AdminController extends Controller
 
         $accounts = $query->with('user', 'account_type')->paginate(PER_PAGE);
 
-        return view('admin/accounts', compact('countries', 'columns', 'sortby', 'order', 'accounts'));
+        return view('admin/accounts', compact('columns', 'sortby', 'order', 'accounts', 'request'));
     }
 
     public function userAccounts($id)
