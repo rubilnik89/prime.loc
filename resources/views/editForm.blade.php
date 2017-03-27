@@ -14,8 +14,8 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
 
-                        {{ Form::open(array('action' => array('HomeController@edit', $user->id), 'method' => 'post')) }}
-                        {{ csrf_field() }}
+                        {{ Form::open(array('action' => array('HomeController@edit', $user->id), 'method' => 'get')) }}
+                        <input type="hidden" name="editUser" value="1">
                         <div class="col-md-4">
                             <label for="name">Имя: {{ $user->name }}</label>
                             <input id="name" class="form-control" name="name" placeholder="Введите другое имя">

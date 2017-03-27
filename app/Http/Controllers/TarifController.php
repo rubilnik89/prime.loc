@@ -43,7 +43,6 @@ class TarifController extends Controller
             ]);
             Session::flash('editTarif', 'Тариф изменен успешно!');
             return redirect()->route('tarifs');
-
         }
 
         return view('tarifs/editTarif', compact('tarif'));

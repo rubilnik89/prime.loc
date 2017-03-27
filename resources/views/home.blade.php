@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-md-12">
                                 <a class="btn btn-primary"
-                                   href="{{ route('editForm',['id' => $user->id]) }}"
+                                   href="{{ route('edit', ['id' => $user->id]) }}"
                                    role="button">Редактировать профиль</a>
                             </div>
                         </div>

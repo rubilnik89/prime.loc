@@ -108,23 +108,21 @@ class HomeController extends Controller
         return view('userTransactions', compact('transactions', 'user'));
     }
 
-    public function editForm()
+    public function edit(Request $request, $id)
     {
         $user = Auth::user();
+
+        if($request->editUser) {
+
+            $user->update([
+                'name' => $request->name ?: $user->name,
+                'surname' => $request->surname ?: $user->surname,
+                'phone' => $request->phone ?: $user->phone,
+            ]);
+
+            return redirect()->route('home');
+        }
         return view('editForm', compact('user'));
-    }
-
-    public function edit(Request $request)
-    {
-        $data = $request->all();
-        $user = Auth::user();
-        $user->update([
-            'name' => $data['name'] ?: $user->name,
-            'surname' => $data['surname'] ?: $user->surname,
-            'phone' => $data['phone'] ?: $user->phone,
-        ]);
-
-        return redirect()->route('home');
     }
 
     public function addAccount(Request $request)
