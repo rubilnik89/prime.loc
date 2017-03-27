@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tarif extends Model
 {
-
-    protected $fillable = ['title', 'days', 'percent'];
+    protected $primaryKey = 'tarifs_id';
+    protected $fillable = ['title', 'days', 'percent', 'enabled'];
 
     public function account()
     {

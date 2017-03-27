@@ -20,17 +20,17 @@
 
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                    <tr>
-                                        <th class="col-md-1">#</th>
-                                        @foreach(array_keys($columns) as $column)
-                                            <th class="col-md-2">
-                                                <i class="fa fa-sort{{ ($sortby == $columns[$column]) ? getSort($order) : '' }}"></i>
-                                                {{link_to_action(
-                                                    'AdminController@accounts',
-                                                     $column, array_merge($request->all(), ['sortby' => $columns[$column], 'order' => getOrder($order)]))}}
-                                            </th>
-                                        @endforeach
-                                    </tr>
+                                        <tr>
+                                            <th class="col-md-1">#</th>
+                                            @foreach(array_keys($columns) as $column)
+                                                <th class="col-md-2">
+                                                    <i class="fa fa-sort{{ ($sortby == $columns[$column]) ? getSort($order) : '' }}"></i>
+                                                    {{link_to_action(
+                                                        'AdminController@accounts',
+                                                         $column, array_merge($request->all(), ['sortby' => $columns[$column], 'order' => getOrder($order)]))}}
+                                                </th>
+                                            @endforeach
+                                        </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($accounts as $index => $account)

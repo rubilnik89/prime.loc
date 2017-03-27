@@ -26,6 +26,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
     Route::get('user/{id}/transactions/{number}', 'AdminController@userAccountTransactions')->name('userAccountTransactions');
     Route::get('users/accounts', 'AdminController@accounts')->name('accounts');
     Route::get('user/{id}', 'AdminController@user')->name('user');
+    Route::get('addTarif', 'TarifController@addTarif')->name('addTarif');
+    Route::get('editTarif/{id}', 'TarifController@editTarif')->name('editTarif');
 
 });
 

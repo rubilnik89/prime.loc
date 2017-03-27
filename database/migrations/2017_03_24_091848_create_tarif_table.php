@@ -16,6 +16,7 @@ class CreateTarifTable extends Migration
         Schema::create('tarifs', function (Blueprint $table) {
             $table->increments('tarifs_id');
             $table->string('title');
+            $table->boolean('enabled');
             $table->integer('days');
             $table->decimal('percent');
             $table->timestamps();
