@@ -15,59 +15,60 @@
                 </div>
             @endif
 
-            @if (!Auth::guest() && Auth::user()->is_admin == 1)
-                <div class="col-md-8">
-                    <a class="btn btn-default"
-                       href="{{ route('addTarif') }}"
-                       role="button"><i class="fa fa-plus"></i> Добавить новый тариф</a>
-                </div>
-            @endif
-
             <div class="col-md-8">
-                <table class="table table-hover table-striped">
-                    <thead>
-                    <tr>
-                        @foreach(array_keys($tarifColumns) as $column)
-                            <th class="col-md-2">
-                                <i class="fa fa-fw fa-sort{{ ($sortby == $tarifColumns[$column]) ? getSort($order) : '' }}"></i>
-                                {{link_to_action(
-                                'TarifController@all',
-                                $column, array_merge($request->all(), ['sortby' => $tarifColumns[$column], 'order' => getOrder($order)]))}}
-                            </th>
-                        @endforeach
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($tarifs as $tarif)
-                        <tr>
-                            <td class="col-md-2">
-                                <h4>{{ $tarif->title }}</h4>
-                            </td>
-                            <td class="col-md-2 col-md-offset-2">
-                                <h4>Дней: {{ $tarif->days }}</h4>
-                            </td>
-                            <td class="col-md-2 col-md-offset-2">
-                                <h4>Процент: {{ $tarif->percent }}%</h4>
-                            </td>
-                            <td class="col-md-1">
-                                <h4>{{ TARIF_IS_ENABLED[$tarif->enabled] }}</h4>
-                            </td>
-                            @if (!Auth::guest() && Auth::user()->is_admin == 1)
-                                <td class="col-md-1">
-                                    <a class="btn btn-default"
-                                       href="{{ route('editTarif', ['id' => $tarif->tarifs_id]) }}"
-                                       role="button">Редактировать</a>
-                                </td>
-                            @endif
-
-                        </tr>
-
-                    @endforeach
-                    </tbody>
-                </table>
+                <div class="panel panel-default">
+                    @if (!Auth::guest() && Auth::user()->is_admin == 1)
+                        <div class="panel-heading">
+                            <a class="btn btn-default" href="{{ route('addTarif') }}" role="button"><i
+                                        class="fa fa-plus"></i> Добавить новый тариф</a>
+                        </div>
+                    @endif
+                    <div class="panel-body">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <tr>
+                                @foreach(array_keys($tarifColumns) as $column)
+                                    <th class="col-md-2">
+                                        <i class="fa fa-fw fa-sort{{ ($sortby == $tarifColumns[$column]) ? getSort($order) : '' }}"></i>
+                                        {{link_to_action(
+                                        'TarifController@all',
+                                        $column, array_merge($request->all(), ['sortby' => $tarifColumns[$column], 'order' => getOrder($order)]))}}
+                                    </th>
+                                @endforeach
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($tarifs as $tarif)
+                                <tr>
+                                    <td class="col-md-2">
+                                        <h4>{{ $tarif->title }}</h4>
+                                    </td>
+                                    <td class="col-md-2 col-md-offset-2">
+                                        <h4>Дней: {{ $tarif->days }}</h4>
+                                    </td>
+                                    <td class="col-md-2 col-md-offset-2">
+                                        <h4>Процент: {{ $tarif->percent }}%</h4>
+                                    </td>
+                                    <td class="col-md-1">
+                                        <h4>{{ TARIF_IS_ENABLED[$tarif->enabled] }}</h4>
+                                    </td>
+                                    @if (!Auth::guest() && Auth::user()->is_admin == 1)
+                                        <td class="col-md-1">
+                                            <a class="btn btn-default"
+                                               href="{{ route('editTarif', ['id' => $tarif->tarifs_id]) }}"
+                                               role="button">Редактировать</a>
+                                        </td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-
         </div>
+
+    </div>
     </div>
 
 @endsection
