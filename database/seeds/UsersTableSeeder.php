@@ -10,6 +10,16 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->delete();
         User::create([
+            'name' => 'Valery',
+            'surname' => 'Ivanov',
+            'phone' => '05011111111',
+            'country' => 'UA',
+            'is_admin' => false,
+            'activated' => true,
+            'password' => bcrypt('111111'),
+            'email' => 'webf4f@gmail.com',
+        ]);
+        User::create([
             'name' => 'superadmin',
             'surname' => 'superadmin',
             'phone' => '0555034200',
