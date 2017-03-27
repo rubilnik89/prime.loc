@@ -11,6 +11,7 @@
                     денег</a>
                 <a class="list-group-item" href="{{ route('transactions', ['id' => $accounts[0]->user_id]) }}">История
                     переводов</a>
+                <a class="list-group-item" href="{{ route('tarifs') }}">Тарифы</a>
             </div>
 
             <div class="col-md-6">
