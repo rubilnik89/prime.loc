@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <label for="days">Дни</label>
-                            <input id="days" class="form-control" name="days" placeholder="Введите количеково дней">
+                            <input id="days" class="form-control" name="days" placeholder="Введите количество дней">
                         </div>
                         <div class="col-xs-6">
                             <label for="days">Процент</label>
