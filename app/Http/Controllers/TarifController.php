@@ -8,10 +8,21 @@ use Illuminate\Support\Facades\Session;
 
 class TarifController extends Controller
 {
-    public function all()
+    public function all(Request $request)
     {
-        $tarifs = Tarif::all();
-        return view('tarifs/tarifs', compact('tarifs'));
+        $sortby = $request->sortby;
+        $order = $request->order;
+
+        $tarifColumns = Tarif::$tarifColumns;
+        $query = Tarif::select();
+
+        if ($sortby) {
+            $query->orderBy($sortby, $order);
+        }
+
+        $tarifs = $query->paginate(PER_PAGE);
+
+        return view('tarifs/tarifs', compact('tarifs', 'tarifColumns', 'sortby', 'order', 'request'));
     }
 
     public function addTarif(Request $request)

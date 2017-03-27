@@ -25,6 +25,18 @@
 
             <div class="col-md-8">
                 <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        @foreach(array_keys($tarifColumns) as $column)
+                            <th class="col-md-2">
+                                <i class="fa fa-fw fa-sort{{ ($sortby == $tarifColumns[$column]) ? getSort($order) : '' }}"></i>
+                                {{link_to_action(
+                                'TarifController@all',
+                                $column, array_merge($request->all(), ['sortby' => $tarifColumns[$column], 'order' => getOrder($order)]))}}
+                            </th>
+                        @endforeach
+                    </tr>
+                    </thead>
                     <tbody>
                     @foreach($tarifs as $tarif)
                         <tr>
