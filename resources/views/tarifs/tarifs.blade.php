@@ -37,12 +37,12 @@
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
-                                @foreach(array_keys($tarifColumns) as $column)
+                                @foreach(array_keys($columns) as $column)
                                     <th class="col-md-2">
-                                        <i class="fa fa-fw fa-sort{{ ($sortby == $tarifColumns[$column]) ? getSort($order) : '' }}"></i>
+                                        <i class="fa fa-fw fa-sort{{ ($sortby == $columns[$column]) ? getSort($order) : '' }}"></i>
                                         {{link_to_action(
                                         'TarifController@all',
-                                        $column, array_merge($request->all(), ['sortby' => $tarifColumns[$column], 'order' => getOrder($order)]))}}
+                                        $column, array_merge($request->all(), ['sortby' => $columns[$column], 'order' => getNextOrder($order, $request->sortby, $columns[$column])]))}}
                                     </th>
                                 @endforeach
                             </tr>

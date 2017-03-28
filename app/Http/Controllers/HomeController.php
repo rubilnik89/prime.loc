@@ -31,31 +31,31 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('home', compact('user'));
+        return view('user/home', compact('user'));
     }
 
     public function accounts()
     {
         $user = Auth::user();
-        return view('userAccounts', compact('user'));
+        return view('user/userAccounts', compact('user'));
     }
 
     public function personal()
     {
         $accounts = Auth::user()->accounts()->where('type_id', '1')->get();
-        return view('userPersonal', compact('accounts'));
+        return view('user/userPersonal', compact('accounts'));
     }
 
     public function investor()
     {
         $accounts = Auth::user()->accounts()->where('type_id', '2')->get();
-        return view('userInvestor', compact('accounts'));
+        return view('user/userInvestor', compact('accounts'));
     }
 
     public function moneyTransfer()
     {
         $accounts = Auth::user()->accounts;
-        return view('moneyTransfer', compact('accounts'));
+        return view('user/moneyTransfer', compact('accounts'));
     }
 
     public function transfer(Request $request)
@@ -108,7 +108,7 @@ class HomeController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('userAccountTransactions', compact('user', 'transactions'));
+        return view('user/userAccountTransactions', compact('user', 'transactions'));
     }
 
     public function transactions()
@@ -116,7 +116,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $transactions = $user->transactions()->orderBy('created_at', 'desc')->get();
 
-        return view('userTransactions', compact('transactions', 'user'));
+        return view('user/userTransactions', compact('transactions', 'user'));
     }
 
     public function edit(Request $request, $id)
@@ -133,7 +133,7 @@ class HomeController extends Controller
 
             return redirect()->route('home');
         }
-        return view('editForm', compact('user'));
+        return view('user/editForm', compact('user'));
     }
 
     public function addAccount(Request $request)
@@ -146,7 +146,7 @@ class HomeController extends Controller
             $personal = $user->accounts()->where('type_id', 1)->first();
             Session::flash('Transfer', 'Перевод средств');
             $tarifs_id = $request->tarif;
-            return view('addAccount', compact('personal', 'user', 'tarifs_id'));
+            return view('user/addAccount', compact('personal', 'user', 'tarifs_id'));
         }
 
         if($request->transfer){
@@ -182,17 +182,17 @@ class HomeController extends Controller
                 }
                 if ($success) {
                     Session::flash('addedAccount', 'Счет создан успешно!');
-                    return view('userAccounts', compact('user'));
+                    return view('user/userAccounts', compact('user'));
                 }
             } else {
                 Session::flash('noMoney', 'На счету недостаточно средств, пополните свой лицевой счет!');
-                return view('userAccounts', compact('user'));
+                return view('user/userAccounts', compact('user'));
             }
         }
 
         $tarifs = Tarif::where('enabled', 1)->get();
         Session::flash('SelectTarif', 'Выбор тарифа');
 
-        return view('addAccount', compact('user', 'tarifs'));
+        return view('user/addAccount', compact('user', 'tarifs'));
     }
 }

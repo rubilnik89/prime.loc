@@ -15,7 +15,7 @@ class TarifController extends Controller
         $sortby = $request->sortby;
         $order = $request->order;
 
-        $tarifColumns = Tarif::$tarifColumns;
+        $columns = Tarif::$tarifColumns;
         $query = Tarif::select();
 
         if ($sortby) {
@@ -24,7 +24,7 @@ class TarifController extends Controller
 
         $tarifs = $query->paginate(PER_PAGE);
 
-        return view('tarifs/tarifs', compact('user', 'tarifs', 'tarifColumns', 'sortby', 'order', 'request'));
+        return view('tarifs/tarifs', compact('user', 'tarifs', 'columns', 'sortby', 'order', 'request'));
     }
 
     public function addTarif(Request $request)

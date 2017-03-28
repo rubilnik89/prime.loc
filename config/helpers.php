@@ -1,12 +1,15 @@
 <?php
 
-function getOrder($order){
-
-    if ($order){
-        if ($order == 'asc'){
-            return 'desc';
+function getNextOrder($order, $sortby = null, $column){
+    if ($column == $sortby){
+        if ($order){
+            if ($order == 'asc'){
+                return 'desc';
+            }
         }
-    }
+        return 'asc';
+    } else return 'asc';
+
     return 'asc';
 }
 
