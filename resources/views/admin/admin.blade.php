@@ -18,7 +18,7 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-1">#</th>
+                                            <th>#</th>
                                             @foreach(array_keys($columns) as $column)
                                                 <th class="col-md-2">
                                                     <i class="fa fa-fw fa-sort{{ ($sortby == $columns[$column]) ? getSort($order) : '' }}"></i>
@@ -32,10 +32,10 @@
                                     <tbody>
                                     @foreach($users as $index => $user)
                                         <tr onclick="window.location.href='{{ route('user', ['id' => $user->id]) }}';">
-                                            <td class="col-md-1">{{ $index + 1 }}</td>
+                                            <td>{{ $index + 1 }}</td>
                                             <td class="col-md-2">{{ $user->name }}</td>
-                                            <td class="col-md-2">{{ $user->surname }}</td>
-                                            <td class="col-md-2">{{ $user->email }}</td>
+                                            <td class="col-md-3">{{ $user->surname }}</td>
+                                            <td class="col-md-3">{{ $user->email }}</td>
                                             <td class="col-md-2">{{ $user->phone }}</td>
                                             <td class="col-md-2">{{ $user->Country->name }}</td>
                                         </tr>
@@ -76,8 +76,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-10">
+            <div class="col-md-10 col-md-offset-2">
                 {{ $users->appends(Request::input())->links() }}
             </div>
         </div>

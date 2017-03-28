@@ -21,7 +21,7 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-1">#</th>
+                                            <th>#</th>
                                             @foreach(array_keys($columns) as $column)
                                                 <th class="col-md-2">
                                                     <i class="fa fa-sort{{ ($sortby == $columns[$column]) ? getSort($order) : '' }}"></i>
@@ -35,7 +35,7 @@
                                     <tbody>
                                     @foreach($accounts as $index => $account)
                                         <tr onclick="window.location.href='{{ route('user', ['id' => $account->user->id]) }}';">
-                                            <td class="col-md-1">{{ $index + 1 }}</td>
+                                            <td>{{ $index + 1 }}</td>
                                             <td class="col-md-2">{{ $account->number }}</td>
                                             <td class="col-md-2">{{ $account->account_type->name }}</td>
                                             <td class="col-md-2">{{ $account->balance }}</td>
@@ -88,8 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-10">
+            <div class="col-md-10 col-md-offset-2">
                 {{ $accounts->appends(Request::input())->links() }}
             </div>
         </div>

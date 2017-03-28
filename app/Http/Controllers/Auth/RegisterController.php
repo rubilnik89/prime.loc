@@ -93,6 +93,7 @@ class RegisterController extends Controller
                 'type_id' => 1,
                 'user_id' => $user->id,
                 'balance' => 0.0000,
+                'tarif_id' => 1,
             ]);
 
             DB::commit();
