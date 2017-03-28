@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 
-use App\Account;
-use App\Tarif;
-use App\Transaction;
-use App\User;
+use App\models\Account;
+use App\models\Tarif;
+use App\models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -152,8 +151,7 @@ class HomeController extends Controller
 
         if($request->transfer){
             $personal = $user->accounts()->where('type_id', 1)->first();
-
-            if ($request->sum < $personal['balance']){
+            if ($request->sum <= $personal['balance']){
 
                 DB::beginTransaction();
                 try {
@@ -185,10 +183,10 @@ class HomeController extends Controller
                 if ($success) {
                     Session::flash('addedAccount', 'Счет создан успешно!');
                     return view('userAccounts', compact('user'));
-                } else {
-                    Session::flash('noAddedAccount', 'Что-то пошло не так, повторите попытку через 5 минут.');
-                    return view('userAccounts', compact('user'));
                 }
+            } else {
+                Session::flash('noMoney', 'На счету недостаточно средств, пополните свой лицевой счет!');
+                return view('userAccounts', compact('user'));
             }
         }
 

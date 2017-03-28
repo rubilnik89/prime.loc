@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Tarif;
+use App\models\Tarif;
 
 class TarifsTableSeeder extends Seeder
 {

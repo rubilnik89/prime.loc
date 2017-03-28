@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App;
+namespace App\models;
 
 
 use Illuminate\Database\Eloquent\Model;
@@ -38,17 +38,17 @@ class Account extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\models\User');
     }
 
     public function account_type()
     {
-        return $this->belongsTo('App\AccountType', 'type_id', 'id');
+        return $this->belongsTo('App\models\AccountType', 'type_id', 'id');
     }
 
     public function tarif()
     {
-        return $this->belongsTo('App\Tarif', 'tarif_id', 'tarifs_id');
+        return $this->belongsTo('App\models\Tarif', 'tarif_id', 'tarifs_id');
     }
 
 }

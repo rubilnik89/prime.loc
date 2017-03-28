@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -47,16 +47,16 @@ class User extends Authenticatable
 
     public function accounts()
     {
-        return $this->hasMany('App\Account');
+        return $this->hasMany('App\models\Account');
     }
 
     public function country()
     {
-        return $this->hasOne('App\Country', 'country_id', 'country');
+        return $this->hasOne('App\models\Country', 'country_id', 'country');
     }
 
     public function transactions()
     {
-        return $this->hasMany('App\Transaction');
+        return $this->hasMany('App\models\Transaction');
     }
 }

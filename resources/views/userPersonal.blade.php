@@ -39,7 +39,7 @@
                                 <div class="col-md-1">
                                     <a class="btn btn-default" href="#" role="button">Пополнить</a>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-1 col-md-offset-3">
                                     <a class="btn btn-default pull-right"
                                        href="{{ route('accountTransactions',['id' => $account->user_id, 'number' => $account->number]) }}"
                                        role="button">История</a>

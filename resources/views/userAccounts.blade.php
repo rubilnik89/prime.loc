@@ -37,6 +37,11 @@
                         {{ Session::get('noAddedAccount') }}
                     </div>
                 @endif
+            @if(Session::has('noMoney'))
+                <div class="alert alert-info">
+                    {{ Session::get('noMoney') }}
+                </div>
+            @endif
 
                 {{--<div class="panel panel-default">--}}
                     {{--<div class="panel-heading">Мои счета</div>--}}

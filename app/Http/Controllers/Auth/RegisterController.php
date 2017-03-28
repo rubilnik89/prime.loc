@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Account;
-use App\User;
+use App\models\Account;
+use App\models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use App\ActivationService;
-use App\Country;
+use App\models\Country;
 
 class RegisterController extends Controller
 {

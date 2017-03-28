@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Account;
-use App\Country;
-use App\User;
+use App\models\Account;
+use App\models\Country;
+use App\models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller

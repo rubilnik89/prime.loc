@@ -23,7 +23,8 @@
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">Мои счета
-                        <a class="btn btn-default" href="{{ route('addAccount', ['id' => $accounts[0]->user_id]) }}" role="button"><i class="fa fa-plus"></i> Добавить новый счет</a></div>
+                        <a class="btn btn-default" href="{{ route('addAccount', ['id' => $accounts[0]->user_id]) }}" role="button"><i class="fa fa-plus"></i> Добавить новый счет</a>
+                    </div>
                     @foreach($accounts as $account)
                         <div class="panel-body">
                             <div class="row">
@@ -38,7 +39,7 @@
                                            readonly>
                                 </div>
 
-                                <div class="col-md-1 col-md-offset-3">
+                                <div class="col-md-1 col-md-offset-4">
                                     <a class="btn btn-default pull-right"
                                        href="{{ route('accountTransactions',['id' => $account->user_id, 'number' => $account->number]) }}"
                                        role="button">История</a>

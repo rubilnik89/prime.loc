@@ -3,6 +3,7 @@
 namespace App;
 
 
+use App\models\User;
 use Illuminate\Mail\Mailer;
 use Illuminate\Mail\Message;
 
