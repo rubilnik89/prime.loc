@@ -4,9 +4,17 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2">
-                <a class="list-group-item" href="{{ route('users') }}">Пользователи</a>
-                <a class="list-group-item" href="{{ route('accounts') }}">Счета</a>
-                <a class="list-group-item active" href="{{ route('tarifs') }}">Тарифы</a>
+                @if (!Auth::guest() && Auth::user()->is_admin == 1)
+                    <a class="list-group-item" href="{{ route('users') }}">Пользователи</a>
+                    <a class="list-group-item" href="{{ route('accounts') }}">Счета</a>
+                    <a class="list-group-item active" href="{{ route('tarifs') }}">Тарифы</a>
+                @else
+                    <a class="list-group-item" href="{{ route('home') }}">Мой профиль</a>
+                    <a class="list-group-item" href="{{ route('userAccounts', ['id' => $user->id]) }}">Мои счета</a>
+                    <a class="list-group-item" href="{{ route('moneyTransfer', ['id' => $user->id]) }}">Перевод денег</a>
+                    <a class="list-group-item" href="{{ route('transactions', ['id' => $user->id]) }}">История переводов</a>
+                    <a class="list-group-item active" href="{{ route('tarifs') }}">Тарифы</a>
+                @endif
             </div>
 
             @if(Session::has('editTarif'))
@@ -18,10 +26,12 @@
             <div class="col-md-8">
                 <div class="panel panel-default">
                     @if (!Auth::guest() && Auth::user()->is_admin == 1)
-                        <div class="panel-heading">
+                        <div class="panel-heading">Тарифные планы
                             <a class="btn btn-default" href="{{ route('addTarif') }}" role="button"><i
                                         class="fa fa-plus"></i> Добавить новый тариф</a>
                         </div>
+                    @else
+                        <div class="panel-heading">Тарифные планы</div>
                     @endif
                     <div class="panel-body">
                         <table class="table table-hover table-striped">

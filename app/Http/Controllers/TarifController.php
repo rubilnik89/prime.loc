@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Tarif;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class TarifController extends Controller
 {
     public function all(Request $request)
     {
+        $user = Auth::user();
         $sortby = $request->sortby;
         $order = $request->order;
 
@@ -22,7 +24,7 @@ class TarifController extends Controller
 
         $tarifs = $query->paginate(PER_PAGE);
 
-        return view('tarifs/tarifs', compact('tarifs', 'tarifColumns', 'sortby', 'order', 'request'));
+        return view('tarifs/tarifs', compact('user', 'tarifs', 'tarifColumns', 'sortby', 'order', 'request'));
     }
 
     public function addTarif(Request $request)

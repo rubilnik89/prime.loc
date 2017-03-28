@@ -31,6 +31,20 @@ class AccountsTableSeeder extends Seeder
             'tarif_id' => 1,
         ]);
         Account::create([
+            'number' => '54848',
+            'user_id' => 3,
+            'type_id' => 2,
+            'balance' => '5474785',
+            'tarif_id' => 1,
+        ]);
+        Account::create([
+            'number' => '88882',
+            'user_id' => 3,
+            'type_id' => 2,
+            'balance' => '778965',
+            'tarif_id' => 1,
+        ]);
+        Account::create([
             'number' => '88883',
             'user_id' => 4,
             'type_id' => 1,

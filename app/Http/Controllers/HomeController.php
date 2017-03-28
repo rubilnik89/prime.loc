@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\Tarif;
 use App\Transaction;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -36,8 +37,20 @@ class HomeController extends Controller
 
     public function accounts()
     {
-        $accounts = Auth::user()->accounts;
-        return view('userAccounts', compact('accounts'));
+        $user = Auth::user();
+        return view('userAccounts', compact('user'));
+    }
+
+    public function personal()
+    {
+        $accounts = Auth::user()->accounts()->where('type_id', '1')->get();
+        return view('userPersonal', compact('accounts'));
+    }
+
+    public function investor()
+    {
+        $accounts = Auth::user()->accounts()->where('type_id', '2')->get();
+        return view('userInvestor', compact('accounts'));
     }
 
     public function moneyTransfer()
@@ -48,30 +61,29 @@ class HomeController extends Controller
 
     public function transfer(Request $request)
     {
-        $data = $request->all();
 
         $user = Auth::user();
-        if ($data['from'] && $data['to'] && $data['sum']) {
+        if ($request->from && $request->to && $request->sum) {
             DB::beginTransaction();
             try {
-                $accountFrom = Account::find($data['from']);
-                $accountTo = Account::find($data['to']);
-                if ($data['sum'] < 0){
+                $accountFrom = Account::find($request->from);
+                $accountTo = Account::find($request->to);
+                if ($request->sum < 0){
                     return redirect()->route('moneyTransfer', $user->id)->with('less0', 'Сумма должна быть больше нуля');
                 }
-                $balanceFrom = $accountFrom->balance - $data['sum'];
+                $balanceFrom = $accountFrom->balance - $request->sum;
                 if ($balanceFrom < 0) {
                     return redirect()->route('moneyTransfer', $user->id)->with('noMoney', 'На счету недостаточно средств для проведения этой транзакции');
                 }
-                Account::where('id', $data['from'])
-                    ->where('balance', '>=', $data['sum'])
-                    ->update(['balance' => DB::raw('balance -'. $data['sum'])]);
-                Account::where('id', $data['to'])
-                    ->update(['balance' => DB::raw('balance +'. $data['sum'])]);
+                Account::where('id', $request->from)
+                    ->where('balance', '>=', $request->sum)
+                    ->update(['balance' => DB::raw('balance -'. $request->sum)]);
+                Account::where('id', $request->to)
+                    ->update(['balance' => DB::raw('balance +'. $request->sum)]);
                 Transaction::create(['user_id' => $user->id,
                     'account_id_from' => $accountFrom->number,
                     'account_id_to' => $accountTo->number,
-                    'amount' => $data['sum'],
+                    'amount' => $request->sum,
                     'type' => 1,
                     'status' => true]);
 
@@ -131,18 +143,57 @@ class HomeController extends Controller
 
         if($request->addtarif) {
 
-            Account::create([
-                'number' => (DB::table('accounts')->max('number') + 1),
-                'user_id' => $user->id,
-                'type_id' => 2,
-                'balance' => 0,
-                'tarif_id' => $request->tarif,
-            ]);
-            Session::flash('addedAccount', 'Счет создан успешно!');
-            $accounts = $user->accounts;
-            return view('userAccounts', compact('accounts'));
+            Session::forget('SelectTarif');
+            $personal = $user->accounts()->where('type_id', 1)->first();
+            Session::flash('Transfer', 'Перевод средств');
+            $tarifs_id = $request->tarif;
+            return view('addAccount', compact('personal', 'user', 'tarifs_id'));
         }
+
+        if($request->transfer){
+            $personal = $user->accounts()->where('type_id', 1)->first();
+
+            if ($request->sum < $personal['balance']){
+
+                DB::beginTransaction();
+                try {
+                    Account::where('id', $personal['id'])
+                        ->where('balance', '>=', $request->sum)
+                        ->update(['balance' => DB::raw('balance -'. $request->sum)]);
+
+                    $new = Account::create([
+                        'number' => (DB::table('accounts')->max('number') + 1),
+                        'user_id' => $user->id,
+                        'type_id' => 2,
+                        'balance' => $request->sum,
+                        'tarif_id' => $request->tarifs_id,
+                    ]);
+
+                    Transaction::create(['user_id' => $user->id,
+                        'account_id_from' => $personal['number'],
+                        'account_id_to' => $new->number,
+                        'amount' => $request->sum,
+                        'type' => 1,
+                        'status' => true]);
+
+                    DB::commit();
+                    $success = true;
+                } catch (\Exception $e) {
+                    $success = false;
+                    DB::rollback();
+                }
+                if ($success) {
+                    Session::flash('addedAccount', 'Счет создан успешно!');
+                    return view('userAccounts', compact('user'));
+                } else {
+                    Session::flash('noAddedAccount', 'Что-то пошло не так, повторите попытку через 5 минут.');
+                    return view('userAccounts', compact('user'));
+                }
+            }
+        }
+
         $tarifs = Tarif::all();
+        Session::flash('SelectTarif', 'Выбор тарифа');
 
         return view('addAccount', compact('user', 'tarifs'));
     }

@@ -17,6 +17,7 @@
             <div class="col-md-6">
 
                 <div class="panel panel-default">
+                    <div class="panel-heading">Перевод средств</div>
                     <div class="panel-body">
                         {{ Form::open(array('action' => array('HomeController@transfer', $accounts[0]->user_id), 'method' => 'post')) }}
                         {{ csrf_field() }}

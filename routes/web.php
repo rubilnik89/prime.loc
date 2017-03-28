@@ -11,6 +11,8 @@ Route::group(['prefix' => 'home', 'middleware' => 'isAdmin'], function(){
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('{id}/edit', 'HomeController@edit')->name('edit');
     Route::get('{id}/accounts', 'HomeController@accounts')->name('userAccounts');
+    Route::get('{id}/personal', 'HomeController@personal')->name('userPersonal');
+    Route::get('{id}/investor', 'HomeController@investor')->name('userInvestor');
     Route::get('{id}/moneyTransfer', 'HomeController@moneyTransfer')->name('moneyTransfer');
     Route::post('{id}/transfer', 'HomeController@transfer')->name('transfer');
     Route::get('{id}/transactions', 'HomeController@transactions')->name('transactions');
