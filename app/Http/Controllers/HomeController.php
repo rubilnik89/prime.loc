@@ -192,7 +192,7 @@ class HomeController extends Controller
             }
         }
 
-        $tarifs = Tarif::all();
+        $tarifs = Tarif::where('enabled', 1)->get();
         Session::flash('SelectTarif', 'Выбор тарифа');
 
         return view('addAccount', compact('user', 'tarifs'));
