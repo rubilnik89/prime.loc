@@ -37,6 +37,9 @@ class HomeController extends Controller
 
     public function accounts()
     {
+        activity('view')
+            ->withProperties(['view' => 'view own accounts'])
+            ->log('Просмотр');
         $user = Auth::user();
         return view('user/userAccounts', compact('user'));
     }

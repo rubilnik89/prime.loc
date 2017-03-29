@@ -8,6 +8,7 @@
                 <a class="list-group-item active" href="{{ route('users') }}">Пользователи</a>
                 <a class="list-group-item" href="{{ route('accounts') }}">Счета</a>
                 <a class="list-group-item" href="{{ route('tarifs') }}">Тарифы</a>
+                <a class="list-group-item" href="{{ route('logs') }}">Логи</a>
             </div>
             <div class="col-md-8">
                 <div class="row">

@@ -14,6 +14,7 @@ class CreateTransactionsTable extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
             $table->integer('user_id');
             $table->integer('account_id_from');
             $table->integer('account_id_to');

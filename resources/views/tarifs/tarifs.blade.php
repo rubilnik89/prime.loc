@@ -8,6 +8,7 @@
                     <a class="list-group-item" href="{{ route('users') }}">Пользователи</a>
                     <a class="list-group-item" href="{{ route('accounts') }}">Счета</a>
                     <a class="list-group-item active" href="{{ route('tarifs') }}">Тарифы</a>
+                    <a class="list-group-item" href="{{ route('logs') }}">Логи</a>
                 @else
                     <a class="list-group-item" href="{{ route('home') }}">Мой профиль</a>
                     <a class="list-group-item" href="{{ route('userAccounts', ['id' => $user->id]) }}">Мои счета</a>
