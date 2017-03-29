@@ -5,9 +5,13 @@ namespace App\models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Account extends Model
 {
+    use LogsActivity;
+    protected static $logAttributes = ['number', 'user_id', 'type_id', 'balance', 'tarif_id'];
+
     protected $fillable = ['number', 'user_id', 'type_id', 'balance', 'tarif_id'];
 
     public static $accountColumns = [

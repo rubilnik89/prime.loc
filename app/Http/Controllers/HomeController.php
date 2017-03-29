@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -151,13 +152,16 @@ class HomeController extends Controller
 
         if($request->transfer){
             $personal = $user->accounts()->where('type_id', 1)->first();
+
             if ($request->sum <= $personal['balance']){
 
                 DB::beginTransaction();
                 try {
+
                     Account::where('id', $personal['id'])
                         ->where('balance', '>=', $request->sum)
-                        ->update(['balance' => DB::raw('balance -'. $request->sum)]);
+                        ->update(['balance' => DB::raw('balance -'. $request->sum)
+                        ]);
 
                     $new = Account::create([
                         'number' => (DB::table('accounts')->max('number') + 1),
@@ -165,14 +169,15 @@ class HomeController extends Controller
                         'type_id' => 2,
                         'balance' => $request->sum,
                         'tarif_id' => $request->tarifs_id,
-                    ]);
+                        ]);
 
                     Transaction::create(['user_id' => $user->id,
                         'account_id_from' => $personal['number'],
                         'account_id_to' => $new->number,
                         'amount' => $request->sum,
                         'type' => 1,
-                        'status' => true]);
+                        'status' => 1,
+                        ]);
 
                     DB::commit();
                     $success = true;

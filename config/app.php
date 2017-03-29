@@ -181,6 +181,8 @@ return [
 
         Barryvdh\Debugbar\ServiceProvider::class,
         Spatie\Activitylog\ActivitylogServiceProvider::class,
+        GrahamCampbell\Exceptions\ExceptionsServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 

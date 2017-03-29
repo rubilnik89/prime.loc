@@ -4,9 +4,13 @@ namespace App\models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable
 {
+    use LogsActivity;
+    protected static $logAttributes = ['name', 'surname', 'email', 'password', 'country', 'phone', 'is_admin', 'activated',];
+
     public static $columns = [
         "Name" => "name",
         "Surname" => "surname",
@@ -15,7 +19,6 @@ class User extends Authenticatable
         "Country" => "country",
     ];
 
-
     use Notifiable;
 
     /**
@@ -23,9 +26,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'surname', 'email', 'password', 'country', 'phone', 'is_admin', 'activated',
-    ];
+    protected $fillable = ['name', 'surname', 'email', 'password', 'country', 'phone', 'is_admin', 'activated',];
 
     /**
      * The attributes that should be hidden for arrays.
