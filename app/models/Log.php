@@ -13,7 +13,15 @@ class Log extends Model
         "Subject Id" => "subject_id",
         "Subject type" => "subject_type",
         "Causer Id" => "causer_id",
-        "Causer type" => "causer_type",
         "Created at" => "created_at",
     ];
+    public function user()
+    {
+        return $this->belongsTo('App\models\User', 'causer_id');
+    }
+
+    public function scopeSearchValue($query, $field, $value)
+    {
+        if ($value) $query->where($field, 'like', "%$value%");
+    }
 }
