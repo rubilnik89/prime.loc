@@ -32,7 +32,7 @@
                                     </thead>
                                     <tbody>
                                     @foreach($users as $index => $user)
-                                        <tr onclick="window.location.href='{{ route('user', ['id' => $user->id]) }}';">
+                                        <tr class="clickable" onclick="window.location.href='{{ route('user', ['id' => $user->id]) }}';">
                                             <td>{{ $index + 1 }}</td>
                                             <td class="col-md-2">{{ $user->name }}</td>
                                             <td class="col-md-3">{{ $user->surname }}</td>

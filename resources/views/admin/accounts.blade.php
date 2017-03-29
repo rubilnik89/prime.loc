@@ -35,7 +35,7 @@
                                     </thead>
                                     <tbody>
                                     @foreach($accounts as $index => $account)
-                                        <tr onclick="window.location.href='{{ route('user', ['id' => $account->user->id]) }}';">
+                                        <tr class="clickable" onclick="window.location.href='{{ route('user', ['id' => $account->user->id]) }}';">
                                             <td>{{ $index + 1 }}</td>
                                             <td class="col-md-2">{{ $account->number }}</td>
                                             <td class="col-md-2">{{ $account->account_type->name }}</td>
