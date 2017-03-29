@@ -37,4 +37,4 @@
         TARIF_DISABLED => "Не активен",
     ];
 
-    const PER_PAGE = 10;
+    const PER_PAGE = 15;

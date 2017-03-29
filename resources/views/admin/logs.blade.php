@@ -42,7 +42,7 @@
                                             <td class="col-md-2 clickable" data-toggle="collapse" data-target="#property{{ $log->id }}">{{ $log->description }}</td>
                                             <td class="col-md-2 clickable" data-toggle="collapse" data-target="#property{{ $log->id }}">{{ $log->subject_id }}</td>
                                             <td class="col-md-2 clickable" data-toggle="collapse" data-target="#property{{ $log->id }}">{{ $log->subject_type }}</td>
-                                            <td class="col-md-2"><a href='{{ route('user', ['id' => $log->causer_id]) }}'>{{ $log->user->email }}</a></td>
+                                            <td class="col-md-2"><a href='{{ route('user', ['id' => $log->causer_id ?: 1]) }}'>{{ $log->causer_id ? $log->user->email : 'admin' }}</a></td>
                                             <td class="col-md-2 clickable" data-toggle="collapse" data-target="#property{{ $log->id }}">{{ $log->created_at }}</td>
                                         </tr>
                                         <tr id="property{{ $log->id }}" class="collapse">

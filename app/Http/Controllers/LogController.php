@@ -28,7 +28,7 @@ class LogController extends Controller
             $query->orderBy($sortby, $order);
         }
 
-        $logs = $query->with('user')->paginate(PER_PAGE);
+        $logs = $query->with('user')->paginate(15);
 
         return view('admin/logs', compact('logs', 'columns', 'sortby', 'order', 'request'));
     }
