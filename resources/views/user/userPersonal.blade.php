@@ -13,8 +13,8 @@
                         <a class="list-group-item" href="{{ route('userInvestor', ['id' => $accounts[0]->user_id]) }}">Инвесторские</a>
                     </div>
                 </div>
-                <a class="list-group-item" href="{{ route('moneyTransfer', ['id' => $accounts[0]->user_id]) }}">Перевод
-                    денег</a>
+                {{--<a class="list-group-item" href="{{ route('moneyTransfer', ['id' => $accounts[0]->user_id]) }}">Перевод--}}
+                    {{--денег</a>--}}
                 <a class="list-group-item" href="{{ route('transactions', ['id' => $accounts[0]->user_id]) }}">История
                     переводов</a>
                 <a class="list-group-item" href="{{ route('tarifs') }}">Тарифы</a>

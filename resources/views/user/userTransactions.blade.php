@@ -6,7 +6,7 @@
             <div class="col-md-2">
                 <a class="list-group-item" href="{{ route('home') }}">Мой профиль</a>
                 <a class="list-group-item" href="{{ route('userAccounts', ['id' => $user->id]) }}">Мои счета</a>
-                <a class="list-group-item" href="{{ route('moneyTransfer', ['id' => $user->id]) }}">Перевод денег</a>
+{{--                <a class="list-group-item" href="{{ route('moneyTransfer', ['id' => $user->id]) }}">Перевод денег</a>--}}
                 <a class="list-group-item active" href="{{ route('transactions', ['id' => $user->id]) }}">История
                     переводов</a>
                 <a class="list-group-item" href="{{ route('tarifs') }}">Тарифы</a>

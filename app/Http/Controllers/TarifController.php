@@ -11,6 +11,10 @@ class TarifController extends Controller
 {
     public function all(Request $request)
     {
+        activity('view')
+            ->withProperties(['view' => 'view tarifs'])
+            ->log('Просмотр');
+
         $user = Auth::user();
         $sortby = $request->sortby;
         $order = $request->order;

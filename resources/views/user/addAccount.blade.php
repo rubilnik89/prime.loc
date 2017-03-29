@@ -12,7 +12,7 @@
                         <a class="list-group-item active" href="{{ route('userInvestor', ['id' => $user->id]) }}">Инвесторские</a>
                     </div>
                 </div>
-                <a class="list-group-item" href="{{ route('moneyTransfer', ['id' => $user->id]) }}">Перевод денег</a>
+                {{--<a class="list-group-item" href="{{ route('moneyTransfer', ['id' => $user->id]) }}">Перевод денег</a>--}}
                 <a class="list-group-item" href="{{ route('transactions', ['id' => $user->id]) }}">История переводов</a>
                 <a class="list-group-item" href="{{ route('tarifs') }}">Тарифы</a>
             </div>

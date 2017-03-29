@@ -31,6 +31,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        activity('view')
+            ->withProperties(['view' => 'view own profile'])
+            ->log('Просмотр');
+
         $user = Auth::user();
         return view('user/home', compact('user'));
     }
@@ -40,71 +44,84 @@ class HomeController extends Controller
         activity('view')
             ->withProperties(['view' => 'view own accounts'])
             ->log('Просмотр');
+
         $user = Auth::user();
         return view('user/userAccounts', compact('user'));
     }
 
     public function personal()
     {
+        activity('view')
+            ->withProperties(['view' => 'view own personal accounts'])
+            ->log('Просмотр');
+
         $accounts = Auth::user()->accounts()->where('type_id', '1')->get();
         return view('user/userPersonal', compact('accounts'));
     }
 
     public function investor()
     {
+        activity('view')
+            ->withProperties(['view' => 'view own accounts'])
+            ->log('Просмотр');
+
         $accounts = Auth::user()->accounts()->where('type_id', '2')->get();
         return view('user/userInvestor', compact('accounts'));
     }
 
-    public function moneyTransfer()
-    {
-        $accounts = Auth::user()->accounts;
-        return view('user/moneyTransfer', compact('accounts'));
-    }
+//    public function moneyTransfer()
+//    {
+//        $accounts = Auth::user()->accounts;
+//        return view('user/moneyTransfer', compact('accounts'));
+//    }
 
-    public function transfer(Request $request)
-    {
-
-        $user = Auth::user();
-        if ($request->from && $request->to && $request->sum) {
-            DB::beginTransaction();
-            try {
-                $accountFrom = Account::find($request->from);
-                $accountTo = Account::find($request->to);
-                if ($request->sum < 0){
-                    return redirect()->route('moneyTransfer', $user->id)->with('less0', 'Сумма должна быть больше нуля');
-                }
-                $balanceFrom = $accountFrom->balance - $request->sum;
-                if ($balanceFrom < 0) {
-                    return redirect()->route('moneyTransfer', $user->id)->with('noMoney', 'На счету недостаточно средств для проведения этой транзакции');
-                }
-                Account::where('id', $request->from)
-                    ->where('balance', '>=', $request->sum)
-                    ->update(['balance' => DB::raw('balance -'. $request->sum)]);
-                Account::where('id', $request->to)
-                    ->update(['balance' => DB::raw('balance +'. $request->sum)]);
-                Transaction::create(['user_id' => $user->id,
-                    'account_id_from' => $accountFrom->number,
-                    'account_id_to' => $accountTo->number,
-                    'amount' => $request->sum,
-                    'type' => 1,
-                    'status' => true]);
-
-                DB::commit();
-                $success = true;
-            } catch (\Exception $e) {
-                $success = false;
-                DB::rollback();
-            }
-            if ($success) {
-                return redirect()->route('moneyTransfer', $user->id)->with('success', 'Everything went great');
-            } else return redirect()->route('moneyTransfer', $user->id)->with('noSuccess', 'Чтото пошло не так, повторите попытку еще раз');
-        }
-        return redirect()->route('moneyTransfer', $user->id)->with('fail', 'Please, check your input');
-    }
+//    public function transfer(Request $request)
+//    {
+//
+//        $user = Auth::user();
+//        if ($request->from && $request->to && $request->sum) {
+//            DB::beginTransaction();
+//            try {
+//                $accountFrom = Account::find($request->from);
+//                $accountTo = Account::find($request->to);
+//                if ($request->sum < 0){
+//                    return redirect()->route('moneyTransfer', $user->id)->with('less0', 'Сумма должна быть больше нуля');
+//                }
+//                $balanceFrom = $accountFrom->balance - $request->sum;
+//                if ($balanceFrom < 0) {
+//                    return redirect()->route('moneyTransfer', $user->id)->with('noMoney', 'На счету недостаточно средств для проведения этой транзакции');
+//                }
+//                Account::where('id', $request->from)
+//                    ->where('balance', '>=', $request->sum)
+//                    ->update(['balance' => DB::raw('balance -'. $request->sum)]);
+//                Account::where('id', $request->to)
+//                    ->update(['balance' => DB::raw('balance +'. $request->sum)]);
+//                Transaction::create(['user_id' => $user->id,
+//                    'account_id_from' => $accountFrom->number,
+//                    'account_id_to' => $accountTo->number,
+//                    'amount' => $request->sum,
+//                    'type' => 1,
+//                    'status' => true]);
+//
+//                DB::commit();
+//                $success = true;
+//            } catch (\Exception $e) {
+//                $success = false;
+//                DB::rollback();
+//            }
+//            if ($success) {
+//                return redirect()->route('moneyTransfer', $user->id)->with('success', 'Everything went great');
+//            } else return redirect()->route('moneyTransfer', $user->id)->with('noSuccess', 'Чтото пошло не так, повторите попытку еще раз');
+//        }
+//        return redirect()->route('moneyTransfer', $user->id)->with('fail', 'Please, check your input');
+//    }
 
     public function accountTransactions($id, $number)
     {
+        activity('view')
+            ->withProperties(['view' => "view own transactions $number"])
+            ->log('Просмотр');
+
         $user = Auth::user();
         $transactions = $user->transactions()
             ->where('account_id_from', $number)
@@ -117,6 +134,10 @@ class HomeController extends Controller
 
     public function transactions()
     {
+        activity('view')
+            ->withProperties(['view' => 'view own transactions'])
+            ->log('Просмотр');
+
         $user = Auth::user();
         $transactions = $user->transactions()->orderBy('created_at', 'desc')->get();
 
@@ -125,6 +146,10 @@ class HomeController extends Controller
 
     public function edit(Request $request, $id)
     {
+        activity('view')
+            ->withProperties(['view' => 'view own edit profile form'])
+            ->log('Просмотр');
+
         $user = Auth::user();
 
         if($request->editUser) {
@@ -142,6 +167,10 @@ class HomeController extends Controller
 
     public function addAccount(Request $request)
     {
+        activity('view')
+            ->withProperties(['view' => 'view add account information'])
+            ->log('Просмотр');
+
         $user = Auth::user();
 
         if($request->addtarif) {
