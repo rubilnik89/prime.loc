@@ -46,7 +46,7 @@
                                             <td class="col-md-2 clickable" data-toggle="collapse" data-target="#property{{ $log->id }}">{{ $log->created_at }}</td>
                                         </tr>
                                         <tr id="property{{ $log->id }}" class="collapse">
-                                            <td colspan="8">
+                                            <td colspan="7">
                                                 <pre>{{ $log->properties }}</pre>
                                             </td>
                                         </tr>
